@@ -7,9 +7,6 @@ package com.qgd.commons.tv.rpc;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,24 +17,22 @@ import java.util.Map;
 /**
  * Created by yangke on 2015-12-18.
  */
-public class RpcRequestBuilder<T> {
+public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<RpcResponse<T>> {
     private static Logger rpcLogger = LoggerFactory.getLogger("yycc_rpc");
 
-    private static ObjectMapper objectMapper;
-
     private String url;
-    private Class<T> resultClass;
+    private RpcResponseReader<T> responseReader;
     private RpcResponse.Listener<T> listener;
     private Map<String, String> headers = new HashMap<String, String>();
     private Map<String, String> params = new HashMap<String, String>();
 
-    public RpcRequestBuilder(String url, Class<T> resultClass) {
-        this(url, resultClass, null);
+    public RpcRequestBuilder(String url, RpcResponseReader<T> responseReader) {
+        this(url, responseReader, null);
     }
 
-    public RpcRequestBuilder(String url, Class<T> resultClass, RpcResponse.Listener<T> listener) {
+    public RpcRequestBuilder(String url, RpcResponseReader<T> responseReader, RpcResponse.Listener<T> listener) {
         this.url = url;
-        this.resultClass = resultClass;
+        this.responseReader = responseReader;
         this.listener = listener;
     }
 
@@ -46,16 +41,6 @@ public class RpcRequestBuilder<T> {
 
         //一般创建Request后都会直接放入VolleyQueue，所以在这里统一记录日志
         rpcLogger.debug("{} request", urlForLog);
-
-        final JavaType readType = getObjectMapper().getTypeFactory().constructParametrizedType(SimpleRpcResponse.class, SimpleRpcResponse.class, resultClass);
-        RpcResponseReader<RpcResponse<T>> responseReader = new RpcResponseReader<RpcResponse<T>>() {
-            @Override
-            public RpcResponse<T> read(NetworkResponse netResp) throws IOException {
-                rpcLogger.debug("{} response, status={}", urlForLog, netResp.statusCode);
-                SimpleRpcResponse<T> respObject = getObjectMapper().readValue(netResp.data, readType);
-                return respObject;
-            }
-        };
 
         Response.Listener<RpcResponse<T>> okListener = new Response.Listener<RpcResponse<T>>() {
             @Override
@@ -78,15 +63,23 @@ public class RpcRequestBuilder<T> {
 
         //TODO yangke 在headers中添加签名数据
 
-        return new VolleyRpcRequest<>(url, responseReader, params, headers, okListener, okErrListener);
+        return new VolleyRpcRequest<>(url, this, params, headers, okListener, okErrListener);
+    }
+
+    @Override
+    public RpcResponse<T> parseNetworkResponse(NetworkResponse response) throws IOException {
+        final String urlForLog = pathOfUrl(url);
+        rpcLogger.debug("{} response, status={}", urlForLog, response.statusCode);
+        RpcResponse<T> respObject = responseReader.read(response.data);
+        return respObject;
     }
 
     public void setUrl(String url) {
         this.url = url;
     }
 
-    public void setResultClass(Class<T> resultClass) {
-        this.resultClass = resultClass;
+    public void setResponseReader(RpcResponseReader<T> responseReader) {
+        this.responseReader = responseReader;
     }
 
     public void setListener(RpcResponse.Listener<T> listener) {
@@ -116,23 +109,6 @@ public class RpcRequestBuilder<T> {
     public RpcRequestBuilder<T> addHeader(Map<String, String> map) {
         headers.putAll(map);
         return this;
-    }
-
-    /**
-     * lazy create ObjectMapper
-     *
-     * @return
-     */
-    private static ObjectMapper getObjectMapper() {
-        if (objectMapper == null) {
-            synchronized (VolleyRpcRequest.class) {
-                if (objectMapper == null) {
-                    objectMapper = new ObjectMapper();
-                    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-                }
-            }
-        }
-        return objectMapper;
     }
 
     private String pathOfUrl(String url) {
