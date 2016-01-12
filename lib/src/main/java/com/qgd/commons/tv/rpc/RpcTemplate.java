@@ -18,9 +18,9 @@ import java.util.Map;
  * Created by yangke on 2016-01-06.
  */
 public class RpcTemplate {
-    private static final RpcResponse.Listener<Map> EMPTY_LISTENER = new RpcResponse.Listener<Map>() {
+    private static final RpcResponse.Listener<String> EMPTY_LISTENER = new RpcResponse.Listener<String>() {
         @Override
-        public void onResponse(RpcResponse<Map> response) {
+        public void onResponse(RpcResponse<String> response) {
             //ignore response
         }
     };
@@ -76,7 +76,7 @@ public class RpcTemplate {
      * @param params
      */
     public void call(String path, Map<String, String> params) {
-        RpcRequestBuilder<Map> reqBuilder = new RpcRequestBuilder<>(baseUrl + path, new ResultClassReader<>(getObjectMapper(), Map.class));
+        RpcRequestBuilder<String> reqBuilder = new RpcRequestBuilder<>(baseUrl + path, new ResultClassReader<>(getObjectMapper(), String.class));
         reqBuilder.setParams(params);
         reqBuilder.setListener(EMPTY_LISTENER);
         queue.add(reqBuilder.build());
