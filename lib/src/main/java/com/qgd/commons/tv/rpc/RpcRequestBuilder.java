@@ -25,15 +25,17 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
     private RpcResponse.Listener<T> listener;
     private Map<String, String> headers = new HashMap<String, String>();
     private Map<String, String> params = new HashMap<String, String>();
+    private RpcToken token;
 
     public RpcRequestBuilder(String url, RpcResponseReader<T> responseReader) {
-        this(url, responseReader, null);
+        this(url, responseReader, null, null);
     }
 
-    public RpcRequestBuilder(String url, RpcResponseReader<T> responseReader, RpcResponse.Listener<T> listener) {
+    public RpcRequestBuilder(String url, RpcResponseReader<T> responseReader, RpcResponse.Listener<T> listener, RpcToken token) {
         this.url = url;
         this.responseReader = responseReader;
         this.listener = listener;
+        this.token = token;
     }
 
     public VolleyRpcRequest<RpcResponse<T>> build() {
@@ -61,7 +63,7 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
             }
         };
 
-        //TODO yangke 在headers中添加签名数据
+        buildSecurityHeaders();
 
         return new VolleyRpcRequest<>(url, this, params, headers, okListener, okErrListener);
     }
@@ -84,6 +86,10 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
 
     public void setListener(RpcResponse.Listener<T> listener) {
         this.listener = listener;
+    }
+
+    public void setToken(RpcToken token) {
+        this.token = token;
     }
 
     public RpcRequestBuilder<T> addParam(String k, String v) {
@@ -109,6 +115,19 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
     public RpcRequestBuilder<T> addHeader(Map<String, String> map) {
         headers.putAll(map);
         return this;
+    }
+
+    private void buildSecurityHeaders() {
+        if (token == null) {
+            return;
+        }
+
+        headers.put("X-Yfb-Uid", token.getUid());
+        headers.put("X-Yfb-Access-Token", token.getAccessToken());
+        headers.put("X-Yfb-Timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+
+        //TODO yangke 计算签名
+        headers.put("X-Yfb-Sign", "1");
     }
 
     private String pathOfUrl(String url) {

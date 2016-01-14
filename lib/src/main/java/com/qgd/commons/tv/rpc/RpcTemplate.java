@@ -7,11 +7,10 @@ package com.qgd.commons.tv.rpc;
 import com.android.volley.RequestQueue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.greenrobot.event.EventBus;
 
-import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -24,25 +23,31 @@ public class RpcTemplate {
             //ignore response
         }
     };
+    private static final Map<String, String> EMPTY_PARAMS = new HashMap<>();
 
     private static ObjectMapper objectMapper;
 
     private String baseUrl;
     private RequestQueue queue;
     private EventBus eventBus;
+    private RpcTokenStore tokenStore;
 
     public RpcTemplate() {
     }
 
     public RpcTemplate(String baseUrl, RequestQueue queue) {
-        this.baseUrl = baseUrl;
-        this.queue = queue;
+        this(baseUrl, queue, null, null);
     }
 
     public RpcTemplate(String baseUrl, RequestQueue queue, EventBus eventBus) {
+        this(baseUrl, queue, eventBus, null);
+    }
+
+    public RpcTemplate(String baseUrl, RequestQueue queue, EventBus eventBus, RpcTokenStore tokenStore) {
         this.queue = queue;
         this.baseUrl = baseUrl;
         this.eventBus = eventBus;
+        this.tokenStore = tokenStore;
     }
 
     public RequestQueue getQueue() {
@@ -51,6 +56,10 @@ public class RpcTemplate {
 
     public void setQueue(RequestQueue queue) {
         this.queue = queue;
+    }
+
+    public void setTokenStore(RpcTokenStore tokenStore) {
+        this.tokenStore = tokenStore;
     }
 
     public String getBaseUrl() {
@@ -76,9 +85,7 @@ public class RpcTemplate {
      * @param params
      */
     public void call(String path, Map<String, String> params) {
-        RpcRequestBuilder<String> reqBuilder = new RpcRequestBuilder<>(baseUrl + path, new ResultClassReader<>(getObjectMapper(), String.class));
-        reqBuilder.setParams(params);
-        reqBuilder.setListener(EMPTY_LISTENER);
+        RpcRequestBuilder<String> reqBuilder = createRequestBuilder(path, params, new ResultClassReader<>(getObjectMapper(), String.class), EMPTY_LISTENER);
         queue.add(reqBuilder.build());
     }
 
@@ -118,9 +125,7 @@ public class RpcTemplate {
      * @param <T>
      */
     public  <T> void call(String path, Map<String, String> params, RpcResponseReader<T> responseReader, RpcResponse.Listener<T> listener) {
-        RpcRequestBuilder<T> reqBuilder = new RpcRequestBuilder<>(baseUrl + path, responseReader);
-        reqBuilder.setParams(params);
-        reqBuilder.setListener(listener);
+        RpcRequestBuilder<T> reqBuilder = createRequestBuilder(path, params, responseReader, listener);
         queue.add(reqBuilder.build());
     }
 
@@ -166,10 +171,7 @@ public class RpcTemplate {
             throw new NullPointerException("eventBus is null");
         }
 
-        RpcRequestBuilder<T> reqBuilder = new RpcRequestBuilder<>(baseUrl + path, responseReader);
-        reqBuilder.setParams(params);
-
-        reqBuilder.setListener(new RpcResponse.Listener<T>() {
+        RpcRequestBuilder<T> reqBuilder = createRequestBuilder(path, params, responseReader, new RpcResponse.Listener<T>() {
             @Override
             public void onResponse(RpcResponse<T> response) {
                 X event = null;
@@ -184,6 +186,22 @@ public class RpcTemplate {
         });
 
         queue.add(reqBuilder.build());
+    }
+
+    /**
+     * @param path
+     * @param params
+     * @param reader
+     * @param emptyListener
+     * @param <T>
+     * @return
+     */
+    public <T> RpcRequestBuilder<T> createRequestBuilder(String path, Map<String, String> params, RpcResponseReader<T> reader, RpcResponse.Listener<T> emptyListener) {
+        RpcRequestBuilder<T> reqBuilder = new RpcRequestBuilder<>(baseUrl + path, reader);
+        reqBuilder.setParams(params);
+        reqBuilder.setListener(emptyListener);
+        reqBuilder.setToken(tokenStore == null ? null : tokenStore.getToken());
+        return reqBuilder;
     }
 
     /**
