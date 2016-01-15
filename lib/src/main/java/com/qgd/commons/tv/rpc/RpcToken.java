@@ -16,5 +16,5 @@ public interface RpcToken {
 
     public String getAccessToken();
 
-    public Date getExpireTime();
+    public String getExpireTime();
 }
