@@ -7,12 +7,17 @@ package com.qgd.commons.tv.rpc;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.qgd.commons.tv.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.crypto.Mac;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by yangke on 2015-12-18.
@@ -122,12 +127,46 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
             return;
         }
 
+        String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
+
         headers.put("X-Yfb-Uid", token.getUid());
         headers.put("X-Yfb-Access-Token", token.getAccessToken());
-        headers.put("X-Yfb-Timestamp", String.valueOf(System.currentTimeMillis() / 1000));
+        headers.put("X-Yfb-Timestamp", timestamp);
+        headers.put("X-Yfb-Sign", buildSign(timestamp));
+    }
 
-        //TODO yangke 计算签名
-        headers.put("X-Yfb-Sign", "1");
+    private String buildSign(String timestamp) {
+        if (token == null || StringUtils.isEmpty(token.getBindKey())) {
+            return "";
+        }
+
+        //参数排序
+        TreeMap<String, String> sortted = new TreeMap<String, String>();
+        sortted.putAll(this.params);
+
+        //构造签名前的字符串
+        StringBuilder buf = new StringBuilder();
+        for (Map.Entry<String, String> entry : sortted.entrySet()) {
+            buf.append(entry.getKey()).append('=').append(entry.getValue()).append('&');
+        }
+        buf.append("timestamp").append('=').append(timestamp).append('&');
+        buf.setLength(buf.length() - 1); //删除最后一个&
+        String source = buf.toString();
+
+        rpcLogger.debug("string to sign: {}", source);
+
+        //计算签名
+        try {
+            String signMethod = "HmacSHA1";
+            SecretKey secretKey = new SecretKeySpec(token.getBindKey().getBytes(), signMethod);
+            Mac mac = Mac.getInstance(signMethod);
+            mac.init(secretKey);
+            byte[] bytes = mac.doFinal(source.getBytes("UTF-8"));
+            return StringUtils.bytesToHexString(bytes);
+        } catch (Exception e) {
+            rpcLogger.error("calculate sign failed: {}", e.getMessage(), e);
+            return "";
+        }
     }
 
     private String pathOfUrl(String url) {
