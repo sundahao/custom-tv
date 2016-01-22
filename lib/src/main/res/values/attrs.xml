@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="scaleable" format="boolean"/>
+    <attr name="borderDrawable" format="reference"/>
+    <attr name="borderSize" format="dimension"/>
+
+    <attr name="columnCount" format="integer"/>
+
+    <declare-styleable name="TvRelativeLayout">
+        <attr name="scaleable"  />
+        <attr name="borderDrawable"/>
+        <attr name="borderSize"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="TvLinearLayout">
+        <attr name="scaleable"  />
+        <attr name="borderDrawable"/>
+        <attr name="borderSize"/>
+
+    </declare-styleable>
+
+
+    <attr name="borderRadius" format="dimension"/>
+    <attr name="type">
+        <enum name="circle" value="0"/>
+        <enum name="round" value="1"/>
+        <enum name="roundTop" value="1"/>
+    </attr>
+
+
+    <declare-styleable name="RoundImageView">
+        <attr name="borderRadius"/>
+        <attr name="type"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="SelectableRoundedImageView">
+        <attr name="sriv_left_top_corner_radius" format="dimension"/>
+        <attr name="sriv_right_top_corner_radius" format="dimension"/>
+        <attr name="sriv_left_bottom_corner_radius" format="dimension"/>
+        <attr name="sriv_right_bottom_corner_radius" format="dimension"/>
+        <attr name="sriv_border_width" format="dimension"/>
+        <attr name="sriv_border_color" format="color"/>
+        <attr name="sriv_oval" format="boolean"/>
+        <attr name="android:scaleType"/>
+    </declare-styleable>
+
+    <declare-styleable name="TvTextView">
+        <attr name="scaleable" />
+        <attr name="borderDrawable" />
+        <attr name="number" format="string"/>
+        <attr name="numberColor" format="color"/>
+
+    </declare-styleable>
+
+
+
+
+
+    <declare-styleable name="FlowLayout">
+        <attr name="columnCount"  />
+        <attr name="android:gravity" />
+    </declare-styleable>
+
+    <declare-styleable name="FlowLayout_Layout">
+        <attr name="android:layout_gravity" />
+    </declare-styleable>
+
+
+</resources>
