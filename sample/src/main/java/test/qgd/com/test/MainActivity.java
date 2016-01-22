@@ -22,6 +22,12 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
     }
 
+    public void showTipDialog(View v){
+        TvDialog.createTipDialog(this,"我是一只tip").show();
+    }
+    public void showProgressDialog(View v){
+        TvDialog.createProgressDialog(this,"提示!","额鹅鹅鹅进度条").show();
+    }
 
     public void showDialog(View v) {
 

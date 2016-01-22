@@ -143,8 +143,12 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     public static TvDialog createProgressDialog(Context context,String title,String message){
-
-        return null;
+        TvDialog dialog=getInstance(context);
+        dialog.withTitle(title);
+        dialog.setCustomView(R.layout.progress_view,context);
+        TextView textView=(TextView)dialog.findViewById(R.id.tipTextView);
+        textView.setText(message);
+        return dialog;
     }
     public static TvDialog createTipDialog(Context context,String message){
         TvDialog dialog=getInstance(context);
@@ -202,7 +206,7 @@ public class TvDialog extends Dialog implements DialogInterface {
 
                 mLinearLayoutView.setVisibility(View.VISIBLE);
                 if (type == null) {
-                    type = Effectstype.Slidetop;
+                    type = Effectstype.Fadein;
                 }
                 start(type);
 

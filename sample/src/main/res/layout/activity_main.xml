@@ -74,7 +74,7 @@
     <view
             android:padding="5dp"
             android:id="@+id/dialogTip"
-            android:onClick="showDialog"
+            android:onClick="showTipDialog"
             class="com.qgd.commons.tv.widget.TvTextView"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
@@ -82,6 +82,20 @@
             android:background="@drawable/default_button"
             android:gravity="center"
             android:text="tip显示"
+            android:textSize="23sp"
+            android:textColor="@color/white"/>
+
+
+    <view
+            android:padding="5dp"
+             android:onClick="showProgressDialog"
+            class="com.qgd.commons.tv.widget.TvTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/default_button"
+            android:gravity="center"
+            android:text="进度条"
             android:textSize="23sp"
             android:textColor="@color/white"/>
 
