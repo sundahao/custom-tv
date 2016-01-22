@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -21,7 +22,7 @@ import com.qgd.commons.tv.util.DimensionConvert;
 import com.qgd.commons.tv.widget.effects.BaseEffects;
 
 
-public class TvDialogBuilder extends Dialog implements DialogInterface {
+public class TvDialog extends Dialog implements DialogInterface {
 
     private final String defTextColor = "#FFFFFFFF";
 
@@ -68,16 +69,18 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
 
     private boolean isCancelable = true;
 
-    private static TvDialogBuilder instance;
+    private static TvDialog instance;
 
 
-    public TvDialogBuilder(Context context) {
+    private CountDownTimer  timer=null;
+
+    public TvDialog(Context context) {
         super(context);
         init(context);
 
     }
 
-    public TvDialogBuilder(Context context, int theme) {
+    public TvDialog(Context context, int theme) {
         super(context, theme);
         init(context);
     }
@@ -94,12 +97,12 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
 
     }
 
-    public static TvDialogBuilder getInstance(Context context) {
+    public static TvDialog getInstance(Context context) {
 
         if (instance == null || !tmpContext.equals(context)) {
-            synchronized (TvDialogBuilder.class) {
+            synchronized (TvDialog.class) {
                 if (instance == null || !tmpContext.equals(context)) {
-                    instance = new TvDialogBuilder(context, R.style.dialog_untran);
+                    instance = new TvDialog(context, R.style.dialog_untran);
                 }
             }
         }
@@ -108,6 +111,69 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
 
     }
 
+    public static TvDialog createDefaultDialog(Context context){
+        TvDialog dialog=getInstance(context);
+        return dialog;
+    }
+
+    public static TvDialog createDialog(Context context,String title,String message){
+        TvDialog dialog=getInstance(context);
+        dialog.withMessage(message);
+        dialog.withTitle(title);
+        return dialog;
+    }
+    public static TvDialog createDialog(Context context,String title,String message,String button1){
+        TvDialog dialog=getInstance(context);
+        dialog.withMessage(message);
+        dialog.withTitle(title);
+        if(button1!=null)
+            dialog.withButton1Text(button1);
+        return dialog;
+    }
+    public static TvDialog createDialog(Context context,String title,String message,String button1,String button2){
+        TvDialog dialog=getInstance(context);
+        dialog.withMessage(message);
+        dialog.withTitle(title);
+        if(button1!=null)
+            dialog.withButton1Text(button1);
+        if(button2!=null)
+            dialog.withButton1Text(button2);
+
+        return dialog;
+    }
+
+    public static TvDialog createProgressDialog(Context context,String title,String message){
+
+        return null;
+    }
+    public static TvDialog createTipDialog(Context context,String message){
+        TvDialog dialog=getInstance(context);
+        dialog.hideTop();
+        dialog.setCustomView(R.layout.tip_view,context);
+        TextView textView=(TextView)dialog.findViewById(R.id.tipTextView);
+        textView.setText(message);
+        return dialog;
+    }
+    public static TvDialog createTipDialog(Context context,String message,int timeOut){
+        final TvDialog dialog=createTipDialog(context,message);
+        CountDownTimer  timer= new CountDownTimer(timeOut,1000) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                dialog.dismiss();
+            }
+        };
+        dialog.setCountDownTimer(timer);
+        return dialog;
+    }
+
+    public void setCountDownTimer(CountDownTimer  timer){
+        this.timer=timer;
+    }
 
     private void init(Context context) {
 
@@ -151,6 +217,9 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
             }
         });
     }
+    private void hideTop(){
+        mLinearLayoutTopView.setVisibility(View.GONE);
+    }
 
     public void toDefault() {
         mTitle.setTextColor(Color.parseColor(defTextColor));
@@ -159,92 +228,92 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
         mLinearLayoutView.setBackgroundColor(Color.parseColor(defDialogColor));
     }
 
-    public TvDialogBuilder withDividerColor(String colorString) {
+    public TvDialog withDividerColor(String colorString) {
         mDivider.setBackgroundColor(Color.parseColor(colorString));
         return this;
     }
 
-    public TvDialogBuilder withDividerColor(int color) {
+    public TvDialog withDividerColor(int color) {
         mDivider.setBackgroundColor(color);
         return this;
     }
 
 
-    public TvDialogBuilder withTitle(CharSequence title) {
+    public TvDialog withTitle(CharSequence title) {
         toggleView(mLinearLayoutTopView, title);
         mTitle.setText(title);
         return this;
     }
 
-    public TvDialogBuilder withTitleColor(String colorString) {
+    public TvDialog withTitleColor(String colorString) {
         mTitle.setTextColor(Color.parseColor(colorString));
         return this;
     }
 
-    public TvDialogBuilder withTitleColor(int color) {
+    public TvDialog withTitleColor(int color) {
         mTitle.setTextColor(color);
         return this;
     }
 
-    public TvDialogBuilder withMessage(int textResId) {
+    public TvDialog withMessage(int textResId) {
         toggleView(mLinearLayoutMsgView, textResId);
         mMessage.setText(textResId);
         return this;
     }
 
-    public TvDialogBuilder withMessage(CharSequence msg) {
+    public TvDialog withMessage(CharSequence msg) {
         toggleView(mLinearLayoutMsgView, msg);
         mMessage.setText(msg);
         return this;
     }
 
-    public TvDialogBuilder withMessageColor(String colorString) {
+    public TvDialog withMessageColor(String colorString) {
         mMessage.setTextColor(Color.parseColor(colorString));
         return this;
     }
 
-    public TvDialogBuilder withMessageColor(int color) {
+    public TvDialog withMessageColor(int color) {
         mMessage.setTextColor(color);
         return this;
     }
 
-    public TvDialogBuilder withDialogColor(String colorString) {
+    public TvDialog withDialogColor(String colorString) {
         mLinearLayoutView.getBackground().setColorFilter(ColorUtils.getColorFilter(Color.parseColor(colorString)));
         return this;
     }
 
-    public TvDialogBuilder withDialogColor(int color) {
+    public TvDialog withDialogColor(int color) {
         mLinearLayoutView.getBackground().setColorFilter(ColorUtils.getColorFilter(color));
         return this;
     }
 
-    public TvDialogBuilder withIcon(int drawableResId) {
+    public TvDialog withIcon(int drawableResId) {
         mIcon.setImageResource(drawableResId);
         return this;
     }
 
-    public TvDialogBuilder withIcon(Drawable icon) {
+    public TvDialog withIcon(Drawable icon) {
         mIcon.setImageDrawable(icon);
         return this;
     }
 
-    public TvDialogBuilder withDuration(int duration) {
+    public TvDialog withDuration(int duration) {
         this.mDuration = duration;
         return this;
     }
 
-    public TvDialogBuilder withEffect(Effectstype type) {
+    public TvDialog withEffect(Effectstype type) {
         this.type = type;
         return this;
     }
 
-    public TvDialogBuilder withButtonDrawable(int resid) {
+    public TvDialog withButtonDrawable(int resid) {
         mButton1.setBackgroundResource(resid);
         mButton2.setBackgroundResource(resid);
         return this;
     }
 
-    public TvDialogBuilder withButton1Text(CharSequence text) {
+    public TvDialog withButton1Text(CharSequence text) {
         mButton1.setVisibility(View.VISIBLE);
         mButton1.setText(text);
 
@@ -262,25 +331,25 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
         }
     }
 
-    public TvDialogBuilder withButton2Text(CharSequence text) {
+    public TvDialog withButton2Text(CharSequence text) {
         mButton2.setVisibility(View.VISIBLE);
         mButton2.setText(text);
 
         return this;
     }
 
-    public TvDialogBuilder setButton1Click(View.OnClickListener click) {
+    public TvDialog setButton1Click(View.OnClickListener click) {
         mButton1.setOnClickListener(click);
         return this;
     }
 
-    public TvDialogBuilder setButton2Click(View.OnClickListener click) {
+    public TvDialog setButton2Click(View.OnClickListener click) {
         mButton2.setOnClickListener(click);
         return this;
     }
 
 
-    public TvDialogBuilder setCustomView(int resId, Context context) {
+    public TvDialog setCustomView(int resId, Context context) {
         View customView = View.inflate(context, resId, null);
         if (mFrameLayoutCustomView.getChildCount() > 0) {
             mFrameLayoutCustomView.removeAllViews();
@@ -289,7 +358,7 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
         return this;
     }
 
-    public TvDialogBuilder setCustomView(View view, Context context) {
+    public TvDialog setCustomView(View view, Context context) {
         if (mFrameLayoutCustomView.getChildCount() > 0) {
             mFrameLayoutCustomView.removeAllViews();
         }
@@ -298,13 +367,13 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
         return this;
     }
 
-    public TvDialogBuilder isCancelableOnTouchOutside(boolean cancelable) {
+    public TvDialog isCancelableOnTouchOutside(boolean cancelable) {
         this.isCancelable = cancelable;
         this.setCanceledOnTouchOutside(cancelable);
         return this;
     }
 
-    public TvDialogBuilder isCancelable(boolean cancelable) {
+    public TvDialog isCancelable(boolean cancelable) {
         this.isCancelable = cancelable;
         this.setCancelable(cancelable);
         return this;
@@ -322,7 +391,9 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
     public void show() {
 
         showMiddleLine();
-
+        if(timer!=null){
+            timer.start();
+        }
         super.show();
     }
 
@@ -337,6 +408,10 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
     @Override
     public void dismiss() {
         super.dismiss();
+        if(timer!=null){
+            timer.cancel();
+            timer=null;
+        }
         mButton1.setVisibility(View.GONE);
         mButton2.setVisibility(View.GONE);
     }

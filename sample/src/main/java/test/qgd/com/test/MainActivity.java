@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.qgd.commons.tv.widget.Effectstype;
-import com.qgd.commons.tv.widget.TvDialogBuilder;
+import com.qgd.commons.tv.widget.TvDialog;
 
 public class MainActivity extends Activity {
 
@@ -16,12 +16,16 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        TvDialog.createTipDialog(this,"呵呵呵！",4000).show();
+
+
         setContentView(R.layout.activity_main);
     }
 
+
     public void showDialog(View v) {
 
-        TvDialogBuilder dialogBuilder = TvDialogBuilder.getInstance(this);
+        TvDialog dialogBuilder = TvDialog.getInstance(this);
         dialogBuilder.withTitle("提示信息")                                  //.withTitle(null)  no title
                 //.withTitleColor("#FFFFFF")                                  //def
                 //.withDividerColor("#11000000")                              //def
