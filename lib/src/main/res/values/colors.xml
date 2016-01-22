@@ -9,14 +9,19 @@
     <color name="button_selected_end_color">#E53B36</color>
 
     <color name="text_color">#FFFFFF</color>
-    <color name="divider_color">#11000000</color>
+    <color name="divider_color">#FFFFFF</color>
     <color name="msg_color">#FFFFFFFF</color>
     <!--<color name="dialog_bg">#ffe74c3c</color>-->
-    <color name="dialog_bg">#515768</color>
+    <!--<color name="dialog_bg">#515768</color>-->
 
+    <color name="dialog_bg">#aa46495b</color>
 
-    <color name="btn_press_color">#66000000</color>
-    <color name="btn_unpress_color">#22000000</color>
+    <color name="btn_unpress_color">#000000</color>
+    <color name="btn_press_color">#df5500</color>
+
+    <!--<color name="btn_press_color">#66000000</color>-->
+    <!--<color name="btn_unpress_color">#22000000</color>-->
+
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>

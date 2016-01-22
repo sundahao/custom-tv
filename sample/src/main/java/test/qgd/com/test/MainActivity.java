@@ -33,7 +33,7 @@ public class MainActivity extends Activity {
                 .withEffect(effect)                                         //def Effectstype.Slidetop
                                                     //def gone
                                                //def gone
-                //.setCustomView(R.layout.custom_view, this)         //.setCustomView(View or ResId,context)
+                      //.setCustomView(View or ResId,context)
                 .setButton1Click(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -56,6 +56,9 @@ public class MainActivity extends Activity {
                 break;
             case R.id.dialogNone:
 
+                break;
+            case R.id.dialogCustom:
+                dialogBuilder.setCustomView(R.layout.custom_view, this);
                 break;
         }
 

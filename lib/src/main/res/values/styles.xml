@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="DialogWindowTitle">
-        <item name="android:textSize">27sp</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:textColor">@color/text_color</item>
     </style>
 
@@ -24,8 +24,9 @@
         <item name="android:minHeight">50dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_marginBottom">0dp</item>
-        <item name="android:background">@drawable/btn_selector</item>
+        <item name="android:background">@drawable/btn_selector_bottom</item>
         <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:gravity">center</item>
     </style>
 

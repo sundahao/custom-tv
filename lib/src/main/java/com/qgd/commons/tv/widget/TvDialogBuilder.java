@@ -108,6 +108,7 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
 
     }
 
+
     private void init(Context context) {
 
         mDialogView = View.inflate(context, R.layout.dialog_layout, null);
@@ -253,7 +254,10 @@ public class TvDialogBuilder extends Dialog implements DialogInterface {
     private void showMiddleLine(){
         if(mButton1.getVisibility()==View.VISIBLE&&mButton2.getVisibility()==View.VISIBLE){
             mMiddleLineView.setVisibility(View.VISIBLE);
+            mButton1.setBackgroundResource(R.drawable.btn_selector_left);
+            mButton2.setBackgroundResource(R.drawable.btn_selector_right);
         }else{
+            mButton1.setBackgroundResource(R.drawable.btn_selector_bottom);
             mMiddleLineView.setVisibility(View.GONE);
         }
     }
