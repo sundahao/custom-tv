@@ -108,6 +108,13 @@ public class TvDialog extends Dialog implements DialogInterface {
         return dialog;
     }
 
+    public static TvDialog createDialog(Context context) {
+        return createDefaultDialog(context);
+    }
+
+    public static TvDialog createDialog(Context context,String message) {
+        return createDialog(context,"提示",message);
+    }
     public static TvDialog createDialog(Context context, String title, String message) {
         TvDialog dialog = getInstance(context);
         dialog.setCustomView(R.layout.normal_view, context);
@@ -414,6 +421,31 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     public TvDialog setButton1Click(View.OnClickListener click) {
         mButton1.setOnClickListener(click);
+        return this;
+    }
+    private String getString(int id){
+        if(mContext!=null)
+            return mContext.getString(id);
+        else
+            return "";
+    }
+
+    public TvDialog setButton1Click(int button1Name,View.OnClickListener click) {
+        return setButton1Click(getString(button1Name),click);
+    }
+
+    public TvDialog setButton2Click(int button2Name,View.OnClickListener click) {
+        return setButton2Click(getString(button2Name),click);
+    }
+    public TvDialog setButton1Click(String button1Name,View.OnClickListener click) {
+        withButton1Text(button1Name);
+        setButton1Click(click);
+        return this;
+    }
+
+    public TvDialog setButton2Click(String button2Name,View.OnClickListener click) {
+        withButton2Text(button2Name);
+        setButton2Click(click);
         return this;
     }
 
