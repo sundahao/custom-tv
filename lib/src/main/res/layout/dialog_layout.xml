@@ -67,33 +67,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-        >
+        />
 
-            <LinearLayout
-                    android:id="@+id/contentPanel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:orientation="vertical">
-
-                <TextView
-                        android:id="@+id/message"
-                        style="?android:attr/textAppearanceMedium"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:paddingBottom="8dip"
-                        android:paddingEnd="8dip"
-                        android:paddingStart="16dip"
-                        android:paddingTop="30dp"
-                        android:text=""
-                        android:textColor="@color/msg_color"
-                        android:textIsSelectable="true"
-                        android:textSize="27sp"/>
-            </LinearLayout>
-
-        </FrameLayout>
 
         <LinearLayout
                 android:layout_margin="1dp"

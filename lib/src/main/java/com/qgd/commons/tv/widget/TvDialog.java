@@ -42,7 +42,6 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     private RelativeLayout mRelativeLayoutView;
 
-    private LinearLayout mLinearLayoutMsgView;
 
     private LinearLayout mLinearLayoutTopView;
 
@@ -113,17 +112,20 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     public static TvDialog createDefaultDialog(Context context){
         TvDialog dialog=getInstance(context);
+        dialog.setCustomView(R.layout.normal_view,context);
         return dialog;
     }
 
     public static TvDialog createDialog(Context context,String title,String message){
         TvDialog dialog=getInstance(context);
+        dialog.setCustomView(R.layout.normal_view,context);
         dialog.withMessage(message);
         dialog.withTitle(title);
         return dialog;
     }
     public static TvDialog createDialog(Context context,String title,String message,String button1){
         TvDialog dialog=getInstance(context);
+        dialog.setCustomView(R.layout.normal_view,context);
         dialog.withMessage(message);
         dialog.withTitle(title);
         if(button1!=null)
@@ -132,6 +134,9 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
     public static TvDialog createDialog(Context context,String title,String message,String button1,String button2){
         TvDialog dialog=getInstance(context);
+        dialog.setCustomView(R.layout.progress_view,context);
+        GifView gif= (GifView) dialog.mFrameLayoutCustomView.findViewById(R.id.progress);
+
         dialog.withMessage(message);
         dialog.withTitle(title);
         if(button1!=null)
@@ -146,16 +151,15 @@ public class TvDialog extends Dialog implements DialogInterface {
         TvDialog dialog=getInstance(context);
         dialog.withTitle(title);
         dialog.setCustomView(R.layout.progress_view,context);
-        TextView textView=(TextView)dialog.findViewById(R.id.tipTextView);
-        textView.setText(message);
+        dialog.withMessage(message);
         return dialog;
     }
     public static TvDialog createTipDialog(Context context,String message){
         TvDialog dialog=getInstance(context);
         dialog.hideTop();
         dialog.setCustomView(R.layout.tip_view,context);
-        TextView textView=(TextView)dialog.findViewById(R.id.tipTextView);
-        textView.setText(message);
+
+        dialog.withMessage(message);
         return dialog;
     }
     public static TvDialog createTipDialog(Context context,String message,int timeOut){
@@ -186,11 +190,12 @@ public class TvDialog extends Dialog implements DialogInterface {
         mLinearLayoutView = (LinearLayout) mDialogView.findViewById(R.id.parentPanel);
         mRelativeLayoutView = (RelativeLayout) mDialogView.findViewById(R.id.main);
         mLinearLayoutTopView = (LinearLayout) mDialogView.findViewById(R.id.topPanel);
-        mLinearLayoutMsgView = (LinearLayout) mDialogView.findViewById(R.id.contentPanel);
+
         mFrameLayoutCustomView = (FrameLayout) mDialogView.findViewById(R.id.customPanel);
 
         mTitle = (TextView) mDialogView.findViewById(R.id.alertTitle);
-        mMessage = (TextView) mDialogView.findViewById(R.id.message);
+        mMessage = null;
+
         mIcon = (ImageView) mDialogView.findViewById(R.id.icon);
         mDivider = mDialogView.findViewById(R.id.titleDivider);
         mButton1 = (Button) mDialogView.findViewById(R.id.button1);
@@ -260,18 +265,19 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     public TvDialog withMessage(int textResId) {
-        toggleView(mLinearLayoutMsgView, textResId);
+        mMessage=(TextView)mFrameLayoutCustomView.findViewById(R.id.messageTextView);
         mMessage.setText(textResId);
         return this;
     }
 
     public TvDialog withMessage(CharSequence msg) {
-        toggleView(mLinearLayoutMsgView, msg);
+        mMessage=(TextView)mFrameLayoutCustomView.findViewById(R.id.messageTextView);
         mMessage.setText(msg);
         return this;
     }
 
     public TvDialog withMessageColor(String colorString) {
+        mMessage=(TextView)mFrameLayoutCustomView.findViewById(R.id.messageTextView);
         mMessage.setTextColor(Color.parseColor(colorString));
         return this;
     }
@@ -282,11 +288,13 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     public TvDialog withDialogColor(String colorString) {
+        mMessage=(TextView)mFrameLayoutCustomView.findViewById(R.id.messageTextView);
         mLinearLayoutView.getBackground().setColorFilter(ColorUtils.getColorFilter(Color.parseColor(colorString)));
         return this;
     }
 
     public TvDialog withDialogColor(int color) {
+        mMessage=(TextView)mFrameLayoutCustomView.findViewById(R.id.messageTextView);
         mLinearLayoutView.getBackground().setColorFilter(ColorUtils.getColorFilter(color));
         return this;
     }
@@ -355,6 +363,7 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     public TvDialog setCustomView(int resId, Context context) {
         View customView = View.inflate(context, resId, null);
+
         if (mFrameLayoutCustomView.getChildCount() > 0) {
             mFrameLayoutCustomView.removeAllViews();
         }
@@ -384,6 +393,7 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     private void toggleView(View view, Object obj) {
+        if(view==null) return;
         if (obj == null) {
             view.setVisibility(View.GONE);
         } else {
@@ -419,4 +429,6 @@ public class TvDialog extends Dialog implements DialogInterface {
         mButton1.setVisibility(View.GONE);
         mButton2.setVisibility(View.GONE);
     }
+
+
 }
