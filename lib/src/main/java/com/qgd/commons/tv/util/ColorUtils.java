@@ -1,4 +1,4 @@
-package com.qgd.commons.tv.widget;
+package com.qgd.commons.tv.util;
 
 import android.graphics.ColorFilter;
 import android.graphics.ColorMatrixColorFilter;

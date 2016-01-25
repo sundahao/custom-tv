@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qgd.commons.tv.R;
+import com.qgd.commons.tv.util.ColorUtils;
 import com.qgd.commons.tv.util.DimensionConvert;
 import com.qgd.commons.tv.widget.effects.BaseEffects;
 
@@ -71,6 +72,8 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     private CountDownTimer timer = null;
 
+    private Context mContext;
+
     public TvDialog(Context context) {
         super(context);
         init(context);
@@ -95,7 +98,8 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     private static TvDialog getInstance(Context context) {
-        return  new TvDialog(context, R.style.dialog_untran);
+
+        return new TvDialog(context, R.style.dialog_untran);
     }
 
     public static TvDialog createDefaultDialog(Context context) {
@@ -122,6 +126,18 @@ public class TvDialog extends Dialog implements DialogInterface {
         return dialog;
     }
 
+    public static TvDialog createDialog(Context context, int title, int message) {
+        return createDialog(context, getString(context, title), getString(context, message));
+    }
+
+    public static TvDialog createDialog(Context context, int title, int message, int button1) {
+        return createDialog(context, getString(context, title), getString(context, message), getString(context, button1));
+    }
+
+    public static TvDialog createDialog(Context context, int title, int message, int button1, int button2) {
+        return createDialog(context, getString(context, title), getString(context, message), getString(context, button1), getString(context, button2));
+    }
+
     public static TvDialog createDialog(Context context, String title, String message, String button1, String button2) {
         TvDialog dialog = getInstance(context);
         dialog.setCustomView(R.layout.normal_view, context);
@@ -146,6 +162,15 @@ public class TvDialog extends Dialog implements DialogInterface {
         return dialog;
     }
 
+    public static TvDialog createProgressDialog(Context context, int title, int message) {
+        return createProgressDialog(context, getString(context, title), getString(context, message));
+    }
+
+
+    public static TvDialog createTipDialog(Context context, int message) {
+        return createTipDialog(context, getString(context, message));
+    }
+
     public static TvDialog createTipDialog(Context context, String message) {
         TvDialog dialog = getInstance(context);
         dialog.hideTop();
@@ -153,6 +178,33 @@ public class TvDialog extends Dialog implements DialogInterface {
 
         dialog.withMessage(message);
         return dialog;
+    }
+
+    private static String getString(Context context, int message) {
+        if (context != null) {
+            return context.getString(message);
+        } else {
+            return "";
+        }
+    }
+
+    public static final int LONG_DELAY = 3500; // 3.5 seconds
+    public static final int SHORT_DELAY = 2000; // 2 seconds
+
+    public static TvDialog createToastDialog(Context context, String message) {
+        return createTipDialog(context, message, SHORT_DELAY);
+    }
+
+    public static TvDialog createToastDialog(Context context, String message, int duration) {
+        return createTipDialog(context, message, duration);
+    }
+
+    public static TvDialog createToastDialog(Context context, int message) {
+        return createTipDialog(context, getString(context, message), SHORT_DELAY);
+    }
+
+    public static TvDialog createToastDialog(Context context, int message, int duration) {
+        return createTipDialog(context, getString(context, message), duration);
     }
 
     public static TvDialog createTipDialog(Context context, String message, int timeOut) {
@@ -177,7 +229,7 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     private void init(Context context) {
-
+        mContext=context;
         mDialogView = View.inflate(context, R.layout.dialog_layout, null);
 
         mLinearLayoutView = (LinearLayout) mDialogView.findViewById(R.id.parentPanel);
@@ -241,7 +293,9 @@ public class TvDialog extends Dialog implements DialogInterface {
         return this;
     }
 
-
+    public TvDialog withTitle(int title){
+        return withTitle( mContext.getString(title) );
+    }
     public TvDialog withTitle(CharSequence title) {
         toggleView(mLinearLayoutTopView, title);
         mTitle.setText(title);
@@ -325,6 +379,13 @@ public class TvDialog extends Dialog implements DialogInterface {
         return this;
     }
 
+    public TvDialog withButton2Text(int text){
+        return withButton2Text( mContext.getString(text) );
+    }
+
+    public TvDialog withButton1Text(int text){
+        return withButton1Text( mContext.getString(text) );
+    }
     public TvDialog withButton1Text(CharSequence text) {
         mButton1.setVisibility(View.VISIBLE);
         mButton1.setText(text);
