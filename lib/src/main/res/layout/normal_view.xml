@@ -4,20 +4,18 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_gravity="center"
         android:orientation="vertical">
 
     <TextView
+             android:gravity="center|left"
+            android:layout_gravity="center_vertical"
             android:tag="message"
             style="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:paddingBottom="8dip"
-            android:paddingEnd="8dip"
-            android:paddingStart="16dip"
-            android:paddingTop="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text=""
             android:textColor="@color/msg_color"
             android:textIsSelectable="true"

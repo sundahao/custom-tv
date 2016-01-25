@@ -74,6 +74,11 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     private Context mContext;
 
+    private int mHeight=220;
+    private int mWidth=450;
+
+    WindowManager.LayoutParams params ;
+
     public TvDialog(Context context) {
         super(context);
         init(context);
@@ -88,12 +93,13 @@ public class TvDialog extends Dialog implements DialogInterface {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params = getWindow().getAttributes();
         params.height = ViewGroup.LayoutParams.MATCH_PARENT;
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        params.width = DimensionConvert.px2dip(getContext(), 450);
-        params.height = DimensionConvert.px2dip(getContext(), 220);
+        params.width = DimensionConvert.px2dip(getContext(), mWidth );
+        params.height = DimensionConvert.px2dip(getContext(), mHeight);
         getWindow().setAttributes((WindowManager.LayoutParams) params);
+
 
     }
 
@@ -104,12 +110,8 @@ public class TvDialog extends Dialog implements DialogInterface {
 
 
     public void setSize(int width,int height){
-        WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        params.width = DimensionConvert.px2dip(getContext(), width);
-        params.height = DimensionConvert.px2dip(getContext(), height);
-        getWindow().setAttributes((WindowManager.LayoutParams) params);
+        mWidth=width;
+        mHeight=height;
     }
 
     public static TvDialog createDefaultDialog(Context context) {
