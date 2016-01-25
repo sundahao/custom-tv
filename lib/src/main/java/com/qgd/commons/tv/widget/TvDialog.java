@@ -68,10 +68,8 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     private boolean isCancelable = true;
 
-    private static TvDialog instance;
 
-
-    private CountDownTimer  timer=null;
+    private CountDownTimer timer = null;
 
     public TvDialog(Context context) {
         super(context);
@@ -96,75 +94,69 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     }
 
-    public static TvDialog getInstance(Context context) {
-
-        if (instance == null || !tmpContext.equals(context)) {
-            synchronized (TvDialog.class) {
-                if (instance == null || !tmpContext.equals(context)) {
-                    instance = new TvDialog(context, R.style.dialog_untran);
-                }
-            }
-        }
-        tmpContext = context;
-        return instance;
-
+    private static TvDialog getInstance(Context context) {
+        return  new TvDialog(context, R.style.dialog_untran);
     }
 
-    public static TvDialog createDefaultDialog(Context context){
-        TvDialog dialog=getInstance(context);
-        dialog.setCustomView(R.layout.normal_view,context);
+    public static TvDialog createDefaultDialog(Context context) {
+        TvDialog dialog = getInstance(context);
+        dialog.setCustomView(R.layout.normal_view, context);
         return dialog;
     }
 
-    public static TvDialog createDialog(Context context,String title,String message){
-        TvDialog dialog=getInstance(context);
-        dialog.setCustomView(R.layout.normal_view,context);
+    public static TvDialog createDialog(Context context, String title, String message) {
+        TvDialog dialog = getInstance(context);
+        dialog.setCustomView(R.layout.normal_view, context);
         dialog.withMessage(message);
         dialog.withTitle(title);
         return dialog;
     }
-    public static TvDialog createDialog(Context context,String title,String message,String button1){
-        TvDialog dialog=getInstance(context);
-        dialog.setCustomView(R.layout.normal_view,context);
+
+    public static TvDialog createDialog(Context context, String title, String message, String button1) {
+        TvDialog dialog = getInstance(context);
+        dialog.setCustomView(R.layout.normal_view, context);
         dialog.withMessage(message);
         dialog.withTitle(title);
-        if(button1!=null)
+        if (button1 != null)
             dialog.withButton1Text(button1);
         return dialog;
     }
-    public static TvDialog createDialog(Context context,String title,String message,String button1,String button2){
-        TvDialog dialog=getInstance(context);
-        dialog.setCustomView(R.layout.progress_view,context);
-        GifView gif= (GifView) dialog.mFrameLayoutCustomView.findViewById(R.id.progress);
+
+    public static TvDialog createDialog(Context context, String title, String message, String button1, String button2) {
+        TvDialog dialog = getInstance(context);
+        dialog.setCustomView(R.layout.progress_view, context);
+        GifView gif = (GifView) dialog.mFrameLayoutCustomView.findViewById(R.id.progress);
 
         dialog.withMessage(message);
         dialog.withTitle(title);
-        if(button1!=null)
+        if (button1 != null)
             dialog.withButton1Text(button1);
-        if(button2!=null)
+        if (button2 != null)
             dialog.withButton1Text(button2);
 
         return dialog;
     }
 
-    public static TvDialog createProgressDialog(Context context,String title,String message){
-        TvDialog dialog=getInstance(context);
+    public static TvDialog createProgressDialog(Context context, String title, String message) {
+        TvDialog dialog = getInstance(context);
         dialog.withTitle(title);
-        dialog.setCustomView(R.layout.progress_view,context);
+        dialog.setCustomView(R.layout.progress_view, context);
         dialog.withMessage(message);
         return dialog;
     }
-    public static TvDialog createTipDialog(Context context,String message){
-        TvDialog dialog=getInstance(context);
+
+    public static TvDialog createTipDialog(Context context, String message) {
+        TvDialog dialog = getInstance(context);
         dialog.hideTop();
-        dialog.setCustomView(R.layout.tip_view,context);
+        dialog.setCustomView(R.layout.tip_view, context);
 
         dialog.withMessage(message);
         return dialog;
     }
-    public static TvDialog createTipDialog(Context context,String message,int timeOut){
-        final TvDialog dialog=createTipDialog(context,message);
-        CountDownTimer  timer= new CountDownTimer(timeOut,1000) {
+
+    public static TvDialog createTipDialog(Context context, String message, int timeOut) {
+        final TvDialog dialog = createTipDialog(context, message);
+        CountDownTimer timer = new CountDownTimer(timeOut, 1000) {
             @Override
             public void onTick(long l) {
 
@@ -179,8 +171,8 @@ public class TvDialog extends Dialog implements DialogInterface {
         return dialog;
     }
 
-    public void setCountDownTimer(CountDownTimer  timer){
-        this.timer=timer;
+    public void setCountDownTimer(CountDownTimer timer) {
+        this.timer = timer;
     }
 
     private void init(Context context) {
@@ -200,7 +192,7 @@ public class TvDialog extends Dialog implements DialogInterface {
         mDivider = mDialogView.findViewById(R.id.titleDivider);
         mButton1 = (Button) mDialogView.findViewById(R.id.button1);
         mButton2 = (Button) mDialogView.findViewById(R.id.button2);
-        mMiddleLineView=mDialogView.findViewById(R.id.middleLineView);
+        mMiddleLineView = mDialogView.findViewById(R.id.middleLineView);
 
 
         setContentView(mDialogView);
@@ -226,7 +218,8 @@ public class TvDialog extends Dialog implements DialogInterface {
             }
         });
     }
-    private void hideTop(){
+
+    private void hideTop() {
         mLinearLayoutTopView.setVisibility(View.GONE);
     }
 
@@ -265,37 +258,43 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     public TvDialog withMessage(int textResId) {
-        mMessage=(TextView)mFrameLayoutCustomView.findViewById(R.id.messageTextView);
-        mMessage.setText(textResId);
+        mMessage = (TextView) mFrameLayoutCustomView.findViewWithTag("message");
+        if (mMessage != null)
+            mMessage.setText(textResId);
         return this;
     }
 
     public TvDialog withMessage(CharSequence msg) {
-        mMessage=(TextView)mFrameLayoutCustomView.findViewById(R.id.messageTextView);
-        mMessage.setText(msg);
+        mMessage = (TextView) mFrameLayoutCustomView.findViewWithTag("message");
+        if (mMessage != null)
+            mMessage.setText(msg);
         return this;
     }
 
     public TvDialog withMessageColor(String colorString) {
-        mMessage=(TextView)mFrameLayoutCustomView.findViewById(R.id.messageTextView);
-        mMessage.setTextColor(Color.parseColor(colorString));
+        mMessage = (TextView) mFrameLayoutCustomView.findViewWithTag("message");
+        if (mMessage != null)
+            mMessage.setTextColor(Color.parseColor(colorString));
         return this;
     }
 
     public TvDialog withMessageColor(int color) {
-        mMessage.setTextColor(color);
+        if (mMessage != null)
+            mMessage.setTextColor(color);
         return this;
     }
 
     public TvDialog withDialogColor(String colorString) {
-        mMessage=(TextView)mFrameLayoutCustomView.findViewById(R.id.messageTextView);
-        mLinearLayoutView.getBackground().setColorFilter(ColorUtils.getColorFilter(Color.parseColor(colorString)));
+        mMessage = (TextView) mFrameLayoutCustomView.findViewWithTag("message");
+        if (mMessage != null)
+            mLinearLayoutView.getBackground().setColorFilter(ColorUtils.getColorFilter(Color.parseColor(colorString)));
         return this;
     }
 
     public TvDialog withDialogColor(int color) {
-        mMessage=(TextView)mFrameLayoutCustomView.findViewById(R.id.messageTextView);
-        mLinearLayoutView.getBackground().setColorFilter(ColorUtils.getColorFilter(color));
+        mMessage = (TextView) mFrameLayoutCustomView.findViewWithTag("message");
+        if (mMessage != null)
+            mLinearLayoutView.getBackground().setColorFilter(ColorUtils.getColorFilter(color));
         return this;
     }
 
@@ -332,12 +331,13 @@ public class TvDialog extends Dialog implements DialogInterface {
 
         return this;
     }
-    private void showMiddleLine(){
-        if(mButton1.getVisibility()==View.VISIBLE&&mButton2.getVisibility()==View.VISIBLE){
+
+    private void showMiddleLine() {
+        if (mButton1.getVisibility() == View.VISIBLE && mButton2.getVisibility() == View.VISIBLE) {
             mMiddleLineView.setVisibility(View.VISIBLE);
             mButton1.setBackgroundResource(R.drawable.btn_selector_left);
             mButton2.setBackgroundResource(R.drawable.btn_selector_right);
-        }else{
+        } else {
             mButton1.setBackgroundResource(R.drawable.btn_selector_bottom);
             mMiddleLineView.setVisibility(View.GONE);
         }
@@ -366,6 +366,7 @@ public class TvDialog extends Dialog implements DialogInterface {
 
         if (mFrameLayoutCustomView.getChildCount() > 0) {
             mFrameLayoutCustomView.removeAllViews();
+
         }
         mFrameLayoutCustomView.addView(customView);
         return this;
@@ -393,7 +394,8 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     private void toggleView(View view, Object obj) {
-        if(view==null) return;
+        if (view == null)
+            return;
         if (obj == null) {
             view.setVisibility(View.GONE);
         } else {
@@ -405,7 +407,7 @@ public class TvDialog extends Dialog implements DialogInterface {
     public void show() {
 
         showMiddleLine();
-        if(timer!=null){
+        if (timer != null) {
             timer.start();
         }
         super.show();
@@ -422,9 +424,9 @@ public class TvDialog extends Dialog implements DialogInterface {
     @Override
     public void dismiss() {
         super.dismiss();
-        if(timer!=null){
+        if (timer != null) {
             timer.cancel();
-            timer=null;
+            timer = null;
         }
         mButton1.setVisibility(View.GONE);
         mButton2.setVisibility(View.GONE);

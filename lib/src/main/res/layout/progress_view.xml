@@ -16,7 +16,7 @@
             custom:gif="@drawable/loading"/>
 
     <TextView
-            android:id="@+id/messageTextView"
+            android:tag="message"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"

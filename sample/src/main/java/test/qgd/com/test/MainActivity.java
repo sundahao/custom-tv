@@ -31,11 +31,11 @@ public class MainActivity extends Activity {
 
     public void showDialog(View v) {
 
-        TvDialog dialogBuilder = TvDialog.getInstance(this);
+        TvDialog dialogBuilder = TvDialog.createDefaultDialog(this);
         dialogBuilder.withTitle("提示信息")                                  //.withTitle(null)  no title
                 //.withTitleColor("#FFFFFF")                                  //def
                 //.withDividerColor("#11000000")                              //def
-                .withMessage("对话框")                     //.withMessage(null)  no Msg
+                .withMessage("对话框"+v)                     //.withMessage(null)  no Msg
                 //.withMessageColor("#FFFFFFFF")                              //def  | withMessageColor(int resid)
                 //.withDialogColor("#FFE74C3C")                               //def  | withDialogColor(int resid)                               //def
                 //.withIcon(getResources().getDrawable(R.drawable.ic_launcher)).isCancelableOnTouchOutside(true)                           //def    | isCancelable(true)
