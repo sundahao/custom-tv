@@ -396,7 +396,7 @@ public class TvDialog extends Dialog implements DialogInterface {
     public TvDialog withButton1Text(CharSequence text) {
         mButton1.setVisibility(View.VISIBLE);
         mButton1.setText(text);
-
+        mButton1.requestFocus();
 
         return this;
     }

@@ -76,6 +76,7 @@
                 android:layout_height="wrap_content">
 
             <Button
+
                     android:id="@+id/button1"
                     style="@style/dialog_btn"
                     android:text="OK"
