@@ -124,9 +124,7 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     public static TvDialog createDialog(Context context, String title, String message, String button1, String button2) {
         TvDialog dialog = getInstance(context);
-        dialog.setCustomView(R.layout.progress_view, context);
-        GifView gif = (GifView) dialog.mFrameLayoutCustomView.findViewById(R.id.progress);
-
+        dialog.setCustomView(R.layout.normal_view, context);
         dialog.withMessage(message);
         dialog.withTitle(title);
         if (button1 != null)
@@ -141,6 +139,9 @@ public class TvDialog extends Dialog implements DialogInterface {
         TvDialog dialog = getInstance(context);
         dialog.withTitle(title);
         dialog.setCustomView(R.layout.progress_view, context);
+        GifView gif = (GifView) dialog.mFrameLayoutCustomView.findViewById(R.id.progress);
+        gif.setVisibility(View.VISIBLE);
+
         dialog.withMessage(message);
         return dialog;
     }

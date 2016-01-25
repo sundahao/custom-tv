@@ -11,7 +11,9 @@ import android.view.View;
 
 import com.qgd.commons.tv.R;
 
-
+/**
+ * Created by Cuneyt on 4.10.2015.
+ */
 public class GifView extends View {
 
     private static final int DEFAULT_MOVIEW_DURATION = 1000;
@@ -254,7 +256,7 @@ public class GifView extends View {
 
     @SuppressLint("NewApi")
     @Override
-    protected void onVisibilityChanged(View changedView, int visibility) {
+    protected void onVisibilityChanged( View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
         mVisible = visibility == View.VISIBLE;
         invalidateView();
