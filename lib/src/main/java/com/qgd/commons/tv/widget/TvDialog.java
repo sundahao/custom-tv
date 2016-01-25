@@ -102,6 +102,16 @@ public class TvDialog extends Dialog implements DialogInterface {
         return new TvDialog(context, R.style.dialog_untran);
     }
 
+
+    public void setSize(int width,int height){
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.width = DimensionConvert.px2dip(getContext(), width);
+        params.height = DimensionConvert.px2dip(getContext(), height);
+        getWindow().setAttributes((WindowManager.LayoutParams) params);
+    }
+
     public static TvDialog createDefaultDialog(Context context) {
         TvDialog dialog = getInstance(context);
         dialog.setCustomView(R.layout.normal_view, context);
@@ -153,7 +163,7 @@ public class TvDialog extends Dialog implements DialogInterface {
         if (button1 != null)
             dialog.withButton1Text(button1);
         if (button2 != null)
-            dialog.withButton1Text(button2);
+            dialog.withButton2Text(button2);
 
         return dialog;
     }
