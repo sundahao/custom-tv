@@ -1,75 +1,79 @@
 package test.qgd.com.test;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.qgd.commons.tv.widget.Effectstype;
 import com.qgd.commons.tv.widget.TvDialog;
 
 public class MainActivity extends Activity {
 
-    private Effectstype effect = Effectstype.Fadein;
 
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TvDialog tvDialog=TvDialog.createTipDialog(this,"呵呵呵！",1000);
-        tvDialog.setSize(500,100);
+        TvDialog tvDialog = TvDialog.createToastDialog(this, "呵呵呵！"); //类似toast
+        tvDialog.setSize(500, 100);//可以设置大小
         tvDialog.show();
-
+        context=this;
 
         setContentView(R.layout.activity_main);
+
+
     }
 
-    public void showTipDialog(View v){
-        TvDialog.createTipDialog(this,"我是一只tip").show();
+    public void showNoCancelDialog(View v) {//不可取消按钮
+        final TvDialog tvDialog=TvDialog.createDialog(this, "提示!", "不可按返回取消");
+        tvDialog.setCancelable(false);
+        tvDialog.setButton1Click("只能点这里取消",new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                tvDialog.dismiss();
+            }
+        });
+        tvDialog.show();
     }
-    public void showProgressDialog(View v){
-        TvDialog.createProgressDialog(this,"提示!","额鹅鹅鹅进度条").show();
+
+    public void showTipDialog(View v) {//无标题，
+        TvDialog.createTipDialog(this, "我是一只tip").show();
+    }
+
+    public void showProgressDialog(View v) {//显示进度条
+        TvDialog.createProgressDialog(this, "提示!", "额鹅鹅鹅进度条").show();
     }
 
     public void showDialog(View v) {
 
         TvDialog dialogBuilder = TvDialog.createDefaultDialog(this);
-        dialogBuilder.withTitle("提示信息")                                  //.withTitle(null)  no title
-                //.withTitleColor("#FFFFFF")                                  //def
-                //.withDividerColor("#11000000")                              //def
-                .withMessage("对话框我是事实上事实对")                     //.withMessage(null)  no Msg
-                //.withMessageColor("#FFFFFFFF")                              //def  | withMessageColor(int resid)
-                //.withDialogColor("#FFE74C3C")                               //def  | withDialogColor(int resid)                               //def
-                //.withIcon(getResources().getDrawable(R.drawable.ic_launcher)).isCancelableOnTouchOutside(true)                           //def    | isCancelable(true)
-                .withDuration(100)                                          //def
-                .withEffect(effect)                                         //def Effectstype.Slidetop
-                                                    //def gone
-                                               //def gone
-                      //.setCustomView(View or ResId,context)
-                .setButton1Click(new View.OnClickListener() {
+        dialogBuilder.withMessage("内容内容内容内容内容内容");//内容
+        dialogBuilder.withTitle("提示信息")//标题
+                .setButton1Click(new View.OnClickListener() {//按钮事件
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(v.getContext(), "按钮一", Toast.LENGTH_SHORT).show();
+                        TvDialog.createToastDialog(context, "按了确定").show();
                     }
                 }).setButton2Click(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(v.getContext(), "按钮二", Toast.LENGTH_SHORT).show();
+                TvDialog.createToastDialog(context, "按了取消").show();
             }
         });
 
-        switch (v.getId()){
+        switch (v.getId()) {//一个按钮 确定
             case R.id.dialogOk:
                 dialogBuilder.withButton1Text("确定");
                 break;
-            case R.id.dialogBoth:
+            case R.id.dialogBoth://2个按钮
                 dialogBuilder.withButton1Text("确定");
                 dialogBuilder.withButton2Text("取消");
                 break;
-            case R.id.dialogNone:
+            case R.id.dialogNone://无按钮
 
                 break;
-            case R.id.dialogCustom:
+            case R.id.dialogCustom://自定义内部显示
                 dialogBuilder.setCustomView(R.layout.custom_view, this);
                 break;
         }
