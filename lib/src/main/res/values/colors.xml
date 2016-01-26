@@ -14,7 +14,7 @@
     <!--<color name="dialog_bg">#ffe74c3c</color>-->
     <!--<color name="dialog_bg">#515768</color>-->
 
-    <color name="dialog_bg">#aa46495b</color>
+    <color name="dialog_bg">#dd46495b</color>
 
     <color name="btn_unpress_color">#000000</color>
     <color name="btn_press_color">#df5500</color>
