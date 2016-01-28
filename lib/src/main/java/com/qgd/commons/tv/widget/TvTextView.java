@@ -36,6 +36,7 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
     private String mKeyNumber;
 
     private Paint mPaint;
+    private OnFocusChangeListener mOnFocusChangeListener;
 
     public TvTextView(Context context) {
         super(context);
@@ -83,6 +84,11 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
     }
 
     @Override
+    public void setOnFocusChangeListener(OnFocusChangeListener l) {
+        mOnFocusChangeListener=l;
+    }
+
+    @Override
     public void onFocusChange(View view, boolean b) {
         if (!mScaleable)
             return;
@@ -90,6 +96,9 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
             AnimateFactory.zoomInView(view);
         } else {
             AnimateFactory.zoomOutView(view);
+        }
+        if(mOnFocusChangeListener!=null){
+            mOnFocusChangeListener.onFocusChange(view,b);
         }
     }
 

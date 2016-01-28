@@ -59,7 +59,11 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
         mDrawable = getResources().getDrawable(R.drawable.select_border2);
         this.setOnFocusChangeListener(this);
     }
-
+    private OnFocusChangeListener mOnFocusChangeListener;
+    @Override
+    public void setOnFocusChangeListener(OnFocusChangeListener l) {
+        mOnFocusChangeListener=l;
+    }
     @Override
     public void onFocusChange(View view, boolean b) {
         if(!scaleable)
@@ -68,6 +72,9 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
             AnimateFactory.zoomInView(view);
         } else {
             AnimateFactory.zoomOutView(view);
+        }
+        if(mOnFocusChangeListener!=null){
+            mOnFocusChangeListener.onFocusChange(view,b);
         }
     }
 
