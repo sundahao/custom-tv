@@ -27,7 +27,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize ;
+    private int borderSize;
 
     private boolean mScaleable = true;
 
@@ -43,8 +43,8 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         int borderResId = a.getResourceId(R.styleable.TvRelativeLayout_borderDrawable, R.drawable.select_border2);
         mBorderDrawable = getResources().getDrawable(borderResId);
 
-//        borderSize=a.getDimensionPixelSize(R.styleable.TvRelativeLayout_borderSize,R.dimen.default_border_size);
-        borderSize=11;
+        //        borderSize=a.getDimensionPixelSize(R.styleable.TvRelativeLayout_borderSize,R.dimen.default_border_size);
+        borderSize = 11;
         a.recycle();
     }
 
@@ -56,13 +56,16 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         mRect = new Rect();
         mBound = new Rect();
         mDrawable = getResources().getDrawable(R.drawable.select_border2);
-        this.setOnFocusChangeListener(this);
+        super.setOnFocusChangeListener(this);
     }
+
     private OnFocusChangeListener mOnFocusChangeListener;
+
     @Override
     public void setOnFocusChangeListener(OnFocusChangeListener l) {
-        mOnFocusChangeListener=l;
+        mOnFocusChangeListener = l;
     }
+
     @Override
     public void onFocusChange(View view, boolean b) {
         if (!mScaleable)
@@ -72,8 +75,8 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         } else {
             AnimateFactory.zoomOutView(view);
         }
-        if(mOnFocusChangeListener!=null){
-            mOnFocusChangeListener.onFocusChange(view,b);
+        if (mOnFocusChangeListener != null) {
+            mOnFocusChangeListener.onFocusChange(view, b);
         }
     }
 

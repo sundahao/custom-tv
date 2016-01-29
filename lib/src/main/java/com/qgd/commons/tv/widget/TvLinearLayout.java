@@ -51,13 +51,16 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
         mRect = new Rect();
         mBound = new Rect();
         mDrawable = getResources().getDrawable(R.drawable.select_border2);
-        this.setOnFocusChangeListener(this);
+        super.setOnFocusChangeListener(this);
     }
+
     private OnFocusChangeListener mOnFocusChangeListener;
+
     @Override
     public void setOnFocusChangeListener(OnFocusChangeListener l) {
-        mOnFocusChangeListener=l;
+        mOnFocusChangeListener = l;
     }
+
     @Override
     public void onFocusChange(View view, boolean b) {
         if (!mScaleable)
@@ -67,8 +70,8 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
         } else {
             AnimateFactory.zoomOutView(view);
         }
-        if(mOnFocusChangeListener!=null){
-            mOnFocusChangeListener.onFocusChange(view,b);
+        if (mOnFocusChangeListener != null) {
+            mOnFocusChangeListener.onFocusChange(view, b);
         }
     }
 

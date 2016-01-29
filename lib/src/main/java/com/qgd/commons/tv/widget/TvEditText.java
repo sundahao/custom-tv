@@ -27,8 +27,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
     private Animation scaleBigAnimation;
     private int borderSize = 12;
 
-    private boolean scaleable=false;
-
+    private boolean scaleable = false;
 
 
     public TvEditText(Context context) {
@@ -40,8 +39,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
         super(context, attrs);
         init();
 
-        TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.TvTextView);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TvTextView);
 
         scaleable = a.getBoolean(R.styleable.TvTextView_scaleable, false);
         a.recycle();
@@ -57,24 +55,28 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
         mRect = new Rect();
         mBound = new Rect();
         mDrawable = getResources().getDrawable(R.drawable.select_border2);
-        this.setOnFocusChangeListener(this);
+        super.setOnFocusChangeListener(this);
     }
+
     private OnFocusChangeListener mOnFocusChangeListener;
+
     @Override
     public void setOnFocusChangeListener(OnFocusChangeListener l) {
-        mOnFocusChangeListener=l;
+
+        mOnFocusChangeListener = l;
     }
+
     @Override
     public void onFocusChange(View view, boolean b) {
-        if(!scaleable)
+        if (!scaleable)
             return;
         if (b) {
             AnimateFactory.zoomInView(view);
         } else {
             AnimateFactory.zoomOutView(view);
         }
-        if(mOnFocusChangeListener!=null){
-            mOnFocusChangeListener.onFocusChange(view,b);
+        if (mOnFocusChangeListener != null) {
+            mOnFocusChangeListener.onFocusChange(view, b);
         }
     }
 
@@ -82,7 +84,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
     public void draw(Canvas canvas) {
         if (hasFocus()) {
             super.getDrawingRect(mRect);
-            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top , borderSize + mRect.right , borderSize + mRect.bottom);
+            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right, borderSize + mRect.bottom);
             mDrawable.setBounds(mBound);
             canvas.save();
             mDrawable.draw(canvas);
