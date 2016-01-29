@@ -39,7 +39,12 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
         mScaleable = a.getBoolean(R.styleable.TvLinearLayout_scaleable, true);
 
         int borderResId = a.getResourceId(R.styleable.TvLinearLayout_borderDrawable, R.drawable.select_border2);
+
         mBorderDrawable = getResources().getDrawable(borderResId);
+
+
+        borderSize=a.getDimensionPixelSize(R.styleable.TvLinearLayout_borderSize,borderSize);
+
         a.recycle();
     }
 

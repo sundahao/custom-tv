@@ -52,6 +52,7 @@
         <attr name="borderDrawable" />
         <attr name="number" format="string"/>
         <attr name="numberColor" format="color"/>
+        <attr name="borderSize"/>
 
     </declare-styleable>
 

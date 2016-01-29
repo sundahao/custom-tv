@@ -57,6 +57,8 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
         int numberColor = a.getColor(R.styleable.TvTextView_numberColor, Color.WHITE);
         mPaint.setColor(numberColor);
 
+        borderSize=a.getDimensionPixelSize(R.styleable.TvTextView_borderSize,borderSize);
+
         a.recycle();
 
 
