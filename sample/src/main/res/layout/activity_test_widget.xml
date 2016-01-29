@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/home_bg"
+        android:clipChildren="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+
+>
+    <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/lightcoral"
+            android:clipChildren="false"
+            android:orientation="horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+
+    >
+
+
+        <LinearLayout
+                android:clipToPadding="false"
+
+                android:padding="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+        >
+
+
+            <com.qgd.commons.tv.widget.TvTextView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                     android:layout_marginEnd ="10dp"
+                    android:layout_marginTop ="10dp"
+
+
+                    android:background="@color/red"
+                    android:padding="10dp"
+
+            />
+
+            <com.qgd.commons.tv.widget.TvTextView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/green"
+                    android:padding="10dp"
+
+
+            />
+            <com.qgd.commons.tv.widget.TvTextView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/yellow"
+                    android:padding="10dp"
+
+            />
+            <com.qgd.commons.tv.widget.TvTextView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/blue"
+                    android:padding="10dp"
+
+            />
+            <com.qgd.commons.tv.widget.TvTextView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/fuchsia"
+                    android:padding="10dp"
+
+            />
+
+            <com.qgd.commons.tv.widget.TvTextView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/orange"
+                    android:padding="10dp"
+
+
+            />
+            <com.qgd.commons.tv.widget.TvTextView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:background="@color/yellow"
+
+            />
+
+            <com.qgd.commons.tv.widget.TvTextView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_marginLeft ="10dp"
+                    android:layout_marginTop ="10dp"
+                    android:background="@color/greenyellow"
+
+            />
+
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

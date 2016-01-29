@@ -1,6 +1,7 @@
 package com.qgd.commons.tv.util;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.CycleInterpolator;
@@ -44,12 +45,21 @@ public class AnimateFactory {
     public static void zoomInView(View v,float zoomSize) {
         if (v != null) {
             v.startAnimation(AnimateFactory.zoomAnimation(1.0f, zoomSize, 200));
-        }
+         }
+    }
+    private static  void setSize(View v,float zoomSize){
+        int h=v.getMeasuredHeight();
+        int w=v.getMeasuredWidth();
+        ViewGroup.LayoutParams lp = v.getLayoutParams();
+        lp.width = (int) (w*zoomSize);
+        lp.height = (int)(h*zoomSize);
+        v.setLayoutParams(lp);
+        v.invalidate();
     }
     public static void zoomOutView(View v,float zoomSize) {
         if (v != null) {
             v.startAnimation(AnimateFactory.zoomAnimation(zoomSize, 1.0f, 200));
-        }
+         }
     }
 
 

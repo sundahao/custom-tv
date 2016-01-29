@@ -20,9 +20,8 @@ import com.qgd.commons.tv.util.AnimateFactory;
  */
 public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChangeListener {
 
-    private final Drawable mBorderDrawable;
+    private Drawable mBorderDrawable;
     private Rect mBound;
-    private Drawable mDrawable;
     private Rect mRect;
 
     private Animation scaleSmallAnimation;
@@ -54,7 +53,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         setWillNotDraw(false);
         mRect = new Rect();
         mBound = new Rect();
-        mDrawable = getResources().getDrawable(R.drawable.select_border2);
+        mBorderDrawable = getResources().getDrawable(R.drawable.select_border2);
         super.setOnFocusChangeListener(this);
     }
 
@@ -84,9 +83,9 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         if (hasFocus()) {
             super.getDrawingRect(mRect);
             mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right, borderSize + mRect.bottom);
-            mDrawable.setBounds(mBound);
+            mBorderDrawable.setBounds(mBound);
             canvas.save();
-            mDrawable.draw(canvas);
+            mBorderDrawable.draw(canvas);
             canvas.restore();
         }
 
