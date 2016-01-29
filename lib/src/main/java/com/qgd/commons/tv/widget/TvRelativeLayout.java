@@ -39,7 +39,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
 
         mScaleable = a.getBoolean(R.styleable.TvTextView_scaleable, true);
 
-        int borderResId = a.getResourceId(R.styleable.TvRelativeLayout_borderDrawable, R.drawable.select_border2);
+        int borderResId = a.getResourceId(R.styleable.TvRelativeLayout_borderDrawable, R.drawable.white_light_10);
         mBorderDrawable = getResources().getDrawable(borderResId);
         borderSize=a.getDimensionPixelSize(R.styleable.TvRelativeLayout_borderSize,borderSize);
 
@@ -53,7 +53,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         setWillNotDraw(false);
         mRect = new Rect();
         mBound = new Rect();
-        mBorderDrawable = getResources().getDrawable(R.drawable.select_border2);
+        mBorderDrawable = getResources().getDrawable(R.drawable.white_light_10);
         super.setOnFocusChangeListener(this);
     }
 

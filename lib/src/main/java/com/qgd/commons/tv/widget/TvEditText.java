@@ -54,7 +54,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
         setWillNotDraw(false);
         mRect = new Rect();
         mBound = new Rect();
-        mDrawable = getResources().getDrawable(R.drawable.select_border2);
+        mDrawable = getResources().getDrawable(R.drawable.white_light_10);
         super.setOnFocusChangeListener(this);
     }
 
