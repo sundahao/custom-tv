@@ -37,7 +37,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TvTextView);
 
-        mScaleable = a.getBoolean(R.styleable.TvTextView_scaleable, true);
+        mScaleable = a.getBoolean(R.styleable.TvRelativeLayout_scaleable, true);
 
         int borderResId = a.getResourceId(R.styleable.TvRelativeLayout_borderDrawable, R.drawable.white_light_10);
         mBorderDrawable = getResources().getDrawable(borderResId);
