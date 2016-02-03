@@ -79,6 +79,8 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     WindowManager.LayoutParams params ;
 
+    private  boolean isButtonFocus=true;
+
     public TvDialog(Context context) {
         super(context);
         init(context);
@@ -305,6 +307,13 @@ public class TvDialog extends Dialog implements DialogInterface {
         mLinearLayoutView.setBackgroundColor(Color.parseColor(defDialogColor));
     }
 
+    public void setButtonFocusable(boolean b){
+        isButtonFocus=b;
+    }
+    public boolean getButtonFocusable(){
+        return isButtonFocus;
+    }
+
     public TvDialog withDividerColor(String colorString) {
         mDivider.setBackgroundColor(Color.parseColor(colorString));
         return this;
@@ -411,7 +420,8 @@ public class TvDialog extends Dialog implements DialogInterface {
     public TvDialog withButton1Text(CharSequence text) {
         mButton1.setVisibility(View.VISIBLE);
         mButton1.setText(text);
-        mButton1.requestFocus();
+        if(isButtonFocus)
+            mButton1.requestFocus();
 
         return this;
     }
