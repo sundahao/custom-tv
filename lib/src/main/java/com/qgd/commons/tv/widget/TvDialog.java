@@ -61,7 +61,11 @@ public class TvDialog extends Dialog implements DialogInterface {
     private Button mButton1;
 
     private Button mButton2;
+
+    private Button mButton3;
+
     private View mMiddleLineView;
+    private View mMiddleLineView1;
 
     private int mDuration = -1;
 
@@ -269,7 +273,10 @@ public class TvDialog extends Dialog implements DialogInterface {
         mDivider = mDialogView.findViewById(R.id.titleDivider);
         mButton1 = (Button) mDialogView.findViewById(R.id.button1);
         mButton2 = (Button) mDialogView.findViewById(R.id.button2);
+        mButton3 = (Button) mDialogView.findViewById(R.id.button3);
+
         mMiddleLineView = mDialogView.findViewById(R.id.middleLineView);
+        mMiddleLineView1 = mDialogView.findViewById(R.id.middleLineView1);
 
 
         setContentView(mDialogView);
@@ -407,6 +414,8 @@ public class TvDialog extends Dialog implements DialogInterface {
     public TvDialog withButtonDrawable(int resid) {
         mButton1.setBackgroundResource(resid);
         mButton2.setBackgroundResource(resid);
+        mButton3.setBackgroundResource(resid);
+
         return this;
     }
 
@@ -435,11 +444,24 @@ public class TvDialog extends Dialog implements DialogInterface {
             mButton1.setBackgroundResource(R.drawable.btn_selector_bottom);
             mMiddleLineView.setVisibility(View.GONE);
         }
+        if(mButton2.getVisibility() == View.VISIBLE&&mButton3.getVisibility()==View.VISIBLE){
+            mMiddleLineView1.setVisibility(View.VISIBLE);
+            mButton2.setBackgroundResource(R.drawable.btn_selector_middle);
+            mButton3.setBackgroundResource(R.drawable.btn_selector_right);
+
+        }
     }
 
     public TvDialog withButton2Text(CharSequence text) {
         mButton2.setVisibility(View.VISIBLE);
         mButton2.setText(text);
+
+        return this;
+    }
+
+    public TvDialog withButton3Text(CharSequence text) {
+        mButton3.setVisibility(View.VISIBLE);
+        mButton3.setText(text);
 
         return this;
     }
@@ -476,6 +498,10 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     public TvDialog setButton2Click(View.OnClickListener click) {
         mButton2.setOnClickListener(click);
+        return this;
+    }
+    public TvDialog setButton3Click(View.OnClickListener click) {
+        mButton3.setOnClickListener(click);
         return this;
     }
 
@@ -549,6 +575,8 @@ public class TvDialog extends Dialog implements DialogInterface {
         }
         mButton1.setVisibility(View.GONE);
         mButton2.setVisibility(View.GONE);
+        mButton3.setVisibility(View.GONE);
+
     }
 
 

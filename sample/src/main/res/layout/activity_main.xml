@@ -11,6 +11,22 @@
         android:gravity="center"
         android:orientation="vertical"
 >
+    <view
+            android:padding="5dp"
+
+            android:id="@+id/dialogThree"
+
+            android:onClick="showDialog"
+            class="com.qgd.commons.tv.widget.TvTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/default_button"
+            android:gravity="center"
+            android:text="3个按钮对话框"
+            android:textSize="23sp"
+            android:textColor="@color/white"/>
+
 
     <view
             android:padding="5dp"
@@ -41,6 +57,9 @@
             android:text="确定取消话框"
             android:textSize="23sp"
             android:textColor="@color/white"/>
+
+
+
 
     <view
             android:padding="5dp"

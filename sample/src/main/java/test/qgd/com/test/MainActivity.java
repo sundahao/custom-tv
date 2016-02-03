@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
 
         TvDialog tvDialog = TvDialog.createToastDialog(this, "呵呵呵！"); //类似toast
         tvDialog.setSize(500, 100);//可以设置大小
-        tvDialog.show();
+        //tvDialog.show();
         context=this;
 
         setContentView(R.layout.activity_main);
@@ -69,6 +69,18 @@ public class MainActivity extends Activity {
             case R.id.dialogBoth://2个按钮
                 dialogBuilder.withButton1Text("确定");
                 dialogBuilder.withButton2Text("取消");
+                break;
+
+            case R.id.dialogThree:
+                dialogBuilder.withButton1Text("确定");
+                dialogBuilder.withButton2Text("取消");
+                dialogBuilder.withButton3Text("多出来");
+                dialogBuilder.setButton3Click(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        TvDialog.createToastDialog(context, "我是多出来的按钮么").show();
+                    }
+                });
                 break;
             case R.id.dialogNone://无按钮
 

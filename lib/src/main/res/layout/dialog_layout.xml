@@ -97,6 +97,21 @@
                     style="@style/dialog_btn"
                     android:text="Cancle"
                     android:visibility="gone"/>
+            <View
+                    android:id="@+id/middleLineView1"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/white"
+                    android:visibility="gone"
+            />
+
+            <Button
+
+                    android:id="@+id/button3"
+                    style="@style/dialog_btn"
+                    android:text="Cancle"
+                    android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
