@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="alpha30white">#55ffffff</color>
+    <color name="alpha60white">#99ffffff</color>
+
+
     <color name="alpha30gray">#55808080</color><!--灰色 -->
     <color name="alpha60gray">#99808080</color><!--灰色 -->
     <color name="orange_button_select">#ff6900</color>
