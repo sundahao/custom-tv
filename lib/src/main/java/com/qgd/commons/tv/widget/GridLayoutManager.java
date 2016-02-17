@@ -45,7 +45,7 @@ import static com.qgd.commons.tv.widget.RecyclerView.NO_ID;
 import static com.qgd.commons.tv.widget.RecyclerView.NO_POSITION;
 import static com.qgd.commons.tv.widget.RecyclerView.VERTICAL;
 
-final class GridLayoutManager extends RecyclerView.LayoutManager {
+public class GridLayoutManager extends RecyclerView.LayoutManager {
 
      /*
       * LayoutParams for {@link HorizontalGridView} and {@link VerticalGridView}.
