@@ -68,6 +68,10 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
 
     @Override
     public void onFocusChange(View view, boolean b) {
+        if (mOnFocusChangeListener != null) {
+            mOnFocusChangeListener.onFocusChange(view, b);
+        }
+
         if (!scaleable)
             return;
         if (b) {
@@ -75,9 +79,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
         } else {
             AnimateFactory.zoomOutView(view);
         }
-        if (mOnFocusChangeListener != null) {
-            mOnFocusChangeListener.onFocusChange(view, b);
-        }
+
     }
 
     @Override
