@@ -64,7 +64,13 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
     public void setOnFocusChangeListener(OnFocusChangeListener l) {
         mOnFocusChangeListener = l;
     }
+    public boolean isScaleable() {
+        return mScaleable;
+    }
 
+    public void setScaleable(boolean mScaleable) {
+        this.mScaleable = mScaleable;
+    }
     @Override
     public void onFocusChange(View view, boolean b) {
         if (mOnFocusChangeListener != null) {

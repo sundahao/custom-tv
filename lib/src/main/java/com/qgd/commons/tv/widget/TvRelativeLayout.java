@@ -56,7 +56,13 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         mBorderDrawable = getResources().getDrawable(R.drawable.white_light_10);
         super.setOnFocusChangeListener(this);
     }
+    public boolean isScaleable() {
+        return mScaleable;
+    }
 
+    public void setScaleable(boolean mScaleable) {
+        this.mScaleable = mScaleable;
+    }
     private OnFocusChangeListener mOnFocusChangeListener;
 
     @Override

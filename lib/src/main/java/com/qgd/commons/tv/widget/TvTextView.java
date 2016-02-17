@@ -68,6 +68,14 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
         postInvalidate();
     }
 
+    public boolean isScaleable() {
+        return mScaleable;
+    }
+
+    public void setScaleable(boolean mScaleable) {
+        this.mScaleable = mScaleable;
+    }
+
     protected void init() {
 
         setFocusable(true);
