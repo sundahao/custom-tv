@@ -67,6 +67,10 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
 
     @Override
     public void onFocusChange(View view, boolean b) {
+        if (mOnFocusChangeListener != null) {
+            mOnFocusChangeListener.onFocusChange(view, b);
+        }
+
         if (!mScaleable)
             return;
         if (b) {
@@ -74,9 +78,7 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
         } else {
             AnimateFactory.zoomOutView(view);
         }
-        if (mOnFocusChangeListener != null) {
-            mOnFocusChangeListener.onFocusChange(view, b);
-        }
+
     }
 
     @Override

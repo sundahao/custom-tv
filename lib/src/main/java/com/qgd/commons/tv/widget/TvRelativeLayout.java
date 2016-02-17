@@ -66,6 +66,10 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
 
     @Override
     public void onFocusChange(View view, boolean b) {
+        if (mOnFocusChangeListener != null) {
+            mOnFocusChangeListener.onFocusChange(view, b);
+        }
+
         if (!mScaleable)
             return;
         if (b) {
@@ -73,9 +77,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         } else {
             AnimateFactory.zoomOutView(view);
         }
-        if (mOnFocusChangeListener != null) {
-            mOnFocusChangeListener.onFocusChange(view, b);
-        }
+
     }
 
     @Override
