@@ -50,7 +50,6 @@
 
             <com.qgd.commons.tv.widget.TvTextView
                     tv:scaleable="false"
-
                     android:id="@+id/textView2"
                     android:layout_width="366dp"
                     android:layout_height="550dp"
@@ -101,6 +100,7 @@
                     android:textSize="20sp"
 
             />
+
 
 
         </RelativeLayout>
