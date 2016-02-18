@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tv="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_gravity="center"
+              android:clipChildren="false"
+>
+
+
+    <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginEnd="80dp"
+            android:layout_marginStart="80dp"
+            android:clipChildren="false"
+            android:scrollbars="none"
+    >
+
+        <RelativeLayout
+
+                android:id="@+id/listRelativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center"
+                android:layout_marginEnd="-20dp"
+                android:layout_marginStart="-20dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:gravity="center"
+
+        >
+
+
+            <com.qgd.commons.tv.widget.TvTextView
+                    tv:scaleable="false"
+                    android:id="@+id/textView1"
+                    android:layout_width="366dp"
+                    android:layout_height="550dp"
+                    android:layout_margin="13dp"
+                    android:background="@color/lightskyblue"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="Hello World!"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+            />
+
+
+            <com.qgd.commons.tv.widget.TvTextView
+                    tv:scaleable="false"
+
+                    android:id="@+id/textView2"
+                    android:layout_width="366dp"
+                    android:layout_height="550dp"
+                    android:layout_margin="13dp"
+                    android:layout_toRightOf="@+id/textView1"
+                    android:background="#7cc23b"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="Hello World2"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+
+            />
+
+
+            <com.qgd.commons.tv.widget.TvTextView
+                    tv:scaleable="false"
+
+                    android:id="@+id/textView3"
+                    android:layout_width="366dp"
+                    android:layout_height="550dp"
+                    android:layout_margin="13dp"
+                    android:layout_toRightOf="@+id/textView2"
+                    android:background="#d67759"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="Hello World2"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+
+            />
+
+
+            <com.qgd.commons.tv.widget.TvTextView
+                    tv:scaleable="false"
+
+                    android:nextFocusLeft="@+id/textView3"
+                    android:id="@+id/textView4"
+                    android:layout_width="366dp"
+                    android:layout_height="550dp"
+                    android:layout_margin="13dp"
+                    android:layout_toRightOf="@+id/textView3"
+                    android:background="#5d42a3"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="Hello World2"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+
+            />
+
+
+        </RelativeLayout>
+
+    </HorizontalScrollView>
+
+
+</LinearLayout>

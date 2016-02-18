@@ -17,6 +17,8 @@
         </activity>
 
         <activity android:name=".WidgetTestActivity"/>
+        <activity android:name=".WidgetStackActivity"/>
+
     </application>
 
 </manifest>
