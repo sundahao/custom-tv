@@ -18,6 +18,7 @@
             android:scrollbars="none"
     >
 
+
         <RelativeLayout
 
                 android:id="@+id/listRelativeLayout"
@@ -34,7 +35,6 @@
 
 
             <com.qgd.commons.tv.widget.TvTextView
-                    tv:scaleable="false"
                     android:id="@+id/textView1"
                     android:layout_width="366dp"
                     android:layout_height="550dp"
@@ -45,11 +45,33 @@
                     android:text="Hello World!"
                     android:textColor="@color/white"
                     android:textSize="20sp"
+                    tv:scaleable="false"
             />
 
 
+            <RelativeLayout
+                    android:layout_width="366dp"
+                    android:layout_height="550dp"
+                    android:background="@color/lightskyblue"
+            >
+
+
+                <com.qgd.commons.tv.widget.DashedLineView
+                        android:id="@+id/textView5"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="13dp"
+                        android:layout_marginRight="13dp"
+                        android:layout_marginTop="120dp"
+                        tv:lineColor="@color/blue"
+                />
+
+            </RelativeLayout>
+
+
             <com.qgd.commons.tv.widget.TvTextView
-                    tv:scaleable="false"
                     android:id="@+id/textView2"
                     android:layout_width="366dp"
                     android:layout_height="550dp"
@@ -61,14 +83,13 @@
                     android:text="Hello World2"
                     android:textColor="@color/white"
                     android:textSize="20sp"
-
+                    tv:scaleable="false"
             />
 
 
             <com.qgd.commons.tv.widget.TvTextView
-                    tv:scaleable="false"
-
                     android:id="@+id/textView3"
+
                     android:layout_width="366dp"
                     android:layout_height="550dp"
                     android:layout_margin="13dp"
@@ -79,15 +100,14 @@
                     android:text="Hello World2"
                     android:textColor="@color/white"
                     android:textSize="20sp"
+                    tv:scaleable="false"
 
             />
 
 
             <com.qgd.commons.tv.widget.TvTextView
-                    tv:scaleable="false"
-
-                    android:nextFocusLeft="@+id/textView3"
                     android:id="@+id/textView4"
+
                     android:layout_width="366dp"
                     android:layout_height="550dp"
                     android:layout_margin="13dp"
@@ -95,12 +115,13 @@
                     android:background="#5d42a3"
                     android:focusable="true"
                     android:gravity="center"
+                    android:nextFocusLeft="@+id/textView3"
                     android:text="Hello World2"
                     android:textColor="@color/white"
                     android:textSize="20sp"
+                    tv:scaleable="false"
 
             />
-
 
 
         </RelativeLayout>
