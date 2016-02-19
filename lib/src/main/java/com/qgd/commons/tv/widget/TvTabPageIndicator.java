@@ -6,7 +6,6 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -26,17 +25,6 @@ public class TvTabPageIndicator extends LinearLayout implements PageIndicatorInt
     private OnTabReselectedListener mTabReselectedListener;
 
 
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-        //        Log.d("TvTabPageIndicator","dispatchKeyEvent "+event.getSource());
-
-        if (event.getKeyCode() == KeyEvent.KEYCODE_DPAD_LEFT || event.getKeyCode() == KeyEvent.KEYCODE_DPAD_RIGHT) {
-            //            Log.d("TvTabPageIndicator","KEYCODE_DPAD_LEFT RIGHT");
-
-            return false;
-        }
-        return super.dispatchKeyEvent(event);
-    }
 
     public interface OnTabReselectedListener {
         /**
