@@ -12,7 +12,7 @@ public class WidgetTestActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_test_widget);
+        setContentView(R.layout.test_dot_line);
 
     }
 
