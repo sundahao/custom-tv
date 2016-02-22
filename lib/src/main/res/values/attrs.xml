@@ -83,5 +83,8 @@
         <attr name="lineColor" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="JustifyTextView">
+        <attr name="lineSpacing" format="dimension" />
+    </declare-styleable>
 
 </resources>
