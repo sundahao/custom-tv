@@ -93,4 +93,16 @@ public class AnimateFactory {
 
     }
 
+    public static void zoomInView(View v, float zoomSize,int duration) {
+        if (v != null) {
+            v.startAnimation(AnimateFactory.zoomAnimation(1.0f, zoomSize,duration));
+        }
+    }
+
+    public static void zoomOutView(View v, float zoomSize,int duration) {
+        if (v != null) {
+            v.startAnimation(AnimateFactory.zoomAnimation(zoomSize, 1.0f, duration));
+        }
+    }
+
 }
