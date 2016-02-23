@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.widget.TextView;
 
@@ -157,7 +156,6 @@ public class JustifyTextView extends TextView {
     @Override
     protected void onDraw(Canvas canvas) {
         // super.onDraw(canvas);
-        Log.d(TAG, "==============onDraw");
         float linewidth = 0;
         int point = 0;
         int line = 0;
@@ -199,12 +197,10 @@ public class JustifyTextView extends TextView {
                 }
             }
         }
-        Log.d(TAG, "lines=====ondraw" + line);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        Log.d(TAG, "==============onMeasure");
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         // 此处得到的是TextView的宽度;高度需重新计算
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
@@ -218,14 +214,12 @@ public class JustifyTextView extends TextView {
         mText = this.getText().toString();
         arrayTowords();
         int lines = getLines();
-        Log.d(TAG, "lines" + lines);
 
         float fontSpacing = mPaint.getFontSpacing();// 推荐行间距
         Paint.FontMetricsInt fontMetricsInt = mPaint.getFontMetricsInt();
         int fontheight = fontMetricsInt.bottom - fontMetricsInt.top;
 
         height = (int) (lines * (mPaint.getTextSize() + lineSpacing));// 0.8偏大
-        Log.d(TAG, "width" + width + "  height:" + height + " fontheight:" + fontheight + " textSize:" + mPaint.getTextSize() + " fontSpacing:" + fontSpacing + "mPaint属性:" + mPaint.getColor());
         setMeasuredDimension(widthSize, height + getPaddingBottom());
     }
 
