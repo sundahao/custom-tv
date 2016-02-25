@@ -579,5 +579,15 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     }
 
+    public Button getButton1() {
+        return mButton1;
+    }
 
+    public Button getButton2() {
+        return mButton2;
+    }
+
+    public Button getButton3() {
+        return mButton3;
+    }
 }
