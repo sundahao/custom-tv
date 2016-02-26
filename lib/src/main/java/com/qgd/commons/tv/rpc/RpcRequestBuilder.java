@@ -55,6 +55,11 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
                 if (RpcResponseCodes.CODE_SUCCESS != response.getCode()) {
                     String errStr = String.format("%s server error, code=%d, message=%s", urlForLog, response.getCode(), response.getMessage());
                     rpcLogger.error(errStr);
+
+                    //服务端系统异常，统一设置默认提示信息
+                    if (response.getCode() < 200000 && response instanceof SimpleRpcResponse) {
+                        ((SimpleRpcResponse) response).setMessage("服务器开小差了，请稍后再试！");
+                    }
                 }
                 listener.onResponse(response);
             }
