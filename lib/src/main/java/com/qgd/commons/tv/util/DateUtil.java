@@ -19,6 +19,11 @@ public class DateUtil {
         sf = new SimpleDateFormat(defaultFormat);
         return sf.format(d);
     }
+     public static String getCurrentDate(String format) {
+        Date d = new Date();
+        sf = new SimpleDateFormat(format);
+        return sf.format(d);
+    }
 
     /*时间戳转换成字符窜*/
     public static String getDateToString(long time) {
@@ -26,6 +31,8 @@ public class DateUtil {
         sf = new SimpleDateFormat(defaultFormat);
         return sf.format(d);
     }
+
+
 
     /*将字符串转为时间戳*/
     public static long getStringToDateLong(String time) {
