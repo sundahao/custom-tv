@@ -4,6 +4,7 @@
 
 package com.qgd.commons.tv.rpc;
 
+import android.support.annotation.NonNull;
 import com.android.volley.RequestQueue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -197,11 +198,26 @@ public class RpcTemplate {
      * @return
      */
     public <T> RpcRequestBuilder<T> createRequestBuilder(String path, Map<String, String> params, RpcResponseReader<T> reader, RpcResponse.Listener<T> emptyListener) {
-        RpcRequestBuilder<T> reqBuilder = new RpcRequestBuilder<>(baseUrl + path, reader);
+        RpcRequestBuilder<T> reqBuilder = new RpcRequestBuilder<>(createUrl(path), reader);
         reqBuilder.setParams(params);
         reqBuilder.setListener(emptyListener);
         reqBuilder.setToken(tokenStore == null ? null : tokenStore.getToken());
         return reqBuilder;
+    }
+
+    @NonNull
+    private String createUrl(String path) {
+        if (baseUrl.charAt(baseUrl.length() - 1) == '/') {
+            if (path.charAt(0) == '/') {
+                return baseUrl + path.substring(1);
+            }
+        } else {
+            if (path.charAt(0) != '/') {
+                return baseUrl + '/' + path;
+            }
+        }
+
+        return baseUrl + path;
     }
 
     /**
