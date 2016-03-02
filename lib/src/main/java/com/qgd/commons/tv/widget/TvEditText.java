@@ -25,7 +25,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 12;
+    private int borderSize = 13;
 
     private boolean scaleable = false;
 

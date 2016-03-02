@@ -24,7 +24,7 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 11;
+    private int borderSize = 13;
 
     private boolean mScaleable = true;
 
