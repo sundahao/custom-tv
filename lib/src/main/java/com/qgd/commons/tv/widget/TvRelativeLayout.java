@@ -26,7 +26,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 13;
+    private int borderSize = 15;
 
     private boolean mScaleable = true;
 
@@ -39,7 +39,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
 
         mScaleable = a.getBoolean(R.styleable.TvRelativeLayout_scaleable, true);
 
-        int borderResId = a.getResourceId(R.styleable.TvRelativeLayout_borderDrawable, R.drawable.red_light_10);
+        int borderResId = a.getResourceId(R.styleable.TvRelativeLayout_borderDrawable, R.drawable.white_light);
         mBorderDrawable = getResources().getDrawable(borderResId);
         borderSize=a.getDimensionPixelSize(R.styleable.TvRelativeLayout_borderSize,borderSize);
 

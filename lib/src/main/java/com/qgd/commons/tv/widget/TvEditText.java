@@ -25,7 +25,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 13;
+    private int borderSize = 15;
 
     private boolean scaleable = false;
 
@@ -54,7 +54,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
         setWillNotDraw(false);
         mRect = new Rect();
         mBound = new Rect();
-        mDrawable = getResources().getDrawable(R.drawable.red_light_10);
+        mDrawable = getResources().getDrawable(R.drawable.white_light);
         super.setOnFocusChangeListener(this);
     }
 

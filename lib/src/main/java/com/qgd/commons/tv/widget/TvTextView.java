@@ -30,7 +30,7 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 13;
+    private int borderSize = 15;
 
     private boolean mScaleable = true;
     private String mKeyNumber;
@@ -51,7 +51,7 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
 
         mScaleable = a.getBoolean(R.styleable.TvTextView_scaleable, true);
         mKeyNumber = a.getString(R.styleable.TvTextView_number);
-        int berderResId = a.getResourceId(R.styleable.TvTextView_borderDrawable, R.drawable.red_light_10);
+        int berderResId = a.getResourceId(R.styleable.TvTextView_borderDrawable, R.drawable.white_light);
         mBorderDrawable = getResources().getDrawable(berderResId);
 
         int numberColor = a.getColor(R.styleable.TvTextView_numberColor, Color.WHITE);

@@ -228,7 +228,9 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     public static TvDialog createToastDialog(Context context, int message) {
-        return createTipDialog(context, getString(context, message), SHORT_DELAY);
+        TvDialog dialog=createTipDialog(context, getString(context, message), SHORT_DELAY);
+
+        return dialog;
     }
 
     public static TvDialog createToastDialog(Context context, int message, int duration) {
