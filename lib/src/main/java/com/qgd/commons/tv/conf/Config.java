@@ -28,7 +28,7 @@ public class Config {
 
     public static Config load(Application application) {
         try {
-            File file = new File(Environment.getExternalStorageDirectory(), application.getPackageName() + ".properties");
+            File file = new File(Environment.getExternalStorageDirectory(), "qgd/yfb/conf/" + application.getPackageName() + ".properties");
             return load(file);
         } catch (Throwable e) {
             Log.e("Config", "load config fail", e);
