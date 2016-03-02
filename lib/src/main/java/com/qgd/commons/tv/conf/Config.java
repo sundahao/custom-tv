@@ -28,7 +28,7 @@ public class Config {
 
     public static Config load(Application application) {
         try {
-            File file = new File(Environment.getExternalStorageDirectory(), "qgd/yfb/conf/" + application.getPackageName() + ".properties");
+            File file = new File(Environment.getExternalStorageDirectory(), "qgd/conf/" + application.getPackageName() + ".properties");
             return load(file);
         } catch (Throwable e) {
             Log.e("Config", "load config fail", e);
@@ -41,6 +41,7 @@ public class Config {
         FileInputStream in = null;
         try {
             if (file != null && file.exists()) {
+                Log.i("Config", "load config from: " + file.getAbsolutePath());
                 in = new FileInputStream(file);
                 props.load(in);
             }
