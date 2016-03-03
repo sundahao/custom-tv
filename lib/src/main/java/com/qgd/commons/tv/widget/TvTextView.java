@@ -116,17 +116,17 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
 
     @Override
     public void draw(Canvas canvas) {
+        super.draw(canvas);
 
         if (hasFocus()) {
             super.getDrawingRect(mRect);
-            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right, borderSize + mRect.bottom);
+            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right-1, borderSize + mRect.bottom-1);
             mBorderDrawable.setBounds(mBound);
             canvas.save();
             if (mBorderDrawable != null)
                 mBorderDrawable.draw(canvas);
             canvas.restore();
         }
-        super.draw(canvas);
     }
 
 

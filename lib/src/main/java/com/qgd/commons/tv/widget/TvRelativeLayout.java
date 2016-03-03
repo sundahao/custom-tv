@@ -90,7 +90,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
     public void draw(Canvas canvas) {
         if (hasFocus()) {
             super.getDrawingRect(mRect);
-            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right, borderSize + mRect.bottom);
+            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right-1, borderSize + mRect.bottom-1);
             mBorderDrawable.setBounds(mBound);
             canvas.save();
             mBorderDrawable.draw(canvas);

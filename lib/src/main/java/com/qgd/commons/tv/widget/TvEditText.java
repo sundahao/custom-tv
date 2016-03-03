@@ -86,7 +86,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
     public void draw(Canvas canvas) {
         if (hasFocus()) {
             super.getDrawingRect(mRect);
-            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right, borderSize + mRect.bottom);
+            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right-1, borderSize + mRect.bottom-1);
             mDrawable.setBounds(mBound);
             canvas.save();
             mDrawable.draw(canvas);
