@@ -246,8 +246,8 @@ public class TvDialog extends Dialog implements DialogInterface {
         dialog.setCustomView(R.layout.toast_view, context);
         dialog.withMessage(message);
 
-        dialog.params.height = DimensionConvert.px2dip(context, 50);
-        dialog.params.width = DimensionConvert.px2dip(context, message.length() * 30);
+        dialog.params.height = DimensionConvert.px2dip(context, 54);
+        dialog.params.width = DimensionConvert.px2dip(context, message.length() * 40);
         dialog.getWindow().setAttributes(dialog.params);
 
 
