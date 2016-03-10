@@ -79,9 +79,9 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         if (!mScaleable)
             return;
         if (b) {
-            AnimateFactory.zoomInView(view);
+            AnimateFactory.zoomInViewFix(view);
         } else {
-            AnimateFactory.zoomOutView(view);
+            AnimateFactory.zoomOutViewFix(view);
         }
 
     }

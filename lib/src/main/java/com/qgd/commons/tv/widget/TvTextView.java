@@ -107,9 +107,9 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
         if (!mScaleable)
             return;
         if (b) {
-            AnimateFactory.zoomInView(view);
+            AnimateFactory.zoomInViewFix(view);
         } else {
-            AnimateFactory.zoomOutView(view);
+            AnimateFactory.zoomOutViewFix(view);
         }
 
     }

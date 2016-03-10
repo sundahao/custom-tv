@@ -18,6 +18,7 @@
 
         <activity android:name=".WidgetTestActivity"/>
         <activity android:name=".WidgetStackActivity"/>
+        <activity android:name=".FixScaleActivity"/>
 
     </application>
 

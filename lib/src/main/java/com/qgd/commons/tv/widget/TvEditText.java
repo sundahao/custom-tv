@@ -75,9 +75,9 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
         if (!scaleable)
             return;
         if (b) {
-            AnimateFactory.zoomInView(view);
+            AnimateFactory.zoomInViewFix(view);
         } else {
-            AnimateFactory.zoomOutView(view);
+            AnimateFactory.zoomOutViewFix(view);
         }
 
     }
