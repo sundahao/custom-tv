@@ -30,7 +30,7 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 11;
+    private int borderSize = 15;
 
     private boolean mScaleable = true;
     private String mKeyNumber;
@@ -51,7 +51,7 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
 
         mScaleable = a.getBoolean(R.styleable.TvTextView_scaleable, true);
         mKeyNumber = a.getString(R.styleable.TvTextView_number);
-        int berderResId = a.getResourceId(R.styleable.TvTextView_borderDrawable, R.drawable.white_light_10);
+        int berderResId = a.getResourceId(R.styleable.TvTextView_borderDrawable, R.drawable.white_light);
         mBorderDrawable = getResources().getDrawable(berderResId);
 
         int numberColor = a.getColor(R.styleable.TvTextView_numberColor, Color.WHITE);
@@ -107,26 +107,26 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
         if (!mScaleable)
             return;
         if (b) {
-            AnimateFactory.zoomInView(view);
+            AnimateFactory.zoomInViewFix(view);
         } else {
-            AnimateFactory.zoomOutView(view);
+            AnimateFactory.zoomOutViewFix(view);
         }
 
     }
 
     @Override
     public void draw(Canvas canvas) {
+        super.draw(canvas);
 
         if (hasFocus()) {
             super.getDrawingRect(mRect);
-            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right, borderSize + mRect.bottom);
+            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right-1, borderSize + mRect.bottom-1);
             mBorderDrawable.setBounds(mBound);
             canvas.save();
             if (mBorderDrawable != null)
                 mBorderDrawable.draw(canvas);
             canvas.restore();
         }
-        super.draw(canvas);
     }
 
 

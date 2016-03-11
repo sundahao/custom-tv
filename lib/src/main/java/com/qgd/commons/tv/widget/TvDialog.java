@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -78,12 +79,12 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     private Context mContext;
 
-    private int mHeight=220;
-    private int mWidth=450;
+    private int mHeight = 220;
+    private int mWidth = 450;
 
-    WindowManager.LayoutParams params ;
+    WindowManager.LayoutParams params;
 
-    private  boolean isButtonFocus=true;
+    private boolean isButtonFocus = true;
 
     public TvDialog(Context context) {
         super(context);
@@ -99,15 +100,15 @@ public class TvDialog extends Dialog implements DialogInterface {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        params = getWindow().getAttributes();
-        params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        params.width = DimensionConvert.px2dip(getContext(), mWidth );
-        params.height = DimensionConvert.px2dip(getContext(), mHeight);
-        params.dimAmount=0.8f;
-        getWindow().setAttributes((WindowManager.LayoutParams) params);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-
+        if (params == null) {
+            params = getWindow().getAttributes();
+            params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            params.width = DimensionConvert.px2dip(getContext(), mWidth);
+            params.height = DimensionConvert.px2dip(getContext(), mHeight);
+        }
+        //params.dimAmount = 0.8f;
+        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
 
     }
@@ -118,9 +119,9 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
 
-    public void setSize(int width,int height){
-        mWidth=width;
-        mHeight=height;
+    public void setSize(int width, int height) {
+        mWidth = width;
+        mHeight = height;
     }
 
     public static TvDialog createDefaultDialog(Context context) {
@@ -133,9 +134,10 @@ public class TvDialog extends Dialog implements DialogInterface {
         return createDefaultDialog(context);
     }
 
-    public static TvDialog createDialog(Context context,String message) {
-        return createDialog(context,"提示",message);
+    public static TvDialog createDialog(Context context, String message) {
+        return createDialog(context, "提示", message);
     }
+
     public static TvDialog createDialog(Context context, String title, String message) {
         TvDialog dialog = getInstance(context);
         dialog.setCustomView(R.layout.normal_view, context);
@@ -203,7 +205,6 @@ public class TvDialog extends Dialog implements DialogInterface {
         TvDialog dialog = getInstance(context);
         dialog.hideTop();
         dialog.setCustomView(R.layout.tip_view, context);
-
         dialog.withMessage(message);
         return dialog;
     }
@@ -220,20 +221,51 @@ public class TvDialog extends Dialog implements DialogInterface {
     public static final int SHORT_DELAY = 2000; // 2 seconds
 
     public static TvDialog createToastDialog(Context context, String message) {
-        return createTipDialog(context, message, SHORT_DELAY);
+        TvDialog dialog = createToastDialog(context, message, SHORT_DELAY);
+        return dialog;
     }
 
-    public static TvDialog createToastDialog(Context context, String message, int duration) {
-        return createTipDialog(context, message, duration);
-    }
 
     public static TvDialog createToastDialog(Context context, int message) {
-        return createTipDialog(context, getString(context, message), SHORT_DELAY);
+        TvDialog dialog = createToastDialog(context, getString(context, message), SHORT_DELAY);
+
+        return dialog;
     }
 
     public static TvDialog createToastDialog(Context context, int message, int duration) {
-        return createTipDialog(context, getString(context, message), duration);
+        return createToastDialog(context, getString(context, message), duration);
     }
+
+
+    public static TvDialog createToastDialog(Context context, String message, int timeOut) {
+        final TvDialog dialog = new TvDialog(context, R.style.dialog_tip);
+
+        dialog.params = dialog.getWindow().getAttributes();
+
+        dialog.hideTop();
+        dialog.setCustomView(R.layout.toast_view, context);
+        dialog.withMessage(message);
+
+        dialog.params.height = DimensionConvert.px2dip(context, 54);
+        dialog.params.width = DimensionConvert.px2dip(context, message.length() * 40);
+        dialog.getWindow().setAttributes(dialog.params);
+
+
+        CountDownTimer timer = new CountDownTimer(timeOut, 1000) {
+            @Override
+            public void onTick(long l) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                dialog.dismiss();
+            }
+        };
+        dialog.setCountDownTimer(timer);
+        return dialog;
+    }
+
 
     public static TvDialog createTipDialog(Context context, String message, int timeOut) {
         final TvDialog dialog = createTipDialog(context, message);
@@ -257,8 +289,8 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     private void init(Context context) {
-        mContext=context;
-        mDialogView = View.inflate(context, R.layout.dialog_layout, null);
+        mContext = context;
+        mDialogView = LayoutInflater.from(context).inflate(R.layout.dialog_layout, null, false);
 
         mLinearLayoutView = (LinearLayout) mDialogView.findViewById(R.id.parentPanel);
         mRelativeLayoutView = (RelativeLayout) mDialogView.findViewById(R.id.main);
@@ -314,10 +346,11 @@ public class TvDialog extends Dialog implements DialogInterface {
         mLinearLayoutView.setBackgroundColor(Color.parseColor(defDialogColor));
     }
 
-    public void setButtonFocusable(boolean b){
-        isButtonFocus=b;
+    public void setButtonFocusable(boolean b) {
+        isButtonFocus = b;
     }
-    public boolean getButtonFocusable(){
+
+    public boolean getButtonFocusable() {
         return isButtonFocus;
     }
 
@@ -331,9 +364,10 @@ public class TvDialog extends Dialog implements DialogInterface {
         return this;
     }
 
-    public TvDialog withTitle(int title){
-        return withTitle( mContext.getString(title) );
+    public TvDialog withTitle(int title) {
+        return withTitle(mContext.getString(title));
     }
+
     public TvDialog withTitle(CharSequence title) {
         toggleView(mLinearLayoutTopView, title);
         mTitle.setText(title);
@@ -419,17 +453,18 @@ public class TvDialog extends Dialog implements DialogInterface {
         return this;
     }
 
-    public TvDialog withButton2Text(int text){
-        return withButton2Text( mContext.getString(text) );
+    public TvDialog withButton2Text(int text) {
+        return withButton2Text(mContext.getString(text));
     }
 
-    public TvDialog withButton1Text(int text){
-        return withButton1Text( mContext.getString(text) );
+    public TvDialog withButton1Text(int text) {
+        return withButton1Text(mContext.getString(text));
     }
+
     public TvDialog withButton1Text(CharSequence text) {
         mButton1.setVisibility(View.VISIBLE);
         mButton1.setText(text);
-        if(isButtonFocus)
+        if (isButtonFocus)
             mButton1.requestFocus();
 
         return this;
@@ -444,7 +479,7 @@ public class TvDialog extends Dialog implements DialogInterface {
             mButton1.setBackgroundResource(R.drawable.btn_selector_bottom);
             mMiddleLineView.setVisibility(View.GONE);
         }
-        if(mButton2.getVisibility() == View.VISIBLE&&mButton3.getVisibility()==View.VISIBLE){
+        if (mButton2.getVisibility() == View.VISIBLE && mButton3.getVisibility() == View.VISIBLE) {
             mMiddleLineView1.setVisibility(View.VISIBLE);
             mButton2.setBackgroundResource(R.drawable.btn_selector_middle);
             mButton3.setBackgroundResource(R.drawable.btn_selector_right);
@@ -470,27 +505,29 @@ public class TvDialog extends Dialog implements DialogInterface {
         mButton1.setOnClickListener(click);
         return this;
     }
-    private String getString(int id){
-        if(mContext!=null)
+
+    private String getString(int id) {
+        if (mContext != null)
             return mContext.getString(id);
         else
             return "";
     }
 
-    public TvDialog setButton1Click(int button1Name,View.OnClickListener click) {
-        return setButton1Click(getString(button1Name),click);
+    public TvDialog setButton1Click(int button1Name, View.OnClickListener click) {
+        return setButton1Click(getString(button1Name), click);
     }
 
-    public TvDialog setButton2Click(int button2Name,View.OnClickListener click) {
-        return setButton2Click(getString(button2Name),click);
+    public TvDialog setButton2Click(int button2Name, View.OnClickListener click) {
+        return setButton2Click(getString(button2Name), click);
     }
-    public TvDialog setButton1Click(String button1Name,View.OnClickListener click) {
+
+    public TvDialog setButton1Click(String button1Name, View.OnClickListener click) {
         withButton1Text(button1Name);
         setButton1Click(click);
         return this;
     }
 
-    public TvDialog setButton2Click(String button2Name,View.OnClickListener click) {
+    public TvDialog setButton2Click(String button2Name, View.OnClickListener click) {
         withButton2Text(button2Name);
         setButton2Click(click);
         return this;
@@ -500,6 +537,7 @@ public class TvDialog extends Dialog implements DialogInterface {
         mButton2.setOnClickListener(click);
         return this;
     }
+
     public TvDialog setButton3Click(View.OnClickListener click) {
         mButton3.setOnClickListener(click);
         return this;

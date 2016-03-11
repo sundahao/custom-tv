@@ -25,7 +25,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 12;
+    private int borderSize = 15;
 
     private boolean scaleable = false;
 
@@ -54,7 +54,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
         setWillNotDraw(false);
         mRect = new Rect();
         mBound = new Rect();
-        mDrawable = getResources().getDrawable(R.drawable.white_light_10);
+        mDrawable = getResources().getDrawable(R.drawable.white_light);
         super.setOnFocusChangeListener(this);
     }
 
@@ -75,9 +75,9 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
         if (!scaleable)
             return;
         if (b) {
-            AnimateFactory.zoomInView(view);
+            AnimateFactory.zoomInViewFix(view);
         } else {
-            AnimateFactory.zoomOutView(view);
+            AnimateFactory.zoomOutViewFix(view);
         }
 
     }
@@ -86,7 +86,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
     public void draw(Canvas canvas) {
         if (hasFocus()) {
             super.getDrawingRect(mRect);
-            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right, borderSize + mRect.bottom);
+            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right-1, borderSize + mRect.bottom-1);
             mDrawable.setBounds(mBound);
             canvas.save();
             mDrawable.draw(canvas);

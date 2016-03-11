@@ -24,7 +24,7 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 11;
+    private int borderSize = 15;
 
     private boolean mScaleable = true;
 
@@ -37,7 +37,7 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
 
         mScaleable = a.getBoolean(R.styleable.TvLinearLayout_scaleable, true);
 
-        int borderResId = a.getResourceId(R.styleable.TvLinearLayout_borderDrawable, R.drawable.white_light_10);
+        int borderResId = a.getResourceId(R.styleable.TvLinearLayout_borderDrawable, R.drawable.white_light);
 
         mBorderDrawable = getResources().getDrawable(borderResId);
 
@@ -80,9 +80,9 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
         if (!mScaleable)
             return;
         if (b) {
-            AnimateFactory.zoomInView(view);
+            AnimateFactory.zoomInViewFix(view);
         } else {
-            AnimateFactory.zoomOutView(view);
+            AnimateFactory.zoomOutViewFix(view);
         }
 
     }
@@ -91,7 +91,7 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
     public void draw(Canvas canvas) {
         if (hasFocus()) {
             super.getDrawingRect(mRect);
-            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right, borderSize + mRect.bottom);
+            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right-1, borderSize + mRect.bottom-1);
             mBorderDrawable.setBounds(mBound);
             canvas.save();
             mBorderDrawable.draw(canvas);

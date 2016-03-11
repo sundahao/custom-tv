@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+>
+
+    <HorizontalScrollView
+            android:id="@+id/hsv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="76dp"
+            android:layout_marginRight="30dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:scrollbars="none"
+    >
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="-10dp"
+                android:layout_marginStart="-20dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+        >
+
+            <LinearLayout
+                    android:id="@+id/ll_part"
+                    android:layout_width="wrap_content"
+                    android:layout_height="540dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:orientation="vertical">
+
+                <com.qgd.commons.tv.widget.TvRelativeLayout
+                        android:id="@+id/rl_market"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                    <com.qgd.commons.tv.widget.RoundImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/event_background"
+                    />
+
+                    <TextView
+                            android:id="@+id/tv_position1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:paddingLeft="120dp"
+                            android:text="活动"
+                            android:textColor="#fff"
+                            android:textSize="45sp"/>
+                </com.qgd.commons.tv.widget.TvRelativeLayout>
+
+                <com.qgd.commons.tv.widget.TvRelativeLayout
+                        android:id="@+id/rl_shop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/rl_market"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1">
+
+                    <com.qgd.commons.tv.widget.RoundImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/coupon_background"
+                    />
+
+                    <TextView
+                            android:id="@+id/tv_position2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:paddingLeft="120dp"
+                            android:text="优惠"
+                            android:textColor="#fff"
+                            android:textSize="45sp"/>
+                </com.qgd.commons.tv.widget.TvRelativeLayout>
+
+                <com.qgd.commons.tv.widget.TvRelativeLayout
+                        android:id="@+id/rl_food"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/rl_shop"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1">
+
+                    <com.qgd.commons.tv.widget.RoundImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/food_background"
+                    />
+
+                    <TextView
+                            android:id="@+id/tv_position3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:paddingLeft="120dp"
+                            android:text="美食"
+                            android:textColor="#fff"
+                            android:textSize="45sp"/>
+                </com.qgd.commons.tv.widget.TvRelativeLayout>
+
+                <com.qgd.commons.tv.widget.TvRelativeLayout
+                        android:id="@+id/rl_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_below="@id/rl_food"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1">
+
+                    <com.qgd.commons.tv.widget.RoundImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/all"
+                    />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:paddingLeft="120dp"
+                            android:text="全部"
+                            android:textColor="#fff"
+                            android:textSize="45sp"/>
+                </com.qgd.commons.tv.widget.TvRelativeLayout>
+            </LinearLayout>
+
+            <com.qgd.commons.tv.widget.TvRelativeLayout
+                    android:id="@+id/iv_coupon"
+                    android:layout_width="380dp"
+                    android:layout_height="540dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/ll_part"
+                    android:background="@drawable/no_data"
+                    android:nextFocusLeft="@id/rl_market"
+                    android:scaleType="fitXY"/>
+
+            <RelativeLayout
+                    android:id="@+id/rl_center_part"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/iv_coupon"
+                    android:clipChildren="false"
+                    android:clipToPadding="false">
+
+                <com.qgd.commons.tv.widget.TvRelativeLayout
+                        android:id="@+id/rl_poster_position_1"
+                        android:layout_width="260dp"
+                        android:layout_height="260dp">
+
+                    <com.qgd.commons.tv.widget.RoundImageView
+                            android:id="@+id/iv_poster_position_1"
+                            android:layout_width="260dp"
+                            android:layout_height="260dp"
+                            android:src="@drawable/no_data"
+                    />
+
+                    <TextView
+                            android:id="@+id/tv_poster_position_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="43dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/black_foot"
+                            android:gravity="center"
+                            android:text="广告位1"
+                            android:textColor="#fff"
+                            android:textSize="30sp"
+                            android:visibility="invisible"/>
+
+                </com.qgd.commons.tv.widget.TvRelativeLayout>
+
+                <com.qgd.commons.tv.widget.TvRelativeLayout
+                        android:id="@+id/rl_poster_position_2"
+                        android:layout_width="260dp"
+                        android:layout_height="260dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@id/rl_poster_position_1">
+
+                    <com.qgd.commons.tv.widget.RoundImageView
+                            android:id="@+id/iv_poster_position_2"
+                            android:layout_width="260dp"
+                            android:layout_height="260dp"
+                            android:src="@drawable/no_data"
+                    />
+
+                    <TextView
+                            android:id="@+id/tv_poster_position_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="43dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/black_foot"
+                            android:gravity="center"
+                            android:text="广告位2"
+                            android:textColor="#fff"
+                            android:textSize="30sp"
+                            android:visibility="invisible"/>
+                </com.qgd.commons.tv.widget.TvRelativeLayout>
+
+                <com.qgd.commons.tv.widget.TvRelativeLayout
+                        android:id="@+id/trl_today_recipe"
+                        android:layout_width="540dp"
+                        android:layout_height="262dp"
+                        android:layout_below="@id/rl_poster_position_1"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center">
+
+                    <com.qgd.commons.tv.widget.RoundImageView
+                            android:id="@+id/iv_today_food"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/no_data"
+                    />
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="130dp"
+                            android:src="@drawable/today_food"
+                            android:visibility="invisible"/>
+
+                </com.qgd.commons.tv.widget.TvRelativeLayout>
+
+
+            </RelativeLayout>
+
+
+            <ImageView
+                    android:id="@+id/iv_join_us"
+                    android:layout_width="380dp"
+                    android:layout_height="540dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/rl_center_part"
+                    android:nextFocusLeft="@id/rl_poster_position_2"
+                    android:src="@drawable/no_data"/>
+
+        </RelativeLayout>
+    </HorizontalScrollView>
+</LinearLayout>

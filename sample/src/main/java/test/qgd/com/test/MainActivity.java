@@ -25,6 +25,14 @@ public class MainActivity extends Activity {
 
     }
 
+    public  void showToastDialog(View v){
+        TvDialog.createToastDialog(this, "我是一只Toast").show();
+        TvDialog.createToastDialog(this, "我是一只Toast2").show();
+        TvDialog.createToastDialog(this, "我是一只Toast3").show();
+
+
+    }
+
     public void showNoCancelDialog(View v) {//不可取消按钮
         final TvDialog tvDialog=TvDialog.createDialog(this, "提示!", "不可按返回取消");
         tvDialog.setCancelable(false);
