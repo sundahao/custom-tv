@@ -26,7 +26,6 @@ public class AnimateFactory {
 
         anim.setFillAfter(true);
         anim.setDuration(duration);
-        anim.setZAdjustment(Animation.ZORDER_TOP);
         return anim;
     }
 
@@ -51,18 +50,26 @@ public class AnimateFactory {
         }
     }
 
-    private static float fixSize = 24;
+    private static float fixSize = 24.0f;
 
     public static void zoomInViewFix(View v) {
         if (v != null) {
-            float scale = (v.getMeasuredWidth() + fixSize) / v.getMeasuredWidth() * 1.0f;
+            int width=v.getWidth();
+            if(width==0){
+                return;
+            }
+            float scale = (width + fixSize) / width * 1.0f;
             v.startAnimation(AnimateFactory.zoomAnimation(1.0f, scale, 200));
         }
     }
 
     public static void zoomOutViewFix(View v) {
         if (v != null) {
-            float scale = (v.getMeasuredWidth() + fixSize) / v.getMeasuredWidth() * 1.0f;
+            int width=v.getWidth();
+            if(width==0){
+                return;
+            }
+            float scale = (width + fixSize) / width * 1.0f;
             v.startAnimation(AnimateFactory.zoomAnimation(scale, 1.0f, 200));
         }
     }
