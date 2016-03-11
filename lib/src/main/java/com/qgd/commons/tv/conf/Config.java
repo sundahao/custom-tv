@@ -27,29 +27,37 @@ public class Config {
     }
 
     public static Config load(Application application) {
-        return load(new File(Environment.getExternalStorageDirectory(), application.getPackageName() + ".properties"));
+        try {
+            File file = new File(Environment.getExternalStorageDirectory(), "qgd/conf/" + application.getPackageName() + ".properties");
+            return load(file);
+        } catch (Throwable e) {
+            Log.e("Config", "load config fail", e);
+        }
+        return new Config(new Properties());
     }
 
     public static Config load(File file) {
         Properties props = new Properties();
-        if (file != null && file.exists()) {
-            FileInputStream in = null;
-            try {
+        FileInputStream in = null;
+        try {
+            if (file != null && file.exists()) {
+                Log.i("Config", "load config from: " + file.getAbsolutePath());
                 in = new FileInputStream(file);
                 props.load(in);
-            } catch (IOException e) {
-                Log.e("Config", "load config fail", e);
-            } finally {
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-                        //ignore
-                    }
+            }
+        } catch (IOException e) {
+            Log.e("Config", "load config fail", e);
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (Throwable e) {
+                    //ignore
                 }
             }
+
+            return new Config(props);
         }
-        return new Config(props);
     }
 
     public String get(String key) {
