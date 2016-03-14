@@ -4,6 +4,9 @@
     <attr name="scaleable" format="boolean"/>
     <attr name="borderDrawable" format="reference"/>
     <attr name="borderSize" format="dimension"/>
+    <attr name="numberColor" format="color"/>
+
+    <attr name="number" format="string"/>
 
     <attr name="columnCount" format="integer"/>
 
@@ -50,13 +53,20 @@
     <declare-styleable name="TvTextView">
         <attr name="scaleable" />
         <attr name="borderDrawable" />
-        <attr name="number" format="string"/>
-        <attr name="numberColor" format="color"/>
+        <attr name="number"  />
+        <attr name="numberColor"  />
         <attr name="borderSize"/>
 
     </declare-styleable>
 
+    <declare-styleable name="TvImageView">
+        <attr name="scaleable" />
+        <attr name="borderDrawable" />
+        <attr name="number" />
+        <attr name="numberColor"  />
+        <attr name="borderSize"/>
 
+    </declare-styleable>
 
 
 
