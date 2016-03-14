@@ -35,7 +35,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         super(context, attrs);
         init();
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TvTextView);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TvRelativeLayout);
 
         mScaleable = a.getBoolean(R.styleable.TvRelativeLayout_scaleable, true);
 
