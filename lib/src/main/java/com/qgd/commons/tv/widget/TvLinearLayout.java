@@ -6,12 +6,14 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.LinearLayout;
 
 import com.qgd.commons.tv.R;
 import com.qgd.commons.tv.util.AnimateFactory;
+import com.qgd.commons.tv.util.FocusSoundUtil;
 
 /**
  * 作者：ethan on 2015/12/29 17:13
@@ -98,5 +100,11 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
             canvas.restore();
         }
         super.draw(canvas);
+    }
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+
+        FocusSoundUtil.dispatchKeyEvent(this, event);
+        return super.dispatchKeyEvent(event);
     }
 }

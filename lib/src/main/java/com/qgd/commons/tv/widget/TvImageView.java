@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import com.qgd.commons.tv.R;
 import com.qgd.commons.tv.util.AnimateFactory;
 import com.qgd.commons.tv.util.DimensionConvert;
+import com.qgd.commons.tv.util.FocusSoundUtil;
 
 
 /**
@@ -154,6 +156,11 @@ public class TvImageView extends ImageView implements View.OnFocusChangeListener
 
         super.onDraw(canvas);
     }
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
 
+        FocusSoundUtil.dispatchKeyEvent(this, event);
+        return super.dispatchKeyEvent(event);
+    }
 
 }
