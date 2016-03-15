@@ -8,9 +8,13 @@
         android:clipChildren="false"
         android:clipToPadding="false"
         android:orientation="vertical"
+
+        android:focusable="false"
+
 >
 
     <HorizontalScrollView
+            android:focusable="false"
             android:id="@+id/hsv_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,6 +25,11 @@
             android:orientation="vertical"
             android:paddingTop="20dp"
             android:scrollbars="none"
+
+            android:descendantFocusability="afterDescendants"
+            android:soundEffectsEnabled="true"
+            android:hapticFeedbackEnabled="true"
+
     >
 
         <RelativeLayout
@@ -30,6 +39,8 @@
                 android:layout_marginStart="-20dp"
                 android:clipChildren="false"
                 android:clipToPadding="false"
+                android:descendantFocusability="afterDescendants"
+
         >
 
             <LinearLayout
@@ -128,6 +139,7 @@
                     />
 
                     <TextView
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -139,12 +151,17 @@
             </LinearLayout>
 
             <com.qgd.commons.tv.widget.TvRelativeLayout
+
+                    android:soundEffectsEnabled="true"
+                    android:hapticFeedbackEnabled="true"
+
+
                     android:id="@+id/iv_coupon"
                     android:layout_width="380dp"
                     android:layout_height="540dp"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/ll_part"
-                    android:background="@drawable/no_data"
+                    android:background="@color/red"
                     android:nextFocusLeft="@id/rl_market"
                     android:scaleType="fitXY"/>
 

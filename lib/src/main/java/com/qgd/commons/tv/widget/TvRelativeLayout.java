@@ -6,12 +6,14 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.RelativeLayout;
 
 import com.qgd.commons.tv.R;
 import com.qgd.commons.tv.util.AnimateFactory;
+import com.qgd.commons.tv.util.FocusSoundUtil;
 
 
 /**
@@ -41,7 +43,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
 
         int borderResId = a.getResourceId(R.styleable.TvRelativeLayout_borderDrawable, R.drawable.white_light);
         mBorderDrawable = getResources().getDrawable(borderResId);
-        borderSize=a.getDimensionPixelSize(R.styleable.TvRelativeLayout_borderSize,borderSize);
+        borderSize = a.getDimensionPixelSize(R.styleable.TvRelativeLayout_borderSize, borderSize);
 
         a.recycle();
     }
@@ -55,7 +57,10 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         mBound = new Rect();
         mBorderDrawable = getResources().getDrawable(R.drawable.white_light_10);
         super.setOnFocusChangeListener(this);
+
+
     }
+
     public boolean isScaleable() {
         return mScaleable;
     }
@@ -63,6 +68,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
     public void setScaleable(boolean mScaleable) {
         this.mScaleable = mScaleable;
     }
+
     private OnFocusChangeListener mOnFocusChangeListener;
 
     @Override
@@ -90,7 +96,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
     public void draw(Canvas canvas) {
         if (hasFocus()) {
             super.getDrawingRect(mRect);
-            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right-1, borderSize + mRect.bottom-1);
+            mBound.set(-borderSize + mRect.left, -borderSize + mRect.top, borderSize + mRect.right - 1, borderSize + mRect.bottom - 1);
             mBorderDrawable.setBounds(mBound);
             canvas.save();
             mBorderDrawable.draw(canvas);
@@ -100,4 +106,10 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         super.draw(canvas);
     }
 
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+
+        FocusSoundUtil.dispatchKeyEvent(this, event);
+        return super.dispatchKeyEvent(event);
+    }
 }
