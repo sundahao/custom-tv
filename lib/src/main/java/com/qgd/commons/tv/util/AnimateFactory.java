@@ -1,6 +1,5 @@
 package com.qgd.commons.tv.util;
 
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -30,6 +29,14 @@ public class AnimateFactory {
         return anim;
     }
 
+    public static Animation zoomAnimation(float startScaleX, float endScaleX, float startScaleY, float endScaleY, int duration) {
+        ScaleAnimation anim = new ScaleAnimation(startScaleX, endScaleX, startScaleY, endScaleY, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+
+        anim.setFillAfter(true);
+        anim.setDuration(duration);
+        return anim;
+    }
+
     public static Animation shakeAnimate() {
         TranslateAnimation mAnimate = new TranslateAnimation(0, 5, 0, 0);
         mAnimate.setInterpolator(new CycleInterpolator(50));
@@ -51,12 +58,13 @@ public class AnimateFactory {
         }
     }
 
+
     private static float fixSize = 24.0f;
 
     public static void zoomInViewFix(View v) {
         if (v != null) {
-            int width = v.getMeasuredWidth();
-            Log.d("tt","width:"+width );
+            int height = v.getHeight();
+            int width = v.getWidth();
             if (width == 0) {
                 //                int ww = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.EXACTLY);
                 //                int hh = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
@@ -65,14 +73,17 @@ public class AnimateFactory {
                 v.startAnimation(AnimateFactory.zoomAnimation(1.0f, 1.1f, 200));
                 return;
             }
-            float scale = (width + fixSize) / width * 1.0f;
-            v.startAnimation(AnimateFactory.zoomAnimation(1.0f, scale, 200));
+            float scaleWidth = (width + fixSize) / width * 1.0f;
+            //float scaleHeight = (height + fixSize) / height * 1.0f;
+            v.startAnimation(AnimateFactory.zoomAnimation( 1.0f,scaleWidth, 200));
+            //v.startAnimation(AnimateFactory.zoomAnimation(1.0f, scaleWidth, 1.0f, scaleHeight, 200));
         }
     }
 
     public static void zoomOutViewFix(View v) {
         if (v != null) {
-            int width = v.getMeasuredWidth();
+            int height = v.getHeight();
+            int width = v.getWidth();
             if (width == 0) {
                 //                int ww = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
                 //                int hh = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
@@ -81,8 +92,11 @@ public class AnimateFactory {
                 v.startAnimation(AnimateFactory.zoomAnimation(1.1f, 1.0f, 200));
                 return;
             }
-            float scale = (width + fixSize) / width * 1.0f;
-            v.startAnimation(AnimateFactory.zoomAnimation(scale, 1.0f, 200));
+            float scaleWidth = (width + fixSize) / width * 1.0f;
+            //float scaleHeight = (height + fixSize) / height * 1.0f;
+            v.startAnimation(AnimateFactory.zoomAnimation(scaleWidth, 1.0f, 200));
+
+            //v.startAnimation(AnimateFactory.zoomAnimation(scaleWidth, 1.0f, scaleHeight, 1.0f, 200));
         }
     }
 
