@@ -1,10 +1,13 @@
 package com.qgd.commons.tv.util;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.media.AudioManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SoundEffectConstants;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * 作者：ethan on 2016/3/15 11:22
@@ -44,16 +47,21 @@ public class FocusSoundUtil {
                         }
                         break;
                 }
+
+
                 if (direction != 0) {
                     View focused = view.findFocus();
                     if (focused != null) {
                         View v = focused.focusSearch(direction);
                         if (v != null && v != focused) {
-                            if (direction != View.FOCUS_DOWN && direction != View.FOCUS_UP)
+
+                            if (direction != View.FOCUS_DOWN && direction != View.FOCUS_UP) {
                                 view.playSoundEffect(SoundEffectConstants.getContantForFocusDirection(direction));
+                            }
                         } else {
                             AudioManager mAudioManager = (AudioManager) view.getContext().getSystemService(Context.AUDIO_SERVICE);
                             mAudioManager.playSoundEffect(AudioManager.FX_KEYPRESS_INVALID);
+                            mAudioManager.unloadSoundEffects();
 
                         }
                     }

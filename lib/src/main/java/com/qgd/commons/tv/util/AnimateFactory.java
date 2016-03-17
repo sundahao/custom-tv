@@ -54,9 +54,14 @@ public class AnimateFactory {
 
     public static void zoomInViewFix(View v) {
         if (v != null) {
-            int width=v.getWidth();
-            if(width==0){
-                return;
+            int width = v.getWidth();
+            if (width == 0) {
+                int ww = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                int hh = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                v.measure(ww, hh);
+                int h = v.getMeasuredHeight();
+                int w = v.getMeasuredWidth();
+                width = w;
             }
             float scale = (width + fixSize) / width * 1.0f;
             v.startAnimation(AnimateFactory.zoomAnimation(1.0f, scale, 200));
@@ -65,8 +70,8 @@ public class AnimateFactory {
 
     public static void zoomOutViewFix(View v) {
         if (v != null) {
-            int width=v.getWidth();
-            if(width==0){
+            int width = v.getWidth();
+            if (width == 0) {
                 return;
             }
             float scale = (width + fixSize) / width * 1.0f;

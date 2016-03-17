@@ -93,6 +93,8 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
         mPaint.setTextSize(DimensionConvert.px2dip(getContext(),25));
 
         super.setOnFocusChangeListener(this);
+        setSoundEffectsEnabled(false);
+
     }
 
     @Override
