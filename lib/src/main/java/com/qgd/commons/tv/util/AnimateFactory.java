@@ -62,6 +62,8 @@ public class AnimateFactory {
                 int h = v.getMeasuredHeight();
                 int w = v.getMeasuredWidth();
                 width = w;
+                if(width==0)
+                    return;
             }
             float scale = (width + fixSize) / width * 1.0f;
             v.startAnimation(AnimateFactory.zoomAnimation(1.0f, scale, 200));
