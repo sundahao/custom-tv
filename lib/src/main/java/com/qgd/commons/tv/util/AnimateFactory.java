@@ -1,5 +1,6 @@
 package com.qgd.commons.tv.util;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -54,16 +55,15 @@ public class AnimateFactory {
 
     public static void zoomInViewFix(View v) {
         if (v != null) {
-            int width = v.getWidth();
+            int width = v.getMeasuredWidth();
+            Log.d("tt","width:"+width );
             if (width == 0) {
-                int ww = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-                int hh = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-                v.measure(ww, hh);
-                int h = v.getMeasuredHeight();
-                int w = v.getMeasuredWidth();
-                width = w;
-                if(width==0)
-                    return;
+                //                int ww = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.EXACTLY);
+                //                int hh = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                //                v.measure(ww, hh);
+                //                width = v.getMeasuredWidth();
+                v.startAnimation(AnimateFactory.zoomAnimation(1.0f, 1.1f, 200));
+                return;
             }
             float scale = (width + fixSize) / width * 1.0f;
             v.startAnimation(AnimateFactory.zoomAnimation(1.0f, scale, 200));
@@ -72,8 +72,13 @@ public class AnimateFactory {
 
     public static void zoomOutViewFix(View v) {
         if (v != null) {
-            int width = v.getWidth();
+            int width = v.getMeasuredWidth();
             if (width == 0) {
+                //                int ww = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                //                int hh = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+                //                v.measure(ww, hh);
+                //                width = v.getWidth();
+                v.startAnimation(AnimateFactory.zoomAnimation(1.1f, 1.0f, 200));
                 return;
             }
             float scale = (width + fixSize) / width * 1.0f;
