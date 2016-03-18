@@ -58,6 +58,8 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
         mBound = new Rect();
         mBorderDrawable = getResources().getDrawable(R.drawable.white_light_10);
         super.setOnFocusChangeListener(this);
+        FocusSoundUtil.initSoundEffect(this.getContext() );
+
     }
 
     private OnFocusChangeListener mOnFocusChangeListener;

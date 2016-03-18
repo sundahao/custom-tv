@@ -60,11 +60,11 @@ public class FocusSoundUtil {
                     if (focused != null) {
                         View v = focused.focusSearch(direction);
                         if (v != null && v != focused) {
-                            playSoundEffect(view.getContext(), SoundEffectConstants.getContantForFocusDirection(direction), 70000);
-
+                            Log.d(TAG, "play sound");
+                            playSoundEffect(view.getContext(), SoundEffectConstants.getContantForFocusDirection(direction), soundVolume);
                         } else if (v != focused) {
                             if (v == null) {
-                                playSoundEffect(view.getContext(), AudioManager.FX_KEYPRESS_INVALID, 100000);
+                                playSoundEffect(view.getContext(), AudioManager.FX_KEYPRESS_INVALID, soundVolume);
 
                             }
 
@@ -79,9 +79,10 @@ public class FocusSoundUtil {
         }
     }
 
+    public static int soundVolume = 3000;
     private static boolean isLoad = false;
 
-    private static final int NUM_SOUNDPOOL_CHANNELS = 4;
+    private static final int NUM_SOUNDPOOL_CHANNELS = 6;
     private static final int SOUND_EFFECT_VOLUME = 1000;
     private static SoundPool mSoundPool;
     private static Object mSoundEffectsLock = new Object();
@@ -94,22 +95,15 @@ public class FocusSoundUtil {
             {2, -1},  // FX_KEYPRESS_SPACEBAR
             {3, -1},  // FX_FOCUS_DELETE
             {4, -1},   // FX_FOCUS_RETURN
-            {4,-1}
-    };
+            {5, -1}};
     /* Sound effect file names  */
     private static final String SOUND_EFFECTS_PATH = "/media/audio/ui/";
     private static final String[] SOUND_EFFECT_FILES = new String[]{"Effect_Tick.ogg", "KeypressStandard.ogg", "KeypressSpacebar.ogg", "KeypressDelete.ogg", "KeypressReturn.ogg", "KeypressInvalid.ogg"};
 
-    public static boolean loadSoundEffects(Context context) {
-
-        if (isLoad)
-            return isLoad;
-
-        AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-        mAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+    public static boolean loadSoundEffects() {
 
         synchronized (mSoundEffectsLock) {
-            mSoundPool = new SoundPool(NUM_SOUNDPOOL_CHANNELS, AudioManager.STREAM_MUSIC, 0);
+            mSoundPool = new SoundPool(NUM_SOUNDPOOL_CHANNELS, AudioManager.STREAM_RING, 0);
             if (mSoundPool == null) {
                 return false;
             }
@@ -128,13 +122,15 @@ public class FocusSoundUtil {
              * If load succeeds, value in SOUND_EFFECT_FILES_MAP[effect][1] is > 0:
              * this indicates we have a valid sample loaded for this effect.
              */
-            for (int effect = 0; effect < 9; effect++) {
+            for (int effect = 0; effect < 10; effect++) {
                 // Do not load sample if this effect uses the MediaPlayer
                 if (SOUND_EFFECT_FILES_MAP[effect][1] == 0) {
                     continue;
                 }
                 if (poolId[SOUND_EFFECT_FILES_MAP[effect][0]] == -1) {
                     String filePath = Environment.getRootDirectory() + SOUND_EFFECTS_PATH + SOUND_EFFECT_FILES[SOUND_EFFECT_FILES_MAP[effect][0]];
+                    Log.d(TAG, "sound effect filePath:" + filePath);
+
                     int sampleId = mSoundPool.load(filePath, 0);
                     SOUND_EFFECT_FILES_MAP[effect][1] = sampleId;
                     poolId[SOUND_EFFECT_FILES_MAP[effect][0]] = sampleId;
@@ -146,15 +142,27 @@ public class FocusSoundUtil {
                 }
             }
         }
-        isLoad = true;
         return true;
     }
 
+    static {
+    }
+
+
+    public static void initSoundEffect(Context context) {
+        if (!isLoad) {
+            AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+            mAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+            loadSoundEffects();
+            isLoad = true;
+        }
+    }
 
     private static void playSoundEffect(Context context, int effectType, int volume) {
-        loadSoundEffects(context);
+        playSoundEffect(effectType, volume);
+    }
 
-
+    private static void playSoundEffect(int effectType, int volume) {
         synchronized (mSoundEffectsLock) {
             if (mSoundPool == null) {
                 return;
@@ -173,6 +181,7 @@ public class FocusSoundUtil {
                         mediaPlayer.prepare();
                         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                             public void onCompletion(MediaPlayer mp) {
+
                                 cleanupPlayer(mp);
                             }
                         });

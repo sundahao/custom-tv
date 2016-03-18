@@ -58,6 +58,8 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
         mBound = new Rect();
         mDrawable = getResources().getDrawable(R.drawable.white_light);
         super.setOnFocusChangeListener(this);
+        FocusSoundUtil.initSoundEffect(this.getContext() );
+
     }
 
     private OnFocusChangeListener mOnFocusChangeListener;

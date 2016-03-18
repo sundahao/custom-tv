@@ -57,6 +57,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         mBound = new Rect();
         mBorderDrawable = getResources().getDrawable(R.drawable.white_light_10);
         super.setOnFocusChangeListener(this);
+        FocusSoundUtil.initSoundEffect(this.getContext() );
 
 
     }
