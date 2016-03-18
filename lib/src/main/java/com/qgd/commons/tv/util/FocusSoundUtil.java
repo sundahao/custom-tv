@@ -60,7 +60,6 @@ public class FocusSoundUtil {
                     if (focused != null) {
                         View v = focused.focusSearch(direction);
                         if (v != null && v != focused) {
-                            Log.d(TAG, "play sound");
                             playSoundEffect(view.getContext(), SoundEffectConstants.getContantForFocusDirection(direction), soundVolume);
                         } else if (v != focused) {
                             if (v == null) {
