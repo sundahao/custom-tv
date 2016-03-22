@@ -63,7 +63,7 @@ public class AnimateFactory {
 
     public static void zoomInViewFix(View v) {
         if (v != null)
-            zoomInViewFix(v, v.getMeasuredWidth(), v.getMeasuredHeight());
+            zoomInViewFix(v, v.getWidth(), v.getHeight());
     }
 
 
@@ -86,7 +86,7 @@ public class AnimateFactory {
 
     public static void zoomOutViewFix(View v) {
         if (v != null)
-            zoomOutViewFix(v, v.getMeasuredWidth(), v.getMeasuredHeight());
+            zoomOutViewFix(v, v.getWidth(), v.getHeight());
     }
 
     public static void zoomOutViewFix(View v, int width, int height) {
