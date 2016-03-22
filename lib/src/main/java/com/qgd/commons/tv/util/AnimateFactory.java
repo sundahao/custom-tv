@@ -62,9 +62,13 @@ public class AnimateFactory {
     private static float fixSize = 24.0f;
 
     public static void zoomInViewFix(View v) {
+        if (v != null)
+            zoomInViewFix(v, v.getMeasuredWidth(), v.getMeasuredHeight());
+    }
+
+
+    public static void zoomInViewFix(View v, int width, int height) {
         if (v != null) {
-            int height = v.getHeight();
-            int width = v.getWidth();
             if (width == 0) {
                 //                int ww = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.EXACTLY);
                 //                int hh = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
@@ -75,15 +79,18 @@ public class AnimateFactory {
             }
             float scaleWidth = (width + fixSize) / width * 1.0f;
             //float scaleHeight = (height + fixSize) / height * 1.0f;
-            v.startAnimation(AnimateFactory.zoomAnimation( 1.0f,scaleWidth, 200));
+            v.startAnimation(AnimateFactory.zoomAnimation(1.0f, scaleWidth, 200));
             //v.startAnimation(AnimateFactory.zoomAnimation(1.0f, scaleWidth, 1.0f, scaleHeight, 200));
         }
     }
 
     public static void zoomOutViewFix(View v) {
+        if (v != null)
+            zoomOutViewFix(v, v.getMeasuredWidth(), v.getMeasuredHeight());
+    }
+
+    public static void zoomOutViewFix(View v, int width, int height) {
         if (v != null) {
-            int height = v.getHeight();
-            int width = v.getWidth();
             if (width == 0) {
                 //                int ww = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
                 //                int hh = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);

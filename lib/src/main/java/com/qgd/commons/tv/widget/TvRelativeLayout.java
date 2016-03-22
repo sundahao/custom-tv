@@ -57,7 +57,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         mBound = new Rect();
         mBorderDrawable = getResources().getDrawable(R.drawable.white_light_10);
         super.setOnFocusChangeListener(this);
-        FocusSoundUtil.initSoundEffect(this.getContext() );
+        FocusSoundUtil.initSoundEffect(this.getContext());
 
 
     }
@@ -85,13 +85,26 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
 
         if (!mScaleable)
             return;
+
+        height = getMeasuredHeight();
+        width = getMeasuredWidth();
+
+        int ww = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int hh = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        measure(ww, hh);
+        width = getMeasuredWidth();
+        //Log.d("tt", "==========>" + b + "height:" + height + " width:" + width);
+
         if (b) {
-            AnimateFactory.zoomInViewFix(view);
+            AnimateFactory.zoomInViewFix(view, width, height);
         } else {
-            AnimateFactory.zoomOutViewFix(view);
+            AnimateFactory.zoomOutViewFix(view, width, height);
         }
 
     }
+
+    private int height;
+    private int width;
 
     @Override
     public void draw(Canvas canvas) {
@@ -105,6 +118,9 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
         }
 
         super.draw(canvas);
+        height = getMeasuredHeight();
+        width = getMeasuredWidth();
+//        Log.d("tt", "height:" + height + " width:" + width);
     }
 
     @Override
