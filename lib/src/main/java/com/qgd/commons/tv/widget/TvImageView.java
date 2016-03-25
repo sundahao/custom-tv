@@ -40,6 +40,7 @@ public class TvImageView extends ImageView implements View.OnFocusChangeListener
     private Paint mPaint;
     private OnFocusChangeListener mOnFocusChangeListener;
 
+
     public TvImageView(Context context) {
         super(context);
         init();
@@ -158,10 +159,23 @@ public class TvImageView extends ImageView implements View.OnFocusChangeListener
 
         super.onDraw(canvas);
     }
+
+
+    private boolean mSoundEnable=true;
+
+    public boolean isSoundEnable() {
+        return mSoundEnable;
+    }
+
+    public void setSoundEnable(boolean mSoundEnable) {
+        this.mSoundEnable = mSoundEnable;
+    }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
 
-        FocusSoundUtil.dispatchKeyEvent(this, event);
+        if(mSoundEnable)
+            FocusSoundUtil.dispatchKeyEvent(this, event);
         return super.dispatchKeyEvent(event);
     }
 

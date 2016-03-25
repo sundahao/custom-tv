@@ -103,10 +103,21 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
         }
         super.draw(canvas);
     }
+    private boolean mSoundEnable=true;
+
+    public boolean isSoundEnable() {
+        return mSoundEnable;
+    }
+
+    public void setSoundEnable(boolean mSoundEnable) {
+        this.mSoundEnable = mSoundEnable;
+    }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
 
-        FocusSoundUtil.dispatchKeyEvent(this, event);
+        if(mSoundEnable)
+            FocusSoundUtil.dispatchKeyEvent(this, event);
         return super.dispatchKeyEvent(event);
     }
 }

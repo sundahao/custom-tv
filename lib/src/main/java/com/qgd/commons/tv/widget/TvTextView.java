@@ -158,10 +158,21 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
 
         super.onDraw(canvas);
     }
+    private boolean mSoundEnable=true;
+
+    public boolean isSoundEnable() {
+        return mSoundEnable;
+    }
+
+    public void setSoundEnable(boolean mSoundEnable) {
+        this.mSoundEnable = mSoundEnable;
+    }
+
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
 
-        FocusSoundUtil.dispatchKeyEvent(this, event);
+        if(mSoundEnable)
+            FocusSoundUtil.dispatchKeyEvent(this, event);
         return super.dispatchKeyEvent(event);
     }
 
