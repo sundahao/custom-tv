@@ -161,6 +161,9 @@ public class FocusSoundUtil {
         playSoundEffect(effectType, volume);
     }
 
+    public static void playSoundEffect(int effectType){
+        playSoundEffect(effectType,soundVolume);
+    }
     private static void playSoundEffect(int effectType, int volume) {
         synchronized (mSoundEffectsLock) {
             if (mSoundPool == null) {
