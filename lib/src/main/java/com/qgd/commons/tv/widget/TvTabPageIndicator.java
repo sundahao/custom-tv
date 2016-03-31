@@ -25,7 +25,6 @@ public class TvTabPageIndicator extends LinearLayout implements PageIndicatorInt
     private OnTabReselectedListener mTabReselectedListener;
 
 
-
     public interface OnTabReselectedListener {
         /**
          * Callback when the selected tab has been reselected.
@@ -117,15 +116,29 @@ public class TvTabPageIndicator extends LinearLayout implements PageIndicatorInt
         mViewPager.setCurrentItem(item);
 
         final int tabCount = mTabLayout.getChildCount();
-        for (int i = 0; i < tabCount; i++) {
-            final View child = mTabLayout.getChildAt(i);
-            final boolean isSelected = (i == item);
+        //        for (int i = 0; i < tabCount; i++) {
+        //            final View child = mTabLayout.getChildAt(i);
+        //            final boolean isSelected = (i == item);
+        //            child.setSelected(isSelected);
+        //            if (isSelected) {
+        //                child.requestFocus();
+        //                //animateToTab(item);
+        //            } else {
+        //
+        //            }
+        //        }
+
+        for (int i = 0; i < tabCount; ++i) {
+            View child = this.mTabLayout.getChildAt(i);
+            boolean isSelected = (i == item);
             child.setSelected(isSelected);
             if (isSelected) {
-                child.requestFocus();
-                //animateToTab(item);
+                child.setBackgroundResource(R.drawable.tab_round_item_backgroud);
             } else {
-
+                child.setBackgroundResource(R.drawable.tab_round_item);
+            }
+            if (isSelected) {
+                child.requestFocus();
             }
         }
 

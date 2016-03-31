@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.qgd.commons.tv.widget.TvDialog;
 
@@ -34,8 +35,10 @@ public class MainActivity extends Activity {
     }
 
     public void showNoCancelDialog(View v) {//不可取消按钮
-        final TvDialog tvDialog=TvDialog.createDialog(this, "提示!", "不可按返回取消");
+        final TvDialog tvDialog=TvDialog.createDialog(getApplicationContext(), "提示!", "不可按返回取消");
+        tvDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         tvDialog.setCancelable(false);
+
         tvDialog.setButton1Click("只能点这里取消",new View.OnClickListener(){
             @Override
             public void onClick(View view) {
