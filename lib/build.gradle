@@ -48,7 +48,7 @@ dependencies {
 
 task sourceJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
-    classifier "relase"
+    classifier "source"
 }
 
 uploadArchives {
