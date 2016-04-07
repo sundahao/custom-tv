@@ -80,7 +80,7 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
 
         VolleyRpcRequest<RpcResponse<T>> volleyRpcRequest= new VolleyRpcRequest<>(url, this, params, headers, okListener, okErrListener);
         if(volleyRpcRequest!=null){
-            volleyRpcRequest.setRetryPolicy(new DefaultRetryPolicy(10000, 1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            volleyRpcRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         }
         return volleyRpcRequest;
     }
