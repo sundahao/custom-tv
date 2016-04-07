@@ -5,14 +5,16 @@
 package com.qgd.commons.tv.rpc;
 
 import android.support.annotation.NonNull;
+
 import com.android.volley.RequestQueue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.greenrobot.event.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by yangke on 2016-01-06.

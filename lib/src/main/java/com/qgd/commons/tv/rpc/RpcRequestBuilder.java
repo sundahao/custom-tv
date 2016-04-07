@@ -4,20 +4,23 @@
 
 package com.qgd.commons.tv.rpc;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.qgd.commons.tv.util.StringUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.crypto.Mac;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+
+import javax.crypto.Mac;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Created by yangke on 2015-12-18.
@@ -75,7 +78,11 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
 
         buildSecurityHeaders();
 
-        return new VolleyRpcRequest<>(url, this, params, headers, okListener, okErrListener);
+        VolleyRpcRequest<RpcResponse<T>> volleyRpcRequest= new VolleyRpcRequest<>(url, this, params, headers, okListener, okErrListener);
+        if(volleyRpcRequest!=null){
+            volleyRpcRequest.setRetryPolicy(new DefaultRetryPolicy(10000, 1, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        }
+        return volleyRpcRequest;
     }
 
     @Override
