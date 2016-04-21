@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/action_bar_root"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ff000000"
+                tools:context=".widget.QgdPlayerActivity">
+
+    <view
+            android:id="@+id/surfaceView"
+            class="com.google.android.exoplayer.VideoSurfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="left|top" />
+
+    <RelativeLayout
+            android:id="@+id/rl_replay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:visibility="invisible">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.3"
+                android:src="#333333" />
+
+        <com.qgd.commons.tv.widget.TvTextView
+                android:id="@+id/tv_replay"
+                android:layout_width="178dp"
+                android:layout_height="62dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="410dp"
+                android:background="@drawable/replay_bg"
+                android:gravity="center"
+                android:text="重播"
+                android:textColor="@color/colorWhite"
+                android:textSize="26sp" />
+
+        <com.qgd.commons.tv.widget.TvTextView
+                android:id="@+id/tv_back"
+                android:layout_width="178dp"
+                android:layout_height="62dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="410dp"
+                android:background="@drawable/replay_bg"
+                android:gravity="center"
+                android:text="返回"
+                android:textColor="@color/colorWhite"
+                android:textSize="26sp" />
+    </RelativeLayout>
+
+    <ProgressBar
+            android:id="@+id/loadingIcon"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminate="false"
+            android:visibility="visible" />
+
+</RelativeLayout>

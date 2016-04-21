@@ -1,6 +1,7 @@
 package com.qgd.commons.tv.util;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.widget.Toast;
 
 /**
@@ -44,5 +45,12 @@ public class ToastUtils {
 
     public static void show(Context context, String format, int duration, Object... args) {
         show(context, String.format(format, args), duration);
+    }
+
+    public static void showMessage(Context context, String msg){
+        Toast toast = Toast.makeText(context.getApplicationContext(),
+                msg, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }
