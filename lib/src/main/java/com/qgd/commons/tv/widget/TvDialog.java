@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -86,6 +87,7 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     private boolean isButtonFocus = true;
 
+
     public TvDialog(Context context) {
         super(context);
         init(context);
@@ -115,7 +117,7 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     private static TvDialog getInstance(Context context) {
 
-        return new TvDialog(context, R.style.dialog_untran);
+        return new TvDialog(context, R.style.dialog_style);
     }
 
 
@@ -125,9 +127,8 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     public static TvDialog createDefaultDialog(Context context) {
-        TvDialog dialog = getInstance(context);
-        dialog.setCustomView(R.layout.normal_view, context);
-        return dialog;
+        return createDialog(context, null, null, null, null);
+
     }
 
     public static TvDialog createDialog(Context context) {
@@ -139,20 +140,36 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     public static TvDialog createDialog(Context context, String title, String message) {
-        TvDialog dialog = getInstance(context);
-        dialog.setCustomView(R.layout.normal_view, context);
-        dialog.withMessage(message);
-        dialog.withTitle(title);
-        return dialog;
+        return createDialog(context, title, message, null, null);
     }
 
     public static TvDialog createDialog(Context context, String title, String message, String button1) {
-        TvDialog dialog = getInstance(context);
+        return createDialog(context, title, message, button1, null);
+    }
+
+    public static TvDialog createDialog(Context context, String title, String message, String button1, String button2) {
+        final TvDialog dialog = getInstance(context);
         dialog.setCustomView(R.layout.normal_view, context);
-        dialog.withMessage(message);
-        dialog.withTitle(title);
+        if (message != null)
+            dialog.withMessage(message);
+        if (title != null)
+            dialog.withTitle(title);
         if (button1 != null)
             dialog.withButton1Text(button1);
+        if (button2 != null)
+            dialog.withButton2Text(button2);
+
+        dialog.setOnShowListener(new OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.mLinearLayoutView.setVisibility(View.VISIBLE);
+                if (dialog.type == null) {
+                    dialog.type = Effectstype.SlitScale;
+                }
+                dialog.start(dialog.type);
+            }
+        });
+
         return dialog;
     }
 
@@ -168,18 +185,6 @@ public class TvDialog extends Dialog implements DialogInterface {
         return createDialog(context, getString(context, title), getString(context, message), getString(context, button1), getString(context, button2));
     }
 
-    public static TvDialog createDialog(Context context, String title, String message, String button1, String button2) {
-        TvDialog dialog = getInstance(context);
-        dialog.setCustomView(R.layout.normal_view, context);
-        dialog.withMessage(message);
-        dialog.withTitle(title);
-        if (button1 != null)
-            dialog.withButton1Text(button1);
-        if (button2 != null)
-            dialog.withButton2Text(button2);
-
-        return dialog;
-    }
 
     public static TvDialog createProgressDialog(Context context, String title, String message) {
         TvDialog dialog = getInstance(context);
@@ -187,6 +192,7 @@ public class TvDialog extends Dialog implements DialogInterface {
         dialog.setCustomView(R.layout.progress_view, context);
         GifView gif = (GifView) dialog.mFrameLayoutCustomView.findViewById(R.id.progress);
         gif.setVisibility(View.VISIBLE);
+
 
         dialog.withMessage(message);
         return dialog;
@@ -236,6 +242,39 @@ public class TvDialog extends Dialog implements DialogInterface {
         return createToastDialog(context, getString(context, message), duration);
     }
 
+    private static Paint getTextPaint() {
+        Paint mTextPaint = new Paint();
+        mTextPaint.setARGB(225, 75, 75, 75);
+        Paint.Style style = mTextPaint.getStyle();
+        mTextPaint.setStyle(style);
+        mTextPaint.setTextSize(32.0f); // 指定字体大小
+        mTextPaint.setColor(Color.WHITE);
+        mTextPaint.setFakeBoldText(true); // 粗体
+        mTextPaint.setAntiAlias(true); // 非锯齿效果
+
+        return mTextPaint;
+    }
+
+    private static float getTextWidth(Context context,String text, float size) {
+        float scale =context.getResources().getDisplayMetrics().density;
+        float w;
+        if (scale == 1.0f) {
+            Paint textPaint = new Paint();
+            textPaint.set(getTextPaint());
+            textPaint.setTextSize(size);
+            w = textPaint.measureText(text);
+        } else {
+            TextView view = new TextView(context);
+            view.setText(text);
+            view.setTextSize(size);
+            view.measure(
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+            view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+            w = view.getWidth();
+        }
+        return w;
+    }
 
     public static TvDialog createToastDialog(Context context, String message, int timeOut) {
         final TvDialog dialog = new TvDialog(context, R.style.dialog_tip);
@@ -245,9 +284,23 @@ public class TvDialog extends Dialog implements DialogInterface {
         dialog.hideTop();
         dialog.setCustomView(R.layout.toast_view, context);
         dialog.withMessage(message);
+        int i=30;
+        int h=54;
+        if(message.length()<=2){
+            i=55;
+        }else if(message.length()>2&&message.length()<=4){
+            i=45;
+        }else if(message.length()>4&&message.length()<8){
+            i=40;
+        }else if(message.length()>=8&&message.length()<15){
+            i=35;
+        }else if(message.length()>20){
+            i=20;
+            h=54*2;
+        }
 
-        dialog.params.height = DimensionConvert.px2dip(context, 54);
-        dialog.params.width = DimensionConvert.px2dip(context, message.length() * 40);
+        dialog.params.height = DimensionConvert.px2dip(context, h);
+        dialog.params.width = DimensionConvert.px2dip(context, message.length() * i);
         dialog.getWindow().setAttributes(dialog.params);
 
 

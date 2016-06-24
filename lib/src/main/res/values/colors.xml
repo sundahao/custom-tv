@@ -14,14 +14,14 @@
 
     <color name="text_color">#FFFFFF</color>
     <color name="divider_color">#FFFFFF</color>
-    <color name="msg_color">#FFFFFFFF</color>
+    <color name="msg_color">#000000</color>
     <!--<color name="dialog_bg">#ffe74c3c</color>-->
     <!--<color name="dialog_bg">#515768</color>-->
 
     <color name="dialog_bg">#dd46495b</color>
 
-    <color name="btn_unpress_color">#000000</color>
-    <color name="btn_press_color">#df5500</color>
+    <color name="btn_unpress_color">#a3a3a3</color>
+    <color name="btn_press_color">#ff5d00</color>
 
     <!--<color name="btn_press_color">#66000000</color>-->
     <!--<color name="btn_unpress_color">#22000000</color>-->
@@ -186,4 +186,8 @@
     <color name="black">#000000</color>
     <color name="tab_button_bg">#10172a</color><!--黑色 -->
     <color name="colorWhite">#FFFFFF</color>
+
+    <color name="dialog_background">#fffee4</color>
+    <color name="dialog_button_default">#a3a3a3</color>
+    <color name="dialog_button_active">#ff5d00</color>
 </resources>

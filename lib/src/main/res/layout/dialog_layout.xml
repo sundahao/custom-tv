@@ -22,8 +22,7 @@
                 android:id="@+id/topPanel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#22000000"
-                android:orientation="vertical">
+                 android:orientation="vertical">
 
             <RelativeLayout
                     android:id="@+id/title_template"
@@ -56,8 +55,10 @@
             <View
                     android:id="@+id/titleDivider"
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/divider_color"
+                    android:layout_height="1px"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:background="@color/black"
                     android:visibility="visible"/>
         </LinearLayout>
 

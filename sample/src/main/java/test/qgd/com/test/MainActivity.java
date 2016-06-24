@@ -16,9 +16,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TvDialog tvDialog = TvDialog.createToastDialog(this, "呵呵呵！"); //类似toast
-        tvDialog.setSize(500, 100);//可以设置大小
-        //tvDialog.show();
+        TvDialog tvDialog = TvDialog.createToastDialog(this, "银发"); //类似toast
+        //tvDialog.setSize(500, 100);//可以设置大小
+        tvDialog.show();
         context=this;
 
         setContentView(R.layout.activity_main);

@@ -26,6 +26,6 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text=""
-            android:textColor="#FFFFFFFF"
+            android:textColor="@color/msg_color"
             android:textSize="26sp"/>
 </LinearLayout>

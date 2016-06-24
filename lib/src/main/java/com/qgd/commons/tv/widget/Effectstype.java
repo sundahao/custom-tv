@@ -43,6 +43,8 @@ public enum  Effectstype {
     RotateLeft(RotateLeft.class),
     Slit(Slit.class),
     Shake(Shake.class),
+    SlideTop(SlideTop.class),
+    SlitScale(SlitScale.class),
     Sidefill(SideFall.class);
     private Class<? extends BaseEffects> effectsClazz;
 
