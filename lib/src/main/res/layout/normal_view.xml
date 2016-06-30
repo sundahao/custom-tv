@@ -3,17 +3,19 @@
         android:id="@+id/contentPanel"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
+
         android:orientation="vertical">
 
     <TextView
-             android:gravity="center|left"
-            android:layout_gravity="center_vertical"
-            android:tag="message"
             style="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:gravity="center|left"
+            android:tag="message"
 
             android:text=""
             android:textColor="@color/msg_color"

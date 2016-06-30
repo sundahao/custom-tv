@@ -67,6 +67,17 @@ public class MainActivity extends Activity {
     public void showProgressDialog(View v) {//显示进度条
         TvDialog.createProgressDialog(this, "提示!", "额鹅鹅鹅进度条").show();
     }
+    public  void showMarginDialog(View v){
+        TvDialog dialog= TvDialog.createDialogMargin(this);
+        dialog.withTitle("提示!");
+        dialog.withMessage("额鹅鹅鹅进度条额鹅鹅鹅进度条额鹅鹅鹅进度条额鹅鹅鹅进度条额鹅鹅鹅进度条额鹅鹅鹅进度条额鹅鹅鹅进度条额鹅鹅鹅进度条额鹅鹅鹅进度条额鹅鹅鹅进度条额鹅鹅鹅进度条额鹅鹅鹅进度条额鹅鹅鹅进度条");
+        dialog.withButton1Text("上一页");
+        dialog.withButton2Text("关闭");
+        dialog.withButton3Text("下一页");
+        dialog.setSize(600,400);
+        dialog.show();
+
+    }
 
     public void showDialog(View v) {
 
@@ -92,6 +103,8 @@ public class MainActivity extends Activity {
             case R.id.dialogBoth://2个按钮
                 dialogBuilder.withButton1Text("确定");
                 dialogBuilder.withButton2Text("取消");
+                dialogBuilder.withMessage("内容内容内容内容内容内容");//内容
+
                 break;
 
             case R.id.dialogThree:

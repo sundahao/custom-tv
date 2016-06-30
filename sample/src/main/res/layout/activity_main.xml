@@ -149,4 +149,19 @@
             android:textSize="23sp"
             android:textColor="@color/white"/>
 
+
+
+    <view
+            android:padding="5dp"
+            android:onClick="showMarginDialog"
+            class="com.qgd.commons.tv.widget.TvTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/default_button"
+            android:gravity="center"
+            android:text="对话框Margin"
+            android:textSize="23sp"
+            android:textColor="@color/white"/>
+
 </LinearLayout>

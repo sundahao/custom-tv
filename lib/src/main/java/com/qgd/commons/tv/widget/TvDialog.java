@@ -82,7 +82,7 @@ public class TvDialog extends Dialog implements DialogInterface {
     private Context mContext;
 
     private int mHeight = 250;
-    private int mWidth = 460;
+    private int mWidth = 450;
 
     WindowManager.LayoutParams params;
 
@@ -171,6 +171,26 @@ public class TvDialog extends Dialog implements DialogInterface {
             }
         });
 
+        return dialog;
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+        withTitle(title);
+    }
+
+    @Override
+    public void setTitle(int titleId) {
+        super.setTitle(titleId);
+        withTitle(titleId);
+    }
+
+    public static TvDialog createDialogMargin(Context context) {
+        TvDialog dialog=createDialog(context);
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) dialog.mFrameLayoutCustomView.getLayoutParams();
+        layoutParams.setMargins(37, 30, 37, 5);
+        dialog.mFrameLayoutCustomView.setLayoutParams(layoutParams);
         return dialog;
     }
 
