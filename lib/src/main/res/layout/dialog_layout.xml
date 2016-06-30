@@ -2,10 +2,8 @@
 
 <RelativeLayout android:id="@+id/main"
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="450dp"
-                android:layout_height="220dp"
-                android:paddingLeft="@dimen/dialog_padding"
-                android:paddingRight="@dimen/dialog_padding">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <LinearLayout
 
@@ -22,12 +20,12 @@
                 android:id="@+id/topPanel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                 android:orientation="vertical">
+                android:orientation="vertical">
 
             <RelativeLayout
                     android:id="@+id/title_template"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="58dp"
                     android:layout_marginEnd="16dip"
                     android:layout_marginStart="16dip">
 
@@ -56,8 +54,8 @@
                     android:id="@+id/titleDivider"
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:layout_marginStart="2dp"
                     android:layout_marginEnd="2dp"
+                    android:layout_marginStart="2dp"
                     android:background="@color/black"
                     android:visibility="visible"/>
         </LinearLayout>
@@ -67,19 +65,23 @@
                 android:id="@+id/customPanel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="30dp"
+                android:layout_marginEnd="37dp"
+                android:layout_marginStart="37dp"
+                android:layout_marginTop="30dp"
                 android:layout_weight="1"
         />
 
 
         <LinearLayout
-                android:layout_margin="1dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
             <Button
-
                     android:id="@+id/button1"
+
                     style="@style/dialog_btn"
+                    android:width="196dp"
                     android:text="OK"
                     android:visibility="gone"/>
 
@@ -93,9 +95,10 @@
             />
 
             <Button
-
                     android:id="@+id/button2"
+
                     style="@style/dialog_btn"
+                    android:width="196dp"
                     android:text="Cancle"
                     android:visibility="gone"/>
             <View
@@ -108,9 +111,9 @@
             />
 
             <Button
-
                     android:id="@+id/button3"
                     style="@style/dialog_btn"
+                    android:width="196dp"
                     android:text="Cancle"
                     android:visibility="gone"/>
         </LinearLayout>

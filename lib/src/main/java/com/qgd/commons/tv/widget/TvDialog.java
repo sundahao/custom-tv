@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,8 +81,8 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     private Context mContext;
 
-    private int mHeight = 220;
-    private int mWidth = 450;
+    private int mHeight = 250;
+    private int mWidth = 460;
 
     WindowManager.LayoutParams params;
 
@@ -255,8 +256,8 @@ public class TvDialog extends Dialog implements DialogInterface {
         return mTextPaint;
     }
 
-    private static float getTextWidth(Context context,String text, float size) {
-        float scale =context.getResources().getDisplayMetrics().density;
+    private static float getTextWidth(Context context, String text, float size) {
+        float scale = context.getResources().getDisplayMetrics().density;
         float w;
         if (scale == 1.0f) {
             Paint textPaint = new Paint();
@@ -267,9 +268,7 @@ public class TvDialog extends Dialog implements DialogInterface {
             TextView view = new TextView(context);
             view.setText(text);
             view.setTextSize(size);
-            view.measure(
-                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+            view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
             view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
             w = view.getWidth();
         }
@@ -284,23 +283,33 @@ public class TvDialog extends Dialog implements DialogInterface {
         dialog.hideTop();
         dialog.setCustomView(R.layout.toast_view, context);
         dialog.withMessage(message);
-        int i=30;
-        int h=54;
-        if(message.length()<=2){
-            i=55;
-        }else if(message.length()>2&&message.length()<=4){
-            i=45;
-        }else if(message.length()>4&&message.length()<8){
-            i=40;
-        }else if(message.length()>=8&&message.length()<15){
-            i=35;
-        }else if(message.length()>20){
-            i=20;
-            h=54*2;
+
+        dialog.mMessage = (TextView) dialog.mFrameLayoutCustomView.findViewWithTag("message");
+        int i = 40;
+        int h = 62;
+        if (message.length() <= 1) {
+            i = 64;
+        }else if (message.length() > 1 && message.length() <= 2) {
+            i=68;
+        }else if (message.length() > 2 && message.length() <= 4) {
+            i = 56;
+        } else if (message.length() > 4 && message.length() < 7) {
+            i = 45;
+        } else if (message.length() >= 7 && message.length() < 11) {
+            i = 44;
+        } else if (message.length() >= 11 && message.length() < 15) {
+            i = 42;
+        } else if (message.length() > 16) {
+            i = 24;
+            h = 60 * 2;
+            dialog.mMessage.setGravity(Gravity.CENTER|Gravity.LEFT);
         }
 
-        dialog.params.height = DimensionConvert.px2dip(context, h);
-        dialog.params.width = DimensionConvert.px2dip(context, message.length() * i);
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) dialog.mFrameLayoutCustomView.getLayoutParams();
+        layoutParams.setMargins(0, 0, 0, 0);
+        dialog.mFrameLayoutCustomView.setLayoutParams(layoutParams);
+        dialog.params.height = h;
+        dialog.params.width = message.length() * i;
         dialog.getWindow().setAttributes(dialog.params);
 
 

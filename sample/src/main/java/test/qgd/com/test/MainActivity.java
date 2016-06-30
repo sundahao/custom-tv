@@ -3,6 +3,7 @@ package test.qgd.com.test;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 
@@ -12,6 +13,7 @@ public class MainActivity extends Activity {
 
 
     private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,27 +21,37 @@ public class MainActivity extends Activity {
         TvDialog tvDialog = TvDialog.createToastDialog(this, "银发"); //类似toast
         //tvDialog.setSize(500, 100);//可以设置大小
         tvDialog.show();
-        context=this;
+        context = this;
 
         setContentView(R.layout.activity_main);
 
 
     }
 
-    public  void showToastDialog(View v){
-        TvDialog.createToastDialog(this, "我是一只Toast").show();
-        TvDialog.createToastDialog(this, "我是一只Toast2").show();
-        TvDialog.createToastDialog(this, "我是一只Toast3").show();
+    String str = "";
+    int i = 0;
 
+    public void showToastDialog(View v) {
+       final Handler handler= new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                final TvDialog tvDialog = TvDialog.createToastDialog(context, str);
+                tvDialog.show();
+                str += "啊";
+                i++;
+                handler.postDelayed(this,3000);
+            }
+        }, 3000);
 
     }
 
     public void showNoCancelDialog(View v) {//不可取消按钮
-        final TvDialog tvDialog=TvDialog.createDialog(getApplicationContext(), "提示!", "不可按返回取消");
+        final TvDialog tvDialog = TvDialog.createDialog(getApplicationContext(), "提示!", "不可按返回取消");
         tvDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         tvDialog.setCancelable(false);
 
-        tvDialog.setButton1Click("只能点这里取消",new View.OnClickListener(){
+        tvDialog.setButton1Click("只能点这里取消", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 tvDialog.dismiss();
@@ -59,7 +71,7 @@ public class MainActivity extends Activity {
     public void showDialog(View v) {
 
         TvDialog dialogBuilder = TvDialog.createDefaultDialog(this);
-        dialogBuilder.withMessage("内容内容内容内容内容内容");//内容
+        dialogBuilder.withMessage("内容内容内容内容内容内容,内容内容内容内容内容内容");//内容
         dialogBuilder.withTitle("提示信息")//标题
                 .setButton1Click(new View.OnClickListener() {//按钮事件
                     @Override
