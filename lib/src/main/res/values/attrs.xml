@@ -97,4 +97,14 @@
         <attr name="lineSpacing" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="MarqueeSurfaceView">
+        <attr name="fps" format="float"/>
+        <attr name="text" format="string"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="textColor" format="color"/>
+        <attr name="backgroundColor" format="color"/>
+        <attr name="spaceWidth" format="dimension"/>
+        <attr name="autoStart" format="boolean"/>
+        <attr name="startDelay" format="integer"/>
+    </declare-styleable>
 </resources>
