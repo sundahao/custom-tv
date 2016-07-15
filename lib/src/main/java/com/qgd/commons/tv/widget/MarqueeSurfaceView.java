@@ -72,6 +72,8 @@ public class MarqueeSurfaceView extends SurfaceView implements SurfaceHolder.Cal
         textPaint.setColor(textColor);
         textPaint.setTextSize(textSize);
         backgroundPaint.setColor(backgroundColor);
+
+        calculateTextWidth();
     }
 
     public String getText() {
@@ -81,6 +83,7 @@ public class MarqueeSurfaceView extends SurfaceView implements SurfaceHolder.Cal
     public void setText(String text) {
         this.text = text;
         drawed = false;
+        calculateTextWidth();
     }
 
     public void startMarquee() {
@@ -95,6 +98,8 @@ public class MarqueeSurfaceView extends SurfaceView implements SurfaceHolder.Cal
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        calculateTextBaseline();
+
         doUpdateView();
 
         if (autoStart) {
@@ -116,15 +121,19 @@ public class MarqueeSurfaceView extends SurfaceView implements SurfaceHolder.Cal
         long period = (long) (1000 / fps);
         long delay = startDelay;
         while (!stopped.get()) {
-            if (!drawed) {
-                delay = startDelay;
-                doUpdateView();
-            } else {
-                if (delay > 0) {
-                    delay -= period;
-                } else {
+            try {
+                if (!drawed) {
+                    delay = startDelay;
                     doUpdateView();
+                } else {
+                    if (delay > 0) {
+                        delay -= period;
+                    } else {
+                        doUpdateView();
+                    }
                 }
+            } catch (Throwable e) {
+                e.printStackTrace();
             }
 
             try {
@@ -135,8 +144,6 @@ public class MarqueeSurfaceView extends SurfaceView implements SurfaceHolder.Cal
     }
 
     private void doUpdateView() {
-        measureText();
-
         if (!drawed) {
             posX = 0;
             drawed = true;
@@ -154,6 +161,10 @@ public class MarqueeSurfaceView extends SurfaceView implements SurfaceHolder.Cal
 
     private void drawContent(SurfaceHolder surfaceHolder) {
         Canvas canvas = surfaceHolder.lockCanvas();
+        if (canvas == null) {
+            return;
+        }
+
         try {
             int canvasWidth = getWidth();
             canvas.drawRect(0, 0, canvasWidth, getHeight(), backgroundPaint);
@@ -167,9 +178,12 @@ public class MarqueeSurfaceView extends SurfaceView implements SurfaceHolder.Cal
         }
     }
 
-    private void measureText() {
-        textWidth = text == null ? 0 : textPaint.measureText(text);
+    private void calculateTextBaseline() {
         Paint.FontMetrics fm = textPaint.getFontMetrics();
         textBaseline = getHeight() / 2 - fm.descent + (fm.descent - fm.ascent) / 2;
+    }
+
+    private void calculateTextWidth() {
+        textWidth = text == null ? 0 : textPaint.measureText(text);
     }
 }
