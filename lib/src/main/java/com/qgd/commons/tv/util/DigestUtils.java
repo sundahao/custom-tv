@@ -1,6 +1,7 @@
 package com.qgd.commons.tv.util;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 
@@ -68,21 +69,20 @@ public class DigestUtils {
     }
 
     public static String md5sum(String filename) {
-        InputStream fis;
-        byte[] buffer = new byte[1024];
-        int numRead = 0;
-        MessageDigest md5;
+        InputStream fis = null;
         try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
             fis = new FileInputStream(filename);
-            md5 = MessageDigest.getInstance("MD5");
+            byte[] buffer = new byte[1024 * 1024];
+            int numRead = 0;
             while ((numRead = fis.read(buffer)) > 0) {
                 md5.update(buffer, 0, numRead);
             }
-            fis.close();
             return toHexString(md5.digest());
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException(e);
+        } finally {
+            IOUtils.closeQuietly(fis);
         }
     }
 
