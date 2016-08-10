@@ -4,8 +4,6 @@
 
 package com.qgd.commons.tv.rpc;
 
-import java.util.Date;
-
 /**
  *
  */

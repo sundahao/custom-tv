@@ -5,16 +5,14 @@
 package com.qgd.commons.tv.rpc;
 
 import android.support.annotation.NonNull;
-
 import com.android.volley.RequestQueue;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.greenrobot.event.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by yangke on 2016-01-06.
@@ -170,11 +168,38 @@ public class RpcTemplate {
      * @param <X> 响应类型
      */
     public <T, X extends RpcResponseEvent<T>> void call(String path, Map<String, String> params, RpcResponseReader<T> responseReader, final Class<X> eventClass) {
+        RpcRequestBuilder<T> reqBuilder = createRequestBuilder(path, responseReader, eventClass);
+        reqBuilder.setParams(params);
+        call(reqBuilder.build());
+    }
+
+    public <T> void call(VolleyRpcRequest<RpcResponse<T>> request) {
+        queue.add(request);
+    }
+
+    public <T, X extends RpcResponseEvent<T>> RpcRequestBuilder<T> createRequestBuilder(String path, TypeReference<T> resultTypeRef) {
+        return createRequestBuilder(path, new TypeReferenceReader<>(getObjectMapper(), resultTypeRef));
+    }
+
+    public <T, X extends RpcResponseEvent<T>> RpcRequestBuilder<T> createRequestBuilder(String path, final Class<T> resultClass) {
+        return createRequestBuilder(path, new ResultClassReader<>(getObjectMapper(), resultClass));
+    }
+
+    public <T, X extends RpcResponseEvent<T>> RpcRequestBuilder<T> createRequestBuilder(String path, TypeReference<T> resultTypeRef, final Class<X> eventClass) {
+        return createRequestBuilder(path, new TypeReferenceReader<>(getObjectMapper(), resultTypeRef), eventClass);
+    }
+
+    public <T, X extends RpcResponseEvent<T>> RpcRequestBuilder<T> createRequestBuilder(String path, final Class<T> resultClass, final Class<X> eventClass) {
+        return createRequestBuilder(path, new ResultClassReader<>(getObjectMapper(), resultClass), eventClass);
+    }
+
+    public <T, X extends RpcResponseEvent<T>> RpcRequestBuilder<T> createRequestBuilder(String path, RpcResponseReader<T> responseReader, final Class<X> eventClass) {
         if (eventBus == null) {
             throw new NullPointerException("eventBus is null");
         }
 
-        RpcRequestBuilder<T> reqBuilder = createRequestBuilder(path, params, responseReader, new RpcResponse.Listener<T>() {
+        RpcRequestBuilder<T> reqBuilder = createRequestBuilder(path, responseReader);
+        reqBuilder.setListener(new RpcResponse.Listener<T>() {
             @Override
             public void onResponse(RpcResponse<T> response) {
                 X event = null;
@@ -188,21 +213,26 @@ public class RpcTemplate {
             }
         });
 
-        queue.add(reqBuilder.build());
+        return reqBuilder;
     }
 
     /**
      * @param path
      * @param params
      * @param reader
-     * @param emptyListener
+     * @param respListener
      * @param <T>
      * @return
      */
-    public <T> RpcRequestBuilder<T> createRequestBuilder(String path, Map<String, String> params, RpcResponseReader<T> reader, RpcResponse.Listener<T> emptyListener) {
-        RpcRequestBuilder<T> reqBuilder = new RpcRequestBuilder<>(createUrl(path), reader);
+    public <T> RpcRequestBuilder<T> createRequestBuilder(String path, Map<String, String> params, RpcResponseReader<T> reader, RpcResponse.Listener<T> respListener) {
+        RpcRequestBuilder<T> reqBuilder = createRequestBuilder(path, reader);
         reqBuilder.setParams(params);
-        reqBuilder.setListener(emptyListener);
+        reqBuilder.setListener(respListener);
+        return reqBuilder;
+    }
+
+    public <T> RpcRequestBuilder<T> createRequestBuilder(String path, RpcResponseReader<T> reader) {
+        RpcRequestBuilder<T> reqBuilder = new RpcRequestBuilder<>(createUrl(path), reader);
         reqBuilder.setToken(tokenStore == null ? null : tokenStore.getToken());
         return reqBuilder;
     }

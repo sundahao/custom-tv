@@ -9,18 +9,15 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.qgd.commons.tv.util.StringUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
 
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Created by yangke on 2015-12-18.
@@ -31,8 +28,9 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
     private String url;
     private RpcResponseReader<T> responseReader;
     private RpcResponse.Listener<T> listener;
-    private Map<String, String> headers = new HashMap<String, String>();
-    private Map<String, String> params = new HashMap<String, String>();
+    private Map<String, String> headers = new HashMap<>();
+    private Map<String, String> params = new HashMap<>();
+    private Map<String, List<File>> files = new HashMap<>();
     private RpcToken token;
 
     public RpcRequestBuilder(String url, RpcResponseReader<T> responseReader) {
@@ -78,11 +76,15 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
 
         buildSecurityHeaders();
 
-        VolleyRpcRequest<RpcResponse<T>> volleyRpcRequest= new VolleyRpcRequest<>(url, this, params, headers, okListener, okErrListener);
-        if(volleyRpcRequest!=null){
-            volleyRpcRequest.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleyRpcRequest<RpcResponse<T>> request = null;
+        if (files.isEmpty()) {
+            request = new VolleyRpcRequest<>(url, this, params, headers, okListener, okErrListener);
+        } else {
+            request = new VolleyRpcMultipartRequest<>(url, this, params, headers, okListener, okErrListener, files);
         }
-        return volleyRpcRequest;
+
+        request.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        return request;
     }
 
     @Override
@@ -134,6 +136,16 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
         return this;
     }
 
+    public RpcRequestBuilder<T> addFile(String name, File file) {
+        List<File> list = files.get(name);
+        if (list == null) {
+            list = new LinkedList<>();
+            files.put(name, list);
+        }
+        list.add(file);
+        return this;
+    }
+
     private void buildSecurityHeaders() {
         if (token == null) {
             return;
@@ -152,9 +164,13 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
             return "";
         }
 
-        //参数排序
+        //按顺序排列的参数
         TreeMap<String, String> sortted = new TreeMap<String, String>();
-        sortted.putAll(this.params);
+
+        //文件上传的情况下，服务端签名校验时参数还没有解析出来，所以参数不能参与签名计算
+        if (!files.isEmpty()) {
+            sortted.putAll(this.params);
+        }
 
         //构造签名前的字符串
         StringBuilder buf = new StringBuilder();
@@ -164,8 +180,6 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
         buf.append("timestamp").append('=').append(timestamp).append('&');
         buf.setLength(buf.length() - 1); //删除最后一个&
         String source = buf.toString();
-
-        rpcLogger.debug("string to sign: {}", source);
 
         //计算签名
         try {

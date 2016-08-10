@@ -8,7 +8,7 @@ import com.android.volley.*;
 import com.android.volley.toolbox.HttpHeaderParser;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -21,8 +21,8 @@ public class VolleyRpcRequest<T> extends Request<T> {
 
     private ResponseParser<T> respParser;
     private Response.Listener<T> listener;
-    private Map<String, String> headers = new HashMap<String, String>();
-    private Map<String, String> params = new HashMap<String, String>();
+    private Map<String, String> headers = Collections.emptyMap();
+    private Map<String, String> params = Collections.emptyMap();
 
     /**
      *
