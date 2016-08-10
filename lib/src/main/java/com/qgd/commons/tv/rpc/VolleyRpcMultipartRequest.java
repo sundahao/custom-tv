@@ -31,7 +31,7 @@ public class VolleyRpcMultipartRequest<T> extends VolleyRpcRequest<T> {
 
     @Override
     public String getBodyContentType() {
-        return "Content-Type:multipart/form-data; boundary=" + BOUNDARY;
+        return "multipart/form-data; boundary=" + BOUNDARY;
     }
 
     @Override
