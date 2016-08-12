@@ -167,8 +167,8 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
         //按顺序排列的参数
         TreeMap<String, String> sortted = new TreeMap<String, String>();
 
-        //文件上传的情况下，服务端签名校验时参数还没有解析出来，所以参数不能参与签名计算
-        if (!files.isEmpty()) {
+        //文件上传的情况下，服务端签名校验时参数还没有解析出来，参数不能参与签名计算
+        if (files.isEmpty()) {
             sortted.putAll(this.params);
         }
 
@@ -188,7 +188,8 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
             Mac mac = Mac.getInstance(signMethod);
             mac.init(secretKey);
             byte[] bytes = mac.doFinal(source.getBytes("UTF-8"));
-            return StringUtils.bytesToHexString(bytes);
+            String result = StringUtils.bytesToHexString(bytes);
+            return result;
         } catch (Exception e) {
             rpcLogger.error("calculate sign failed: {}", e.getMessage(), e);
             return "";
