@@ -546,8 +546,21 @@ public class TvDialog extends Dialog implements DialogInterface {
     public TvDialog withButton1Text(CharSequence text) {
         mButton1.setVisibility(View.VISIBLE);
         mButton1.setText(text);
-        if (isButtonFocus)
+        if (isButtonFocus) {
             mButton1.requestFocus();
+            setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface dialog) {
+                    mButton1.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mButton1.requestFocus();
+                            mButton1.requestFocusFromTouch();
+                        }
+                    });
+                }
+            });
+        }
 
         return this;
     }

@@ -16,7 +16,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center|left"
             android:tag="message"
-
+            android:focusable="false"
             android:text=""
             android:textColor="@color/msg_color"
             android:textIsSelectable="true"

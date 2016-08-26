@@ -2,6 +2,7 @@ package test.qgd.com.test;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -50,6 +51,12 @@ public class MainActivity extends Activity {
         final TvDialog tvDialog = TvDialog.createDialog(getApplicationContext(), "提示!", "不可按返回取消");
         tvDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         tvDialog.setCancelable(false);
+        tvDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                System.out.println("onShow.....");
+            }
+        });
 
         tvDialog.setButton1Click("只能点这里取消", new View.OnClickListener() {
             @Override

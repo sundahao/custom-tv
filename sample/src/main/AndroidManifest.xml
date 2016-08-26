@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="test.qgd.com.test" >
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -20,6 +21,15 @@
         <activity android:name=".WidgetTestActivity"/>
         <activity android:name=".WidgetStackActivity"/>
         <activity android:name=".FixScaleActivity"/>
+
+
+        <receiver android:name=".BootBroadCast" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" >
+                </action>
+
+            </intent-filter>
+        </receiver>
 
     </application>
 
