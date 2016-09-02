@@ -12,6 +12,7 @@ public class SimpleRpcResponse<T> implements RpcResponse<T> {
     private int code = RpcResponseCodes.CODE_SUCCESS;
     private String message = "success";
     private T result;
+    private long serverTime;
 
     public SimpleRpcResponse() {
     }
@@ -44,5 +45,14 @@ public class SimpleRpcResponse<T> implements RpcResponse<T> {
 
     public void setResult(T result) {
         this.result = result;
+    }
+
+    @Override
+    public long getServerTime() {
+        return serverTime;
+    }
+
+    public void setServerTime(long serverTime) {
+        this.serverTime = serverTime;
     }
 }

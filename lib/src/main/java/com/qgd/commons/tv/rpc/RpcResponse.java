@@ -18,4 +18,5 @@ public interface RpcResponse<T> {
 
     public T getResult();
 
+    public long getServerTime();
 }
