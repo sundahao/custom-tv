@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.greenrobot.event.EventBus;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -259,10 +260,11 @@ public class RpcTemplate {
      */
     private static ObjectMapper getObjectMapper() {
         if (objectMapper == null) {
-            synchronized (VolleyRpcRequest.class) {
+            synchronized (RpcTemplate.class) {
                 if (objectMapper == null) {
                     objectMapper = new ObjectMapper();
                     objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                    objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
                 }
             }
         }
