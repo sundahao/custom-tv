@@ -107,8 +107,8 @@ public class TvDialog extends Dialog implements DialogInterface {
             params = getWindow().getAttributes();
             params.height = ViewGroup.LayoutParams.MATCH_PARENT;
             params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-            params.width = DimensionConvert.px2dip(getContext(), mWidth);
-            params.height = DimensionConvert.px2dip(getContext(), mHeight);
+            params.width = DimensionConvert.dip2px(getContext(), mWidth);
+            params.height = DimensionConvert.dip2px(getContext(), mHeight);
         }
         //params.dimAmount = 0.8f;
         //getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
