@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.qgd.commons.tv.R;
 import com.qgd.commons.tv.util.AnimateFactory;
+import com.qgd.commons.tv.util.DimensionConvert;
 import com.qgd.commons.tv.util.FocusSoundUtil;
 
 /**
@@ -26,7 +27,7 @@ public class TvLinearLayout extends LinearLayout implements View.OnFocusChangeLi
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 15;
+    private int borderSize = DimensionConvert.dip2px(this.getContext(),15) ;
 
     private boolean mScaleable = true;
 

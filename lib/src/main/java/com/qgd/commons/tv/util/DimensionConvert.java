@@ -16,6 +16,11 @@ public class DimensionConvert {
         return (int) (dpValue * scale + 0.5f);
     }
 
+
+    public static int dip2px(Context context, int dpValue) {
+        return dip2px(context,(float)dpValue);
+    }
+
     /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
      *

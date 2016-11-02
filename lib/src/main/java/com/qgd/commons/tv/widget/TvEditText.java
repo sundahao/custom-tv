@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.qgd.commons.tv.R;
 import com.qgd.commons.tv.util.AnimateFactory;
+import com.qgd.commons.tv.util.DimensionConvert;
 import com.qgd.commons.tv.util.FocusSoundUtil;
 
 
@@ -27,7 +28,7 @@ public class TvEditText extends EditText implements View.OnFocusChangeListener {
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 15;
+    private int borderSize = DimensionConvert.dip2px(this.getContext(),15) ;
 
     private boolean scaleable = false;
 

@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.Layout;
+import android.text.TextPaint;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -105,8 +108,8 @@ public class TvDialog extends Dialog implements DialogInterface {
         super.onCreate(savedInstanceState);
         if (params == null) {
             params = getWindow().getAttributes();
-            params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-            params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+            params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
             params.width = DimensionConvert.dip2px(getContext(), mWidth);
             params.height = DimensionConvert.dip2px(getContext(), mHeight);
         }
@@ -187,7 +190,7 @@ public class TvDialog extends Dialog implements DialogInterface {
     }
 
     public static TvDialog createDialogMargin(Context context) {
-        TvDialog dialog=createDialog(context);
+        TvDialog dialog = createDialog(context);
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) dialog.mFrameLayoutCustomView.getLayoutParams();
         layoutParams.setMargins(37, 30, 37, 5);
         dialog.mFrameLayoutCustomView.setLayoutParams(layoutParams);
@@ -300,18 +303,26 @@ public class TvDialog extends Dialog implements DialogInterface {
 
         dialog.params = dialog.getWindow().getAttributes();
 
+        int gravity = Gravity.CENTER_VERTICAL | Gravity.CENTER;
+        dialog.params.gravity=gravity;
+        dialog.params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.params.type = WindowManager.LayoutParams.TYPE_TOAST;
+
+
         dialog.hideTop();
         dialog.setCustomView(R.layout.toast_view, context);
+
         dialog.withMessage(message);
 
         dialog.mMessage = (TextView) dialog.mFrameLayoutCustomView.findViewWithTag("message");
         int i = 40;
-        int h = 62;
+        int h = 65;
         if (message.length() <= 1) {
             i = 64;
-        }else if (message.length() > 1 && message.length() <= 2) {
-            i=68;
-        }else if (message.length() > 2 && message.length() <= 4) {
+        } else if (message.length() > 1 && message.length() <= 2) {
+            i = 68;
+        } else if (message.length() > 2 && message.length() <= 4) {
             i = 56;
         } else if (message.length() > 4 && message.length() < 7) {
             i = 45;
@@ -322,16 +333,19 @@ public class TvDialog extends Dialog implements DialogInterface {
         } else if (message.length() > 16) {
             i = 24;
             h = 60 * 2;
-            dialog.mMessage.setGravity(Gravity.CENTER|Gravity.LEFT);
+            dialog.mMessage.setGravity(Gravity.CENTER | Gravity.LEFT);
         }
-
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) dialog.mFrameLayoutCustomView.getLayoutParams();
         layoutParams.setMargins(0, 0, 0, 0);
         dialog.mFrameLayoutCustomView.setLayoutParams(layoutParams);
+
         dialog.params.height = h;
         dialog.params.width = message.length() * i;
-        dialog.getWindow().setAttributes(dialog.params);
 
+
+        dialog.params.height = DimensionConvert.dip2px(context, dialog.params.height);
+        dialog.params.width = DimensionConvert.dip2px(context, dialog.params.width);
+        dialog.getWindow().setAttributes(dialog.params);
 
         CountDownTimer timer = new CountDownTimer(timeOut, 1000) {
             @Override

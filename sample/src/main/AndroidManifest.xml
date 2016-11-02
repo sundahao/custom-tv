@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="test.qgd.com.test" >
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    package="test.qgd.com.test">
+
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
@@ -9,8 +10,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,15 +19,28 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".WidgetTestActivity"/>
-        <activity android:name=".WidgetStackActivity"/>
-        <activity android:name=".FixScaleActivity"/>
-
-
-        <receiver android:name=".BootBroadCast" >
+        <activity android:name=".WidgetTestActivity">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" >
-                </action>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+        <activity android:name=".WidgetStackActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+        <activity android:name=".FixScaleActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".BootBroadCast">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
 
             </intent-filter>
         </receiver>

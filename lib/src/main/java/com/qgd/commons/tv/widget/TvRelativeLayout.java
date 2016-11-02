@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 
 import com.qgd.commons.tv.R;
 import com.qgd.commons.tv.util.AnimateFactory;
+import com.qgd.commons.tv.util.DimensionConvert;
 import com.qgd.commons.tv.util.FocusSoundUtil;
 
 
@@ -28,7 +29,7 @@ public class TvRelativeLayout extends RelativeLayout implements View.OnFocusChan
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 15;
+    private int borderSize = DimensionConvert.dip2px(this.getContext(),15) ;
 
     private boolean mScaleable = true;
 

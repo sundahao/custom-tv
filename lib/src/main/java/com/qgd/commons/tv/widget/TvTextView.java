@@ -32,7 +32,7 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
 
     private Animation scaleSmallAnimation;
     private Animation scaleBigAnimation;
-    private int borderSize = 15;
+    private int borderSize = DimensionConvert.dip2px(this.getContext(),15) ;
 
     private boolean mScaleable = true;
     private String mKeyNumber;
@@ -90,7 +90,7 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
 
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setTextSize(DimensionConvert.px2dip(getContext(),25));
+        mPaint.setTextSize(DimensionConvert.dip2px(getContext(),25));
 
         super.setOnFocusChangeListener(this);
         FocusSoundUtil.initSoundEffect(this.getContext() );
