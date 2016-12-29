@@ -13,6 +13,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import com.qgd.commons.tv.R;
+import com.qgd.commons.tv.util.DimensionConvert;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -36,6 +37,7 @@ public class MarqueeSurfaceView extends SurfaceView implements SurfaceHolder.Cal
     private AtomicBoolean stopped = new AtomicBoolean(true);
     private int posX = 0;
     private boolean drawed = false;
+    private int step = DimensionConvert.dip2px(getContext(),1);
 
     public MarqueeSurfaceView(Context context) {
         this(context, null, 0);
@@ -150,12 +152,12 @@ public class MarqueeSurfaceView extends SurfaceView implements SurfaceHolder.Cal
             drawContent(getHolder());
         } else {
             if (textWidth > getWidth()) {
-                posX -= 1;
+                posX -= step;
                 if (posX < -textWidth - spaceWidth) {
                     posX = 0;
                 }
-                drawContent(getHolder());
             }
+            drawContent(getHolder());
         }
     }
 
