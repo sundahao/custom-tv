@@ -4,10 +4,13 @@
 
 package com.qgd.commons.tv.rpc;
 
+import android.support.annotation.NonNull;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qgd.commons.tv.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -32,16 +36,19 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
     private Map<String, String> params = new HashMap<>();
     private Map<String, List<File>> files = new HashMap<>();
     private RpcToken token;
+    private Object jsonPostObject;
+    private ObjectMapper objectMapper;
 
-    public RpcRequestBuilder(String url, RpcResponseReader<T> responseReader) {
-        this(url, responseReader, null, null);
+    public RpcRequestBuilder(String url, RpcResponseReader<T> responseReader, ObjectMapper objectMapper) {
+        this(url, responseReader, null, null, objectMapper);
     }
 
-    public RpcRequestBuilder(String url, RpcResponseReader<T> responseReader, RpcResponse.Listener<T> listener, RpcToken token) {
+    public RpcRequestBuilder(String url, RpcResponseReader<T> responseReader, RpcResponse.Listener<T> listener, RpcToken token, ObjectMapper objectMapper) {
         this.url = url;
         this.responseReader = responseReader;
         this.listener = listener;
         this.token = token;
+        this.objectMapper = objectMapper;
     }
 
     public VolleyRpcRequest<RpcResponse<T>> build() {
@@ -79,6 +86,14 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
         VolleyRpcRequest<RpcResponse<T>> request = null;
         if (files.isEmpty()) {
             request = new VolleyRpcRequest<>(url, this, params, headers, okListener, okErrListener);
+        } else if (jsonPostObject != null) {
+            byte[] postBody;
+            try {
+                postBody = objectMapper.writeValueAsBytes(jsonPostObject);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+            request = new VolleyRpcJsonRequest<>(url, this, postBody, okListener, okErrListener);
         } else {
             request = new VolleyRpcMultipartRequest<>(url, this, params, headers, okListener, okErrListener, files);
         }
@@ -146,6 +161,11 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
         return this;
     }
 
+    public RpcRequestBuilder<T> setJsonPostObject(Object jsonPostObject) {
+        this.jsonPostObject = jsonPostObject;
+        return this;
+    }
+
     private void buildSecurityHeaders() {
         if (token == null) {
             return;
@@ -167,8 +187,8 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
         //按顺序排列的参数
         TreeMap<String, String> sortted = new TreeMap<String, String>();
 
-        //文件上传的情况下，服务端签名校验时参数还没有解析出来，参数不能参与签名计算
-        if (files.isEmpty()) {
+        //文件上传或直接POST一个json对象的情况下，服务端签名校验时参数还没有解析出来，参数不能参与签名计算
+        if (files.isEmpty() && jsonPostObject == null) {
             sortted.putAll(this.params);
         }
 
@@ -182,6 +202,11 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
         String source = buf.toString();
 
         //计算签名
+        return calculateSignature(source);
+    }
+
+    @NonNull
+    private String calculateSignature(String source) {
         try {
             String signMethod = "HmacSHA1";
             SecretKey secretKey = new SecretKeySpec(token.getBindKey().getBytes(), signMethod);
@@ -191,7 +216,7 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
             String result = StringUtils.bytesToHexString(bytes);
             return result;
         } catch (Exception e) {
-            rpcLogger.error("calculate sign failed: {}", e.getMessage(), e);
+            rpcLogger.error("calculate signature failed: {}", e.getMessage(), e);
             return "";
         }
     }

@@ -233,7 +233,7 @@ public class RpcTemplate {
     }
 
     public <T> RpcRequestBuilder<T> createRequestBuilder(String path, RpcResponseReader<T> reader) {
-        RpcRequestBuilder<T> reqBuilder = new RpcRequestBuilder<>(createUrl(path), reader);
+        RpcRequestBuilder<T> reqBuilder = new RpcRequestBuilder<>(createUrl(path), reader, objectMapper);
         reqBuilder.setToken(tokenStore == null ? null : tokenStore.getToken());
         return reqBuilder;
     }
