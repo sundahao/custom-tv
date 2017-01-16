@@ -84,9 +84,9 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
         buildSecurityHeaders();
 
         VolleyRpcRequest<RpcResponse<T>> request = null;
-        if (files.isEmpty()) {
-            request = new VolleyRpcRequest<>(url, this, params, headers, okListener, okErrListener);
-        } else if (jsonPostObject != null) {
+
+
+        if (jsonPostObject != null) {
             byte[] postBody;
             try {
                 postBody = objectMapper.writeValueAsBytes(jsonPostObject);
@@ -94,8 +94,10 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
                 throw new RuntimeException(e);
             }
             request = new VolleyRpcJsonRequest<>(url, this, postBody, okListener, okErrListener);
-        } else {
+        } else if (!files.isEmpty()) {
             request = new VolleyRpcMultipartRequest<>(url, this, params, headers, okListener, okErrListener, files);
+        } else {
+            request = new VolleyRpcRequest<>(url, this, params, headers, okListener, okErrListener);
         }
 
         request.setRetryPolicy(new DefaultRetryPolicy(10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
