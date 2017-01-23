@@ -93,7 +93,7 @@ public class RpcRequestBuilder<T> implements VolleyRpcRequest.ResponseParser<Rpc
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
-            request = new VolleyRpcJsonRequest<>(url, this, postBody, okListener, okErrListener);
+            request = new VolleyRpcJsonRequest<>(url, this, headers, postBody, okListener, okErrListener);
         } else if (!files.isEmpty()) {
             request = new VolleyRpcMultipartRequest<>(url, this, params, headers, okListener, okErrListener, files);
         } else {

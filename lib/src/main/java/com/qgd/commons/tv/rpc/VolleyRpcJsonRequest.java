@@ -8,6 +8,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 
 import java.util.Collections;
+import java.util.Map;
 
 /**
  *
@@ -22,9 +23,9 @@ public class VolleyRpcJsonRequest<T> extends VolleyRpcRequest<T> {
      * @param listener
      * @param errorListener
      */
-    public VolleyRpcJsonRequest(String url, ResponseParser<T> respReader, byte[] postBody,
+    public VolleyRpcJsonRequest(String url, ResponseParser<T> respReader, Map<String, String> headers, byte[] postBody,
             Response.Listener<T> listener, Response.ErrorListener errorListener) {
-        super(url, respReader, Collections.<String, String>emptyMap(), Collections.<String, String>emptyMap(), listener, errorListener);
+        super(url, respReader, Collections.<String, String>emptyMap(), headers, listener, errorListener);
         this.postBody = postBody;
     }
 
