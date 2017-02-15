@@ -5,10 +5,12 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Environment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SoundEffectConstants;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -20,9 +22,20 @@ import java.io.IOException;
 public class FocusSoundUtil {
     private static final String TAG = FocusSoundUtil.class.getSimpleName();
     private int play = 0;
+    public static boolean enableSound=true;
+    public interface DispatchKeyEventListener{
+        void dispatchKeyEvent(View view, KeyEvent event);
+    }
+    public static DispatchKeyEventListener listener;
 
     public static void dispatchKeyEvent(View view, KeyEvent event) {
         try {
+            if(listener!=null){
+                listener.dispatchKeyEvent(view,event);
+            }
+            if(!enableSound){
+                return;
+            }
             int direction = 0;
             switch (event.getKeyCode()) {
                 case KeyEvent.KEYCODE_DPAD_LEFT:
@@ -63,11 +76,40 @@ public class FocusSoundUtil {
                             playSoundEffect(view.getContext(), SoundEffectConstants.getContantForFocusDirection(direction), soundVolume);
                         } else if (v != focused) {
                             if (v == null) {
+                                try {
+                                    ViewParent viewPage=null;
+                                    if(focused.getParent() != null && focused.getParent() instanceof ViewPager){
+                                        viewPage=focused.getParent();
+                                    }else  if(focused.getParent() != null && focused.getParent().getParent() instanceof ViewPager){
+                                        viewPage=focused.getParent().getParent();
+                                    }else  if(focused.getParent() != null && focused.getParent().getParent()!=null&& focused.getParent().getParent().getParent() instanceof ViewPager){
+                                        viewPage=focused.getParent().getParent().getParent();
+                                    }
+                                    if (viewPage!=null) {
+                                        ViewPager vp = (ViewPager)viewPage ;
+                                        int current = vp.getCurrentItem();
+                                        int total = vp.getAdapter().getCount();
+
+                                        if(direction==View.FOCUS_LEFT) {
+                                            if (current != 0) {
+                                                playSoundEffect(view.getContext(), SoundEffectConstants.getContantForFocusDirection(direction), soundVolume);
+                                                return;
+                                            }
+                                        }else if(direction==View.FOCUS_RIGHT){
+                                            if(current!=(total-1)){
+                                                playSoundEffect(view.getContext(), SoundEffectConstants.getContantForFocusDirection(direction), soundVolume);
+                                                return;
+                                            }
+                                        }
+                                    }
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                }
                                 playSoundEffect(view.getContext(), AudioManager.FX_KEYPRESS_INVALID, soundVolume);
-
                             }
-
                         }
+
+
                     }
                 }
             }
@@ -161,9 +203,10 @@ public class FocusSoundUtil {
         playSoundEffect(effectType, volume);
     }
 
-    public static void playSoundEffect(int effectType){
-        playSoundEffect(effectType,soundVolume);
+    public static void playSoundEffect(int effectType) {
+        playSoundEffect(effectType, soundVolume);
     }
+
     private static void playSoundEffect(int effectType, int volume) {
         synchronized (mSoundEffectsLock) {
             if (mSoundPool == null) {
