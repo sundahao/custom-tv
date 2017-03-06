@@ -326,8 +326,8 @@ public class SelectableRoundedImageView extends ImageView {
             mBitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 
             if (bitmap != null) {
-                mBitmapWidth = bitmap.getScaledWidth(r.getDisplayMetrics());
-                mBitmapHeight = bitmap.getScaledHeight(r.getDisplayMetrics());
+                mBitmapWidth = bitmap.getWidth();
+                mBitmapHeight = bitmap.getHeight();
             } else {
                 mBitmapWidth = mBitmapHeight = -1;
             }
