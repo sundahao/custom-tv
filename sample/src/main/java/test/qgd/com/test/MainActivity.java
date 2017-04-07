@@ -3,6 +3,7 @@ package test.qgd.com.test;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -19,7 +20,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TvDialog tvDialog = TvDialog.createToastDialog(this, "银发"); //类似toast
+        TvDialog tvDialog = TvDialog.createCustomerDialog(this,R.layout.tip_view, Color.TRANSPARENT);
         //tvDialog.setSize(500, 100);//可以设置大小
         tvDialog.show();
         context = this;

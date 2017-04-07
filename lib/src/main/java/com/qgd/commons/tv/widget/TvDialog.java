@@ -239,6 +239,38 @@ public class TvDialog extends Dialog implements DialogInterface {
         return dialog;
     }
 
+
+    public static TvDialog createCustomerDialog(Context context,int layout) {
+        TvDialog dialog = getInstance(context);
+        dialog.hideTop();
+        dialog.setCustomView(layout, context);
+        return dialog;
+    }
+    public static TvDialog createCustomerDialog(Context context,int layout,int color) {
+        TvDialog dialog = getInstance(context);
+        dialog.hideTop();
+        dialog.setCustomView(layout, context);
+        if(dialog.mLinearLayoutView!=null)
+            dialog.mLinearLayoutView.setBackgroundColor(color);
+        return dialog;
+    }
+    public static TvDialog createCustomerDialog(Context context,int layout,Drawable bg) {
+        TvDialog dialog = getInstance(context);
+        dialog.hideTop();
+        dialog.setCustomView(layout, context);
+        if(dialog.mLinearLayoutView!=null)
+            dialog.mLinearLayoutView.setBackground(bg);
+        return dialog;
+    }
+    public void setDialogBackground(int color ){
+        if(this.mLinearLayoutView!=null)
+            this.mLinearLayoutView.setBackgroundColor(color);
+    }
+    public void setDialogBackground(Drawable bg ){
+        if(this.mLinearLayoutView!=null)
+            this.mLinearLayoutView.setBackground(bg);
+    }
+
     private static String getString(Context context, int message) {
         if (context != null) {
             return context.getString(message);
