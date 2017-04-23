@@ -20,9 +20,17 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TvDialog tvDialog = TvDialog.createCustomerDialog(this,R.layout.tip_view, Color.TRANSPARENT);
+        final TvDialog tvDialog = TvDialog.createSimpleDialog(this);
+        tvDialog.withMessage("您今天已经没有抽奖的机会了明天可以继续抽奖哦");
         //tvDialog.setSize(500, 100);//可以设置大小
         tvDialog.show();
+        tvDialog.withButton1Text("我知道了");
+        tvDialog.setButton1Click(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvDialog.withButton1Text("点解了");
+            }
+        });
         context = this;
 
         setContentView(R.layout.activity_main);

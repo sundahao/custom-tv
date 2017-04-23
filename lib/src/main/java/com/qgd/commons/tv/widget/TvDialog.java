@@ -135,6 +135,26 @@ public class TvDialog extends Dialog implements DialogInterface {
 
     }
 
+    /*
+     *   无标题对话框
+     */
+    public static TvDialog createSimpleDialog(Context context, String message) {
+
+        TvDialog d=createDialog(context, "", message);
+        d.setSize(450,270);
+        d.hideTop();
+        return d;
+    }
+    /*
+     *   无标题对话框
+     */
+    public static TvDialog createSimpleDialog(Context context) {
+        TvDialog d=createDialog(context, "");
+        d.setSize(450,270);
+        d.hideTop();
+        return d;
+    }
+
     public static TvDialog createDialog(Context context) {
         return createDefaultDialog(context);
     }
