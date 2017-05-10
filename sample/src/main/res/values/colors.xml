@@ -12,9 +12,9 @@
     <color name="color_normal">#f1f1f1</color>
     <color name="color_white">#ffffff</color>
     <color name="color_black">#000000</color>
-    <color name="color_secondry">#009ff9</color>
-    <color name="color_tetiary">#ffc900</color>
-    <color name="color_quaternary">#27b268</color>
+    <color name="color_tertiary">#009ff9</color>
+    <color name="color_quaternary">#ffc900</color>
+    <color name="color_secondary">#27b268</color>
 
     <color name="color_alpha15">#26ffffff</color>
 

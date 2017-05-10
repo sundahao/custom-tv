@@ -163,20 +163,20 @@
             style="@style/textSmall"
             android:layout_marginBottom="20dp"
             android:width="200dp"
-            android:text="我是标题" />
+            android:text="我是文字" />
 
         <TextView
             style="@style/textExtraSmall"
             android:layout_marginBottom="20dp"
             android:width="200dp"
-            android:text="我是标题" />
+            android:text="我是文字" />
 
 
         <TextView
             style="@style/textExtraUltraSmall"
             android:layout_marginBottom="20dp"
             android:width="200dp"
-            android:text="我是标题" />
+            android:text="我是文字" />
 
     </LinearLayout>
 
