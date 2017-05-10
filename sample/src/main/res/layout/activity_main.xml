@@ -1,167 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:background="#2c354b"
-        android:clipChildren="false"
-        android:clipToPadding="false"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#2c354b"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <view
+        android:id="@+id/dialogThree"
+        class="com.qgd.commons.tv.widget.TvTextView"
+        android:layout_width="wrap_content"
+
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/default_button"
         android:gravity="center"
-        android:orientation="vertical"
->
-
-
-
-    <view
-            android:padding="5dp"
-
-            android:id="@+id/dialogToast"
-
-            android:onClick="showToastDialog"
-            class="com.qgd.commons.tv.widget.TvTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/default_button"
-            android:gravity="center"
-            android:text="Toast"
-            android:textSize="23sp"
-            android:textColor="@color/white"/>
-
-    <view
-            android:padding="5dp"
-
-            android:id="@+id/dialogThree"
-
-            android:onClick="showDialog"
-            class="com.qgd.commons.tv.widget.TvTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/default_button"
-            android:gravity="center"
-            android:text="3个按钮对话框"
-            android:textSize="23sp"
-            android:textColor="@color/white"/>
+        android:onClick="showDialog"
+        android:padding="5dp"
+        android:text="3个按钮对话框"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:visibility="gone" />
 
 
     <view
-            android:padding="5dp"
-            android:id="@+id/dialogOk"
-            android:onClick="showDialog"
-            class="com.qgd.commons.tv.widget.TvTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/default_button"
-            android:gravity="center"
-            android:text="确定对话框"
-            android:textSize="23sp"
-            android:textColor="@color/white"/>
+        android:id="@+id/dialogOk"
+
+        class="com.qgd.commons.tv.widget.TvTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/default_button"
+        android:gravity="center"
+        android:onClick="showDialog"
+        android:padding="5dp"
+        android:text="确定对话框"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:visibility="gone" />
 
     <view
-            android:padding="5dp"
+        android:id="@+id/dialogBoth"
 
-            android:id="@+id/dialogBoth"
+        class="com.qgd.commons.tv.widget.TvTextView"
 
-            android:onClick="showDialog"
-            class="com.qgd.commons.tv.widget.TvTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/default_button"
-            android:gravity="center"
-            android:text="确定取消话框"
-            android:textSize="23sp"
-            android:textColor="@color/white"/>
+        android:layout_width="wrap_content"
 
-
-
-
-    <view
-            android:padding="5dp"
-            android:id="@+id/dialogNone"
-            android:onClick="showDialog"
-            class="com.qgd.commons.tv.widget.TvTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/default_button"
-            android:gravity="center"
-            android:text="无按钮"
-            android:textSize="23sp"
-            android:textColor="@color/white"/>
-
-    <view
-            android:padding="5dp"
-            android:id="@+id/dialogCustom"
-            android:onClick="showDialog"
-            class="com.qgd.commons.tv.widget.TvTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/default_button"
-            android:gravity="center"
-            android:text="自定义"
-            android:textSize="23sp"
-            android:textColor="@color/white"/>
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/default_button"
+        android:gravity="center"
+        android:onClick="showDialog"
+        android:padding="5dp"
+        android:text="确定取消话框"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:visibility="gone" />
 
 
     <view
-            android:padding="5dp"
-            android:id="@+id/dialogTip"
-            android:onClick="showTipDialog"
-            class="com.qgd.commons.tv.widget.TvTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/default_button"
-            android:gravity="center"
-            android:text="tip显示"
-            android:textSize="23sp"
-            android:textColor="@color/white"/>
+        android:id="@+id/dialogNone"
+
+        class="com.qgd.commons.tv.widget.TvTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/default_button"
+        android:gravity="center"
+        android:onClick="showDialog"
+        android:padding="5dp"
+        android:text="无按钮"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:visibility="gone" />
 
     <view
-            android:padding="5dp"
-            android:onClick="showNoCancelDialog"
-            class="com.qgd.commons.tv.widget.TvTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/default_button"
-            android:gravity="center"
-            android:text="不可按返回取消"
-            android:textSize="23sp"
-            android:textColor="@color/white"/>
+        android:id="@+id/dialogCustom"
 
-    <view
-            android:padding="5dp"
-             android:onClick="showProgressDialog"
-            class="com.qgd.commons.tv.widget.TvTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/default_button"
-            android:gravity="center"
-            android:text="进度条"
-            android:textSize="23sp"
-            android:textColor="@color/white"/>
-
+        class="com.qgd.commons.tv.widget.TvTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/default_button"
+        android:gravity="center"
+        android:onClick="showDialog"
+        android:padding="5dp"
+        android:text="自定义"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:visibility="gone" />
 
 
     <view
-            android:padding="5dp"
-            android:onClick="showMarginDialog"
-            class="com.qgd.commons.tv.widget.TvTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/default_button"
-            android:gravity="center"
-            android:text="对话框Margin"
-            android:textSize="23sp"
-            android:textColor="@color/white"/>
+        android:id="@+id/dialogTip"
+
+        class="com.qgd.commons.tv.widget.TvTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/default_button"
+        android:gravity="center"
+        android:onClick="showTipDialog"
+        android:padding="5dp"
+        android:text="tip显示"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:visibility="gone" />
+
+    <view
+        class="com.qgd.commons.tv.widget.TvTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/default_button"
+        android:gravity="center"
+        android:onClick="showNoCancelDialog"
+        android:padding="5dp"
+        android:text="不可按返回取消"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:visibility="gone" />
+
+    <view
+        class="com.qgd.commons.tv.widget.TvTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/default_button"
+        android:gravity="center"
+        android:onClick="showProgressDialog"
+        android:padding="5dp"
+        android:text="进度条"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:visibility="gone" />
+
+
+    <view
+        class="com.qgd.commons.tv.widget.TvTextView"
+
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/default_button"
+        android:gravity="center"
+        android:onClick="showMarginDialog"
+        android:padding="5dp"
+        android:text="对话框Margin"
+        android:textColor="@color/white"
+        android:textSize="23sp"
+        android:visibility="gone" />
 
 </LinearLayout>

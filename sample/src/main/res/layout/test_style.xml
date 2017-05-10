@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="#646d77"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:clipChildren="false"
+        android:clipToPadding="false"
+
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="match_parent">
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonPrimaryLarge"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonPrimaryMedium"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonPrimaryNormal"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonPrimarySmall"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonPrimaryExtraSmall"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:clipChildren="false"
+        android:clipToPadding="false"
+
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="match_parent">
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonSecondaryLarge"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonSecondaryMedium"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonSecondaryNormal"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonSecondarySmall"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonSecondaryExtraSmall"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:clipChildren="false"
+        android:clipToPadding="false"
+
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="match_parent">
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonTertiaryLarge"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonDisableMedium"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonDisableInverseNormal"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonQuaternarySmall"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+
+        <com.qgd.commons.tv.widget.TvTextView
+            style="@style/buttonTertiaryExtraSmall"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="按钮1" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:clipChildren="false"
+        android:clipToPadding="false"
+
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="300dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            style="@style/headExtraExtraLarge"
+            android:layout_marginBottom="20dp"
+            android:text="特大标题" />
+
+        <TextView
+            style="@style/headLarge"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="大标题" />
+
+        <TextView
+            style="@style/textSmall"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="我是标题" />
+
+        <TextView
+            style="@style/textExtraSmall"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="我是标题" />
+
+
+        <TextView
+            style="@style/textExtraUltraSmall"
+            android:layout_marginBottom="20dp"
+            android:width="200dp"
+            android:text="我是标题" />
+
+    </LinearLayout>
+
+</LinearLayout>

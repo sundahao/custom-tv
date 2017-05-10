@@ -38,6 +38,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".TestStyleActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+
         <receiver android:name=".BootBroadCast">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"></action>
