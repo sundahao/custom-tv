@@ -82,30 +82,34 @@ public class RoundImageView extends ImageView {
      * 初始化BitmapShader
      */
     private void setUpShader() {
-        Drawable drawable = getDrawable();
-        if (drawable == null) {
-            return;
-        }
+        try {
+            Drawable drawable = getDrawable();
+            if (drawable == null) {
+                return;
+            }
 
-        Bitmap bmp = drawableToBitamp(drawable);
-        // 将bmp作为着色器，就是在指定区域内绘制bmp
-        mBitmapShader = new BitmapShader(bmp, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-        float scale = 1.0f;
-        if (type == TYPE_CIRCLE) {
-            // 拿到bitmap宽或高的小值
-            int bSize = Math.min(bmp.getWidth(), bmp.getHeight());
-            scale = mWidth * 1.0f / bSize;
+            Bitmap bmp = drawableToBitamp(drawable);
+            // 将bmp作为着色器，就是在指定区域内绘制bmp
+            mBitmapShader = new BitmapShader(bmp, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            float scale = 1.0f;
+            if (type == TYPE_CIRCLE) {
+                // 拿到bitmap宽或高的小值
+                int bSize = Math.min(bmp.getWidth(), bmp.getHeight());
+                scale = mWidth * 1.0f / bSize;
 
-        } else if (type == TYPE_ROUND) {
-            // 如果图片的宽或者高与view的宽高不匹配，计算出需要缩放的比例；缩放后的图片的宽高，一定要大于我们view的宽高；所以我们这里取大值；
-            scale = Math.max(getWidth() * 1.0f / bmp.getWidth(), getHeight() * 1.0f / bmp.getHeight());
+            } else if (type == TYPE_ROUND) {
+                // 如果图片的宽或者高与view的宽高不匹配，计算出需要缩放的比例；缩放后的图片的宽高，一定要大于我们view的宽高；所以我们这里取大值；
+                scale = Math.max(getWidth() * 1.0f / bmp.getWidth(), getHeight() * 1.0f / bmp.getHeight());
+            }
+            // shader的变换矩阵，我们这里主要用于放大或者缩小
+            mMatrix.setScale(scale, scale);
+            // 设置变换矩阵
+            mBitmapShader.setLocalMatrix(mMatrix);
+            // 设置shader
+            mBitmapPaint.setShader(mBitmapShader);
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
-        // shader的变换矩阵，我们这里主要用于放大或者缩小
-        mMatrix.setScale(scale, scale);
-        // 设置变换矩阵
-        mBitmapShader.setLocalMatrix(mMatrix);
-        // 设置shader
-        mBitmapPaint.setShader(mBitmapShader);
     }
 
     @Override
