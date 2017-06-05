@@ -451,7 +451,7 @@
 
 
     <!--标题-->
-    <style name="headExtraExtraLarge">
+    <style name="h1">
         <item name="android:textSize">56sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:textStyle">bold</item>
@@ -459,7 +459,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="headExtraLarge">
+    <style name="h2">
         <item name="android:textSize">46sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:textStyle">bold</item>
@@ -467,7 +467,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="headLarge">
+    <style name="h3">
         <item name="android:textSize">40sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:textStyle">bold</item>
@@ -475,7 +475,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="headMedium">
+    <style name="h4">
         <item name="android:textSize">36sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:textStyle">bold</item>
@@ -483,7 +483,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="headNormal">
+    <style name="h5">
         <item name="android:textSize">32sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:textStyle">bold</item>
@@ -492,7 +492,7 @@
     </style>
 
 
-    <style name="headSmall">
+    <style name="h6">
         <item name="android:textSize">32sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:textStyle">bold</item>
@@ -500,7 +500,7 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="headExtraSmall">
+    <style name="h7">
         <item name="android:textSize">28sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:textStyle">bold</item>
@@ -510,35 +510,35 @@
 
 
     <!--文字样式-->
-    <style name="textExtraExtraLarge">
+    <style name="t1">
         <item name="android:textSize">56sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textExtraLarge">
+    <style name="t2">
         <item name="android:textSize">46sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textLarge">
+    <style name="t3">
         <item name="android:textSize">40sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textMedium">
+    <style name="t4">
         <item name="android:textSize">36sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textNormal">
+    <style name="t5">
         <item name="android:textSize">32sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
@@ -546,21 +546,21 @@
     </style>
 
 
-    <style name="textSmall">
+    <style name="t6">
         <item name="android:textSize">30sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textExtraSmall">
+    <style name="t7">
         <item name="android:textSize">28sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textExtraExtraSmall">
+    <style name="t8">
         <item name="android:textSize">26sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
@@ -568,42 +568,42 @@
     </style>
 
 
-    <style name="textExtraUltraSmall">
+    <style name="t9">
         <item name="android:textSize">24sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textExtraUltraUltraSmall">
+    <style name="t10">
         <item name="android:textSize">22sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textUltraSmall">
+    <style name="t11">
         <item name="android:textSize">20sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textUltraUltraSmall">
+    <style name="t12">
         <item name="android:textSize">18sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textUltraUltraUltraSmall">
+    <style name="t13">
         <item name="android:textSize">16sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="textUltraExtralSmall">
+    <style name="t14">
         <item name="android:textSize">14sp</item>
         <item name="android:color">@color/color_black</item>
         <item name="android:layout_width">wrap_content</item>

@@ -149,31 +149,31 @@
         android:layout_height="match_parent">
 
         <TextView
-            style="@style/headExtraExtraLarge"
+            style="@style/h1"
             android:layout_marginBottom="20dp"
             android:text="特大标题" />
 
         <TextView
-            style="@style/headLarge"
+            style="@style/h2"
             android:layout_marginBottom="20dp"
             android:width="200dp"
             android:text="大标题" />
 
         <TextView
-            style="@style/textSmall"
+            style="@style/t3"
             android:layout_marginBottom="20dp"
             android:width="200dp"
             android:text="我是文字" />
 
         <TextView
-            style="@style/textExtraSmall"
+            style="@style/t5"
             android:layout_marginBottom="20dp"
             android:width="200dp"
             android:text="我是文字" />
 
 
         <TextView
-            style="@style/textExtraUltraSmall"
+            style="@style/t8"
             android:layout_marginBottom="20dp"
             android:width="200dp"
             android:text="我是文字" />
