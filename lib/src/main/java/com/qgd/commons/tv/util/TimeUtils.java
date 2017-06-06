@@ -64,4 +64,42 @@ public class TimeUtils {
     public static String getCurrentTimeInString(SimpleDateFormat dateFormat) {
         return getTime(getCurrentTimeInLong(), dateFormat);
     }
+
+    public static String time2Str(long duration){
+        if (duration <= 0) {
+            return "00:00:00";
+        }
+        // 忽略更小的时间上的误差
+        long s = duration / 1000;
+
+        String time = "";
+        // 首先计算有多少小时
+        long h = s / (60 * 60);
+        if(h <= 0){
+            time = "00:";
+        }else if(h < 10){
+            time = "0" + h + ":";
+        }else{
+            time = h + ":";
+        }
+
+        // 计算分钟
+        long m = (s - h * (3600)) / 60;
+        if(m <= 0){
+            time = time + "00:";
+        }else if(m < 10){
+            time = time + "0" + m + ":";
+        }else{
+            time = time + m + ":";
+        }
+
+        // 计算秒
+        long ss = s - h * (3600) - m * 60;
+        if(ss < 10){
+            time = time + "0" + ss;
+        }else{
+            time = time + ss;
+        }
+        return time;
+    }
 }

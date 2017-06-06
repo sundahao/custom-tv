@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         final TvDialog tvDialog = TvDialog.createSimpleDialog(this);
         tvDialog.withMessage("您今天已经没有抽奖的机会了明天可以继续抽奖哦");
@@ -33,7 +34,6 @@ public class MainActivity extends Activity {
         });
         context = this;
 
-        setContentView(R.layout.activity_main);
 
 
     }

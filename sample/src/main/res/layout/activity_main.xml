@@ -24,7 +24,7 @@
         android:text="3个按钮对话框"
         android:textColor="@color/white"
         android:textSize="23sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 
     <view

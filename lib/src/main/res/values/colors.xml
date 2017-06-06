@@ -33,6 +33,9 @@
     <color name="color_normal">#f1f1f1</color>
     <color name="color_white">#ffffff</color>
     <color name="color_black">#000000</color>
+    <color name="color_default_head">#000000</color>
+    <color name="color_default_text">#000000</color>
+
     <color name="color_tertiary">#009ff9</color>
     <color name="color_quaternary">#ffc900</color>
     <color name="color_secondary">#27b268</color>

@@ -453,7 +453,7 @@
     <!--标题-->
     <style name="h1">
         <item name="android:textSize">56sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_head</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -461,7 +461,7 @@
 
     <style name="h2">
         <item name="android:textSize">46sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_head</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -469,7 +469,7 @@
 
     <style name="h3">
         <item name="android:textSize">40sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_head</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -477,7 +477,7 @@
 
     <style name="h4">
         <item name="android:textSize">36sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_head</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -485,7 +485,7 @@
 
     <style name="h5">
         <item name="android:textSize">32sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_head</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -494,7 +494,7 @@
 
     <style name="h6">
         <item name="android:textSize">32sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_head</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -502,45 +502,46 @@
 
     <style name="h7">
         <item name="android:textSize">28sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_head</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
 
+
     <!--文字样式-->
     <style name="t1">
         <item name="android:textSize">56sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="t2">
         <item name="android:textSize">46sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="t3">
         <item name="android:textSize">40sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="t4">
         <item name="android:textSize">36sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="t5">
         <item name="android:textSize">32sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -548,21 +549,21 @@
 
     <style name="t6">
         <item name="android:textSize">30sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="t7">
         <item name="android:textSize">28sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="t8">
         <item name="android:textSize">26sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -570,45 +571,51 @@
 
     <style name="t9">
         <item name="android:textSize">24sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="t10">
         <item name="android:textSize">22sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="t11">
         <item name="android:textSize">20sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="t12">
         <item name="android:textSize">18sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="t13">
         <item name="android:textSize">16sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="t14">
         <item name="android:textSize">14sp</item>
-        <item name="android:color">@color/color_black</item>
+        <item name="android:color">@color/color_default_text</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="t15">
+        <item name="android:textSize">12sp</item>
+        <item name="android:color">@color/color_default_text</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
 </resources>
