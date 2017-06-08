@@ -40,6 +40,13 @@ public class BorderEffect implements BorderView.Effect {
 
     protected boolean mEnableTouch=true;
 
+    public void setDurationTraslate(long mDurationTraslate) {
+        this.mDurationTraslate = mDurationTraslate;
+    }
+
+    public long getDurationTraslate() {
+        return mDurationTraslate;
+    }
     public BorderEffect() {
 
         mFocusListener.add(focusMoveListener);
