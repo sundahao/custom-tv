@@ -38,7 +38,7 @@ public class BorderEffect implements BorderView.Effect {
     protected List<Animator> mAnimatorList = new ArrayList<Animator>();
     protected View mTarget;
 
-    protected boolean mEnableTouch=true;
+    protected boolean mEnableTouch = true;
 
     public void setDurationTraslate(long mDurationTraslate) {
         this.mDurationTraslate = mDurationTraslate;
@@ -47,6 +47,7 @@ public class BorderEffect implements BorderView.Effect {
     public long getDurationTraslate() {
         return mDurationTraslate;
     }
+
     public BorderEffect() {
 
         mFocusListener.add(focusMoveListener);
@@ -70,6 +71,7 @@ public class BorderEffect implements BorderView.Effect {
             if (oldFocus != null) {
                 mAnimatorList.addAll(getScaleAnimator(oldFocus, false));
             }
+
         }
     };
     public FocusListener focusPlayListener = new FocusListener() {
@@ -92,7 +94,7 @@ public class BorderEffect implements BorderView.Effect {
                     mTarget.setVisibility(View.VISIBLE);
                 }
                 animatorSet.start();
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
@@ -212,11 +214,11 @@ public class BorderEffect implements BorderView.Effect {
     protected List<Animator> getScaleAnimator(View view, boolean isScale) {
 
         List<Animator> animatorList = new ArrayList<Animator>(2);
-        if(!mScalable) return animatorList;
+        if (!mScalable) return animatorList;
         try {
             float scaleBefore = 1.0f;
             float scaleAfter = mScale;
-            if (!isScale) {
+            if (!isScale||"noScale".equals(view.getTag())) {
                 scaleBefore = mScale;
                 scaleAfter = 1.0f;
             }
@@ -224,7 +226,7 @@ public class BorderEffect implements BorderView.Effect {
             ObjectAnimator scaleY = new ObjectAnimator().ofFloat(view, "scaleY", scaleBefore, scaleAfter);
             animatorList.add(scaleX);
             animatorList.add(scaleY);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return animatorList;
@@ -247,16 +249,21 @@ public class BorderEffect implements BorderView.Effect {
             int oldHeight = mTarget.getMeasuredHeight();
 
             if (mScalable) {
-                float scaleWidth = newFocus.getMeasuredWidth() * mScale;
-                float scaleHeight = newFocus.getMeasuredHeight() * mScale;
+                float scale=mScale;
+                if("noScale".equals(newFocus.getTag())){
+                    scale=1.0f;
+                }
+
+                float scaleWidth = newFocus.getMeasuredWidth() * scale;
+                float scaleHeight = newFocus.getMeasuredHeight() * scale;
                 newWidth = (int) (scaleWidth + mMargin * 2 + 0.5);
                 newHeight = (int) (scaleHeight + mMargin * 2 - 1);
                 newXY[0] = (int) (newXY[0] - (newWidth - newFocus.getMeasuredWidth()) / 2.0f - 0.5) + factorX;
                 newXY[1] = (int) (newXY[1] - (newHeight - newFocus.getMeasuredHeight()) / 2.0f - 0.3 + factorY);
 
             } else {
-                newWidth = newFocus.getWidth();
-                newHeight = newFocus.getHeight();
+                newWidth = newFocus.getMeasuredWidth();
+                newHeight = newFocus.getMeasuredHeight();
             }
             if (oldHeight == 0 && oldWidth == 0) {
                 oldHeight = newHeight;
@@ -343,7 +350,7 @@ public class BorderEffect implements BorderView.Effect {
                         View focuedChild = ((ViewGroup) v).getFocusedChild();
                         if (focuedChild == null) {
                             scope.isVisible = false;
-                            if(mTarget.getVisibility()==View.VISIBLE) {
+                            if (mTarget.getVisibility() == View.VISIBLE) {
                                 mTarget.clearAnimation();
                                 mTarget.setBackground(null);
                                 mTarget.setVisibility(View.INVISIBLE);
@@ -445,7 +452,7 @@ public class BorderEffect implements BorderView.Effect {
     public void onTouchModeChanged(View target, View attachView, boolean isInTouchMode) {
         try {
             //Log.d(TAG, "onTouchModeChanged:"+isInTouchMode);
-            if (mEnableTouch&&isInTouchMode) {
+            if (mEnableTouch && isInTouchMode) {
                 target.setVisibility(View.INVISIBLE);
                 if (lastFocus != null) {
                     AnimatorSet animatorSet = new AnimatorSet();
@@ -471,7 +478,7 @@ public class BorderEffect implements BorderView.Effect {
     public void onAttach(View target, View attachView) {
         try {
             mTarget = target;
-            bg=mTarget.getBackground();
+            bg = mTarget.getBackground();
             if (target.getParent() != null && (target.getParent() instanceof ViewGroup)) {
                 ViewGroup vg = (ViewGroup) target.getParent();
                 vg.removeView(target);
@@ -602,7 +609,7 @@ public class BorderEffect implements BorderView.Effect {
 
 
                 oldFocus = newFocus;
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
 
@@ -632,9 +639,10 @@ public class BorderEffect implements BorderView.Effect {
         return (T) this;
     }
 
-    public void setEnableTouch(boolean enableTouch){
-        this.mEnableTouch=enableTouch;
+    public void setEnableTouch(boolean enableTouch) {
+        this.mEnableTouch = enableTouch;
     }
+
     public boolean isScalable() {
         return mScalable;
     }
