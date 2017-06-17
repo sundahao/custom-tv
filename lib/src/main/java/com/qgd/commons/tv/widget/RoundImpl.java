@@ -39,6 +39,29 @@ public class RoundImpl {
         mView = view;
     }
 
+    public void setRadius(float mRadius) {
+        this.mRadius = mRadius;
+    }
+
+    public float getRadius() {
+        return mRadius;
+    }
+
+    public void setTopLeftRadius(float mTopLeftRadius) {
+        this.mTopLeftRadius = mTopLeftRadius;
+    }
+
+    public void setTopRightRadius(float mTopRightRadius) {
+        this.mTopRightRadius = mTopRightRadius;
+    }
+
+    public void setBottomLeftRadius(float mBottomLeftRadius) {
+        this.mBottomLeftRadius = mBottomLeftRadius;
+    }
+
+    public void setBottomRightRadius(float mBottomRightRadius) {
+        this.mBottomRightRadius = mBottomRightRadius;
+    }
 
     private void init(Context context, AttributeSet attrs, int defStyle) {
 
