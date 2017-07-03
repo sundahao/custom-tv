@@ -1,4 +1,4 @@
-package com.example.yangke.app1;
+package com.qgd.commons.tv.util;
 
 import android.content.Context;
 import android.media.AudioManager;
