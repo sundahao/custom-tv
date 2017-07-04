@@ -41,7 +41,7 @@
         android:text="确定对话框"
         android:textColor="@color/white"
         android:textSize="23sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <view
         android:id="@+id/dialogBoth"
@@ -59,7 +59,7 @@
         android:text="确定取消话框"
         android:textColor="@color/white"
         android:textSize="23sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 
     <view
@@ -76,7 +76,7 @@
         android:text="无按钮"
         android:textColor="@color/white"
         android:textSize="23sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <view
         android:id="@+id/dialogCustom"
@@ -92,7 +92,7 @@
         android:text="自定义"
         android:textColor="@color/white"
         android:textSize="23sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 
     <view
@@ -109,7 +109,7 @@
         android:text="tip显示"
         android:textColor="@color/white"
         android:textSize="23sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <view
         class="com.qgd.commons.tv.widget.TvTextView"
@@ -124,7 +124,7 @@
         android:text="不可按返回取消"
         android:textColor="@color/white"
         android:textSize="23sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <view
         class="com.qgd.commons.tv.widget.TvTextView"
@@ -139,7 +139,7 @@
         android:text="进度条"
         android:textColor="@color/white"
         android:textSize="23sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 
     <view
@@ -155,6 +155,6 @@
         android:text="对话框Margin"
         android:textColor="@color/white"
         android:textSize="23sp"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
 </LinearLayout>

@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import static android.content.Context.AUDIO_SERVICE;
+
 /**
  * 作者：ethan on 2016/3/15 11:22
  * 邮箱：ethan.chen@fm2020.com
@@ -144,7 +146,7 @@ public class FocusSoundUtil {
     public static boolean loadSoundEffects() {
 
         synchronized (mSoundEffectsLock) {
-            mSoundPool = new SoundPool(NUM_SOUNDPOOL_CHANNELS, AudioManager.STREAM_RING, 0);
+            mSoundPool = new SoundPool(NUM_SOUNDPOOL_CHANNELS, AudioManager.STREAM_MUSIC, 0);
             if (mSoundPool == null) {
                 return false;
             }
@@ -192,7 +194,7 @@ public class FocusSoundUtil {
 
     public static void initSoundEffect(Context context) {
         if (!isLoad) {
-            AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+            AudioManager mAudioManager = (AudioManager) context.getSystemService(AUDIO_SERVICE);
             mAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
             loadSoundEffects();
             isLoad = true;
@@ -228,6 +230,7 @@ public class FocusSoundUtil {
                             public void onCompletion(MediaPlayer mp) {
 
                                 cleanupPlayer(mp);
+
                             }
                         });
                         mediaPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
