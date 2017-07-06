@@ -17,17 +17,17 @@ import java.util.regex.Pattern;
  * Created by yangke on 2017/6/12.
  */
 
-public class LinkInfo {
+public class YfbLink {
     private static final Pattern URI_PATTERN = Pattern.compile("^([a-zA-Z0-9]+)://([a-zA-Z0-9._]+)([/a-zA-Z0-9._]*)?(\\?.*)?$");
     private String protocol;
     private String module;
     private String path;
     private LinkedHashMap<String, String> params;
 
-    public LinkInfo() {
+    public YfbLink() {
     }
 
-    public LinkInfo(String linkUri) {
+    public YfbLink(String linkUri) {
         Matcher m = URI_PATTERN.matcher(linkUri);
         if (!m.matches()) {
             throw new IllegalArgumentException("illegal uri: " + linkUri);
